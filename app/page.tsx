@@ -58,7 +58,7 @@ function HeroSection() {
     const ny = ((e.clientY - top) / height - 0.5) * 2;
 
     if (photoRef.current) {
-      photoRef.current.style.transform = `translate(${nx * 4}px, ${ny * 4 - 12}px)`;
+      photoRef.current.style.transform = `translate(${nx * 4}px, ${ny * 4}px)`;
     }
     if (bgWordsRef.current) {
       bgWordsRef.current.style.transform = `translate(${nx * 2}px, ${ny * 2}px)`;
@@ -119,9 +119,19 @@ function HeroSection() {
         {BG_LINES.map((line, i) => (
           <motion.span
             key={line}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.030 }}
-            transition={{ duration: 2.5, delay: 0.6 + i * 0.15 }}
+            initial={{
+              opacity: 0,
+              x: '30vw'   // start off to the right
+            }}
+            animate={{
+              opacity: 0.03,
+              x: 0
+            }}
+            transition={{
+              duration: 2.6,
+              delay: 0.6 + i * 0.18,
+              ease: [0.22, 1, 0.36, 1]  // smooth cinematic easing
+            }}
             style={{
               display: 'block',
               fontSize: 'clamp(72px, 13vw, 196px)',
@@ -130,8 +140,8 @@ function HeroSection() {
               lineHeight: 0.92,
               color: 'rgba(255,255,255,0.9)',
               filter: 'blur(5px)',
-              transition: 'color 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
               whiteSpace: 'nowrap',
+              willChange: 'transform, opacity'
             }}
           >
             {line}
@@ -150,79 +160,79 @@ function HeroSection() {
           zIndex: 2,
         }}
       >
-        <motion.div
-          ref={photoRef}
-          initial={{ opacity: 0, y: 40, rotate: -6 }}
-          animate={{ opacity: 1, y: -12, rotate: -3 }}
-          whileHover={{ scale: 1.04, rotate: -3 }}
-          transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] as const }}
-          style={{
-            width: 'clamp(240px, 28vw, 380px)',
-            background: 'rgba(255,255,255,0.07)',
-            backdropFilter: 'blur(24px) saturate(140%)',
-            WebkitBackdropFilter: 'blur(24px) saturate(140%)',
-            border: '1px solid rgba(255,255,255,0.14)',
-            borderRadius: 18,
-            padding: '14px 14px 56px 14px',
-            boxShadow: '0 32px 80px rgba(0,0,0,0.55), 0 8px 24px rgba(0,0,0,0.35), 0 0 0 0.5px rgba(255,255,255,0.06) inset',
-            cursor: 'default',
-            transition: 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
-          }}
-        >
-          {/* Photo inside polaroid */}
-          <div
+        <div ref={photoRef} style={{ transition: 'transform 0.1s linear' }}>
+          <motion.div
+            initial={{ opacity: 0, y: 40, rotate: -6 }}
+            animate={{ opacity: 1, y: 0, rotate: -4 }}
+            whileHover={{ scale: 1.04, rotate: -6 }}
+            transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] as const }}
             style={{
-              position: 'relative',
-              width: '100%',
-              aspectRatio: '4 / 5',
-              borderRadius: 10,
-              overflow: 'hidden',
+              width: 'clamp(240px, 28vw, 380px)',
+              background: 'rgba(255,255,255,0.07)',
+              backdropFilter: 'blur(24px) saturate(140%)',
+              WebkitBackdropFilter: 'blur(24px) saturate(140%)',
+              border: '1px solid rgba(255,255,255,0.14)',
+              borderRadius: 18,
+              padding: '14px 14px 56px 14px',
+              boxShadow: '0 32px 80px rgba(0,0,0,0.55), 0 8px 24px rgba(0,0,0,0.35), 0 0 0 0.5px rgba(255,255,255,0.06) inset',
+              cursor: 'default',
             }}
           >
-            <Image
-              src="/Sri.png"
-              alt="Srirama Murthy Chellu"
-              fill
-              priority
-              sizes="(max-width: 768px) 240px, 380px"
+            {/* Photo inside polaroid */}
+            <div
               style={{
-                objectFit: 'cover',
-                objectPosition: 'center top',
-                filter: 'grayscale(10%) brightness(0.90) contrast(1.02)',
-              }}
-            />
-          </div>
-          {/* Caption strip */}
-          <div
-            style={{
-              position: 'absolute',
-              bottom: 0, left: 0, right: 0,
-              height: 56,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <span
-              style={{
-                textAlign: 'center',
-                justifyContent: 'center',
-                alignItems: 'center',
-                display: 'block',        // ✅ important
-                width: '100%',           // ✅ important
-                fontSize: 11,
-                fontWeight: 500,
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-                color: 'rgba(255,255,255,0.35)',
+                position: 'relative',
+                width: '100%',
+                aspectRatio: '4 / 5',
+                borderRadius: 10,
+                overflow: 'hidden',
               }}
             >
-              Srirama · AI/ML Engineer
-              <br />
-              MS Data Science · FSU
-            </span>
-          </div>
-        </motion.div>
+              <Image
+                src="/Sri.png"
+                alt="Srirama Murthy Chellu"
+                fill
+                priority
+                sizes="(max-width: 768px) 240px, 380px"
+                style={{
+                  objectFit: 'cover',
+                  objectPosition: 'center top',
+                  filter: 'grayscale(10%) brightness(0.90) contrast(1.02)',
+                }}
+              />
+            </div>
+            {/* Caption strip */}
+            <div
+              style={{
+                position: 'absolute',
+                bottom: 0, left: 0, right: 0,
+                height: 56,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <span
+                style={{
+                  textAlign: 'center',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  display: 'block',        // ✅ important
+                  width: '100%',           // ✅ important
+                  fontSize: 11,
+                  fontWeight: 500,
+                  letterSpacing: '0.12em',
+                  textTransform: 'uppercase',
+                  color: 'rgba(255,255,255,0.35)',
+                }}
+              >
+                Srirama · AI/ML Engineer
+                <br />
+                MS Data Science · FSU
+              </span>
+            </div>
+          </motion.div>
+        </div>
       </div>{/* end centering wrapper */}
 
       {/* ── Layer 2: Text content (left) ─────────────────────── */}
@@ -450,6 +460,7 @@ export default function HomePage() {
                 category={p.category}
                 stack={p.stack}
                 github={p.github}
+                image={(p as any).image}
                 index={i}
               />
             ))}
@@ -533,6 +544,9 @@ export default function HomePage() {
             }
             @media (min-width: 768px) {
               .masonry-home { column-count: 2; }
+            }
+            @media (min-width: 1024px) {
+              .masonry-home { column-count: 3; }
             }
             .masonry-home > div {
               break-inside: avoid;

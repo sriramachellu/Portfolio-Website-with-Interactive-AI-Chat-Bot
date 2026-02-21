@@ -111,14 +111,14 @@ function GlassRobot({ state }: { state: BotState }) {
                 {[0, 1].map((i) => (
                     <motion.div
                         key={i}
-                        animate={isTyping ? {
+                        animate={(isTyping || isIdle) ? {
                             scaleY: [1, 0.15, 1],
                             transition: { duration: 0.28, delay: i * 0.12, repeat: Infinity, repeatDelay: 2 },
                         } : { scaleY: 1 }}
                         style={{
                             width: 5, height: 5, borderRadius: '50%',
                             background: 'rgba(255,255,255,0.92)',
-                            boxShadow: isActive || isTyping
+                            boxShadow: isActive || isTyping || isIdle
                                 ? '0 0 8px var(--tint-primary)'
                                 : '0 0 4px rgba(255,255,255,0.4)',
                         }}
@@ -145,30 +145,55 @@ export function PortfolioAssistant() {
     const [error, setError] = useState<string | null>(null);
     const [chatVisible, setChatVisible] = useState(false);
     const [barVisible, setBarVisible] = useState(true);
+    const [hasCursor, setHasCursor] = useState(false);
 
     const robotControls = useAnimation();
     const inactivityRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const messagesEnd = useRef<HTMLDivElement>(null);
+    const chatRef = useRef<HTMLDivElement>(null);
+    const robotRef = useRef<HTMLDivElement>(null);
+    const mouseRef = useRef({ x: 0, y: 0 });
+
+    const cursorX = useMotionValue(0);
+    const cursorY = useMotionValue(0);
+    const springX = useSpring(cursorX, { stiffness: 120, damping: 20 });
+    const springY = useSpring(cursorY, { stiffness: 120, damping: 20 });
 
     const isActive = botState === 'active' || botState === 'typing';
 
-    /* ── Scroll-velocity opacity ─────────────────────────────── */
-    // Dims while scrolling fast, springs to full when stopped.
-    // Active chatting (isActive) bypasses dimming entirely.
-    const { scrollY } = useScroll();
-    const velocity = useVelocity(scrollY);
-    const absVel = useTransform(velocity, (v) => Math.min(Math.abs(v), 600));
-    const rawFade = useTransform(absVel, [0, 60, 600], [1, 0.90, 0.68]);
-    const scrollFade = useSpring(rawFade, { stiffness: 55, damping: 22 });
+    useEffect(() => {
+        // Safe check for window for initial value
+        if (typeof window !== 'undefined' && mouseRef.current.x === 0) {
+            mouseRef.current = { x: window.innerWidth * 0.47, y: window.innerHeight - 188 };
+        }
+        const handleMouseMove = (e: MouseEvent) => {
+            if (!hasCursor) setHasCursor(true);
+            mouseRef.current = { x: e.clientX, y: e.clientY };
+            if (botState === 'idle' || botState === 'inactive') {
+                const anchorX = window.innerWidth / 2 - 22;
+                const anchorY = window.innerHeight - 108 - 44;
+                cursorX.set(e.clientX - anchorX + 4);
+                cursorY.set(e.clientY - anchorY + 4);
+            }
+        };
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, [botState, hasCursor, cursorX, cursorY]);
 
-    const baseOp = useMotionValue(0.72);
-    useEffect(() => { baseOp.set(isActive ? 1 : 0.72); }, [isActive, baseOp]);
+    useEffect(() => {
+        if (botState === 'active' || botState === 'typing') {
+            cursorX.set(0);
+            cursorY.set(0);
+        } else if (hasCursor) {
+            const anchorX = typeof window !== 'undefined' ? window.innerWidth / 2 - 22 : 0;
+            const anchorY = typeof window !== 'undefined' ? window.innerHeight - 108 - 44 : 0;
+            cursorX.set(mouseRef.current.x - anchorX + 20);
+            cursorY.set(mouseRef.current.y - anchorY + 20);
+        }
+    }, [botState, hasCursor, cursorX, cursorY]);
 
-    // Active: always 1. Idle/inactive: 0.72 × scrollFade.
-    const containerOpacity = useTransform(
-        [baseOp, scrollFade],
-        ([b, sf]) => (b as number) >= 1 ? 1 : (b as number) * (sf as number),
-    );
+    /* ── Opacity ─────────────────────────────── */
+    const containerOpacity = 1;
 
     /* ── Robot position constants ──────────────────────────────── */
     // Anchor: position:fixed, bottom:108px, left:50%, marginLeft:-22px
@@ -188,12 +213,25 @@ export function PortfolioAssistant() {
     /* ── State → robot position ────────────────────────────────── */
     useEffect(() => {
         switch (botState) {
-            case 'idle':
-                robotControls.start({
-                    x: HOME_X, y: HOME_Y, scale: 0.88, opacity: 0.72,
-                    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
-                });
+            case 'idle': {
+                const anchorX = typeof window !== 'undefined' ? window.innerWidth / 2 - 22 : 0;
+                const anchorY = typeof window !== 'undefined' ? window.innerHeight - 108 - 44 : 0;
+
+                if (!hasCursor) {
+                    // Peek behind the top edge of the hero polaroid
+                    robotControls.start({
+                        x: 'calc(28vw)', y: 'calc(-50vh - 160px)', scale: 0.7, opacity: 0.85,
+                        transition: { duration: 1.5, ease: [0.22, 1, 0.36, 1] as const },
+                    });
+                } else {
+                    robotControls.start({
+                        x: 0, y: 0,
+                        scale: 0.88, opacity: 0.85,
+                        transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
+                    });
+                }
                 break;
+            }
             case 'active':
                 robotControls.start({
                     x: DOCK_X, y: DOCK_Y, scale: 1.05, opacity: 1,
@@ -206,15 +244,24 @@ export function PortfolioAssistant() {
                     transition: { duration: 0.3 },
                 });
                 break;
-            case 'inactive':
-                robotControls.start({
-                    x: HOME_X, y: HOME_Y, scale: 0.78, opacity: 0.45,
-                    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
-                });
+            case 'inactive': {
+                if (!hasCursor) {
+                    robotControls.start({
+                        x: 'calc(28vw)', y: 'calc(-50vh - 160px)', scale: 0.65, opacity: 0.45,
+                        transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
+                    });
+                } else {
+                    robotControls.start({
+                        x: 0, y: 0,
+                        scale: 0.78, opacity: 0.45,
+                        transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
+                    });
+                }
                 break;
+            }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [botState]);
+    }, [botState, robotControls, hasCursor]);
 
     /* ── Inactivity timer ──────────────────────────────────────── */
     const resetInactivity = useCallback(() => {
@@ -264,6 +311,19 @@ export function PortfolioAssistant() {
         if (inactivityRef.current) clearTimeout(inactivityRef.current);
     };
 
+    useEffect(() => {
+        const handleClickOutside = (e: MouseEvent) => {
+            if (!chatVisible) return;
+            const target = e.target as Node;
+            if (chatRef.current?.contains(target) || robotRef.current?.contains(target)) {
+                return;
+            }
+            handleClose();
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, [chatVisible]);
+
     // Re-open existing conversation when user focuses the input again
     const handleFocusResume = () => {
         dispatch('FOCUS');
@@ -311,80 +371,41 @@ export function PortfolioAssistant() {
         <>
             {/* ── Robot — separate fixed element ───────────────────── */}
             <motion.div
+                ref={robotRef}
                 animate={robotControls}
-                initial={{ x: HOME_X, y: HOME_Y, opacity: 0, scale: 0.75 }}
-                onHoverStart={() => {
-                    if (botState === 'idle' || botState === 'inactive') {
-                        robotControls.stop();
-                        // Playful dart away mechanic
-                        const rx = (Math.random() > 0.5 ? 20 : -20) + (Math.random() * 40 - 20);
-                        const targetX = rx > 0 ? '48vw' : '44vw';
-                        const targetY = HOME_Y - 30 - Math.random() * 30;
-
-                        robotControls.start({
-                            x: targetX,
-                            y: targetY,
-                            scale: 0.95,
-                            rotate: rx > 0 ? 10 : -10,
-                            opacity: 0.95,
-                            transition: {
-                                type: 'spring',
-                                stiffness: 450,
-                                damping: 30,
-                                mass: 0.6
-                            }
-                        });
-                    }
-                }}
-                onHoverEnd={() => {
-                    if (botState === 'idle' || botState === 'inactive') {
-                        robotControls.stop();
-                        // Slowly and smoothly return
-                        robotControls.start({
-                            x: HOME_X,
-                            y: HOME_Y,
-                            scale: 0.88,
-                            rotate: 0,
-                            opacity: 0.72,
-                            transition: {
-                                type: 'spring',
-                                stiffness: 120,
-                                damping: 24,
-                                delay: 0.1
-                            }
-                        });
-                    }
-                }}
+                initial={{ x: 'calc(28vw)', y: 'calc(-50vh - 160px)', opacity: 0, scale: 0.7 }}
                 style={{
                     position: 'fixed',
                     bottom: 108,
                     left: '50%',
                     marginLeft: -22,
-                    zIndex: 51,
+                    zIndex: hasCursor ? 51 : 1, // behind polaroid when no cursor
                     cursor: botState === 'idle' || botState === 'inactive' ? 'pointer' : 'default',
                 }}
                 onClick={() => {
                     if (botState === 'idle' || botState === 'inactive') handleFocus();
                 }}
             >
-                <GlassRobot state={botState} />
-
-                {/* Glow ring */}
-                <motion.div
-                    animate={{ opacity: glowOpacity }}
-                    transition={{ duration: 0.6 }}
-                    style={{
-                        position: 'absolute', bottom: -8, left: '50%', marginLeft: -20,
-                        width: 40, height: 12, background: 'var(--tint-primary)',
-                        borderRadius: '50%', filter: 'blur(10px)', pointerEvents: 'none',
-                        transition: 'background 600ms cubic-bezier(0.25,0.46,0.45,0.94)',
-                    }}
-                />
+                <motion.div style={{ x: springX, y: springY }}>
+                    <GlassRobot state={botState} />
+                    {/* Glow ring */}
+                    <motion.div
+                        animate={{ opacity: glowOpacity }}
+                        transition={{ duration: 0.6 }}
+                        style={{
+                            position: 'absolute', bottom: -8, left: '50%', marginLeft: -20,
+                            width: 40, height: 12, background: 'var(--tint-primary)',
+                            borderRadius: '50%', filter: 'blur(10px)', pointerEvents: 'none',
+                            transition: 'background 600ms cubic-bezier(0.25,0.46,0.45,0.94)',
+                        }}
+                    />
+                </motion.div>
             </motion.div>
 
             {/* ── Chat UI — full-width anchor, flex-center children ── */}
             {barVisible && (
                 <motion.div
+                    ref={chatRef}
                     style={{
                         position: 'fixed',
                         bottom: 100,
@@ -407,7 +428,7 @@ export function PortfolioAssistant() {
                                 animate={{ opacity: 1, y: 0, scale: 1 }}
                                 exit={{ opacity: 0, y: 10, scale: 0.97 }}
                                 transition={{ duration: 0.25 }}
-                                className="glass-1"
+                                className="glass-3 text-micro"
                                 style={{
                                     width: 'min(460px, 90vw)',
                                     maxHeight: 280,
@@ -505,12 +526,15 @@ export function PortfolioAssistant() {
                     <motion.div
                         animate={{ width: isActive ? 'min(460px, 90vw)' : 'min(340px, 72vw)' }}
                         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] as const }}
-                        className="glass-2"
                         style={{
                             borderRadius: 100,
                             display: 'flex', alignItems: 'center',
                             padding: '11px 16px', gap: 8,
                             pointerEvents: 'auto',
+                            background: 'rgba(255, 255, 255, 0.15)',
+                            backdropFilter: 'blur(16px) saturate(180%)',
+                            WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+                            border: '1px solid rgba(255, 255, 255, 0.2)',
                             boxShadow: isActive
                                 ? '0 0 0 1px var(--tint-border, rgba(255,255,255,0.15)), 0 8px 28px rgba(0,0,0,0.30)'
                                 : '0 4px 16px rgba(0,0,0,0.20)',

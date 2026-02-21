@@ -1,16 +1,18 @@
 import { motion } from 'framer-motion';
 import { Github } from 'lucide-react';
+import Image from 'next/image';
 
 export interface ProjectShowcaseCardProps {
     title: string;
     description: string;
     category: string;
     stack: string[];
-    github?: string;
+    github?: string | null;
+    image?: string | null;
     index: number;
 }
 
-export function ProjectShowcaseCard({ title, description, category, stack, github, index }: ProjectShowcaseCardProps) {
+export function ProjectShowcaseCard({ title, description, category, stack, github, image, index }: ProjectShowcaseCardProps) {
     return (
         <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -44,28 +46,41 @@ export function ProjectShowcaseCard({ title, description, category, stack, githu
                     justifyContent: 'center',
                     background: 'linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%)',
                 }}>
-                    {/* Abstract visual hint */}
-                    <div style={{
-                        width: '60%',
-                        height: '60%',
-                        background: 'radial-gradient(circle, var(--tint-primary) 0%, transparent 70%)',
-                        opacity: 0.08,
-                        filter: 'blur(40px)',
-                    }} />
+                    {image ? (
+                        <Image
+                            src={image}
+                            alt={title}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            style={{ objectFit: 'cover' }}
+                            unoptimized={true}
+                        />
+                    ) : (
+                        <>
+                            {/* Abstract visual hint */}
+                            <div style={{
+                                width: '60%',
+                                height: '60%',
+                                background: 'radial-gradient(circle, var(--tint-primary) 0%, transparent 70%)',
+                                opacity: 0.08,
+                                filter: 'blur(40px)',
+                            }} />
 
-                    <span style={{
-                        position: 'absolute',
-                        right: 40,
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        fontSize: 12,
-                        fontWeight: 600,
-                        color: 'rgba(255,255,255,0.2)',
-                        letterSpacing: '0.06em',
-                        textTransform: 'uppercase'
-                    }}>
-                        Awaiting Visual Asset
-                    </span>
+                            <span style={{
+                                position: 'absolute',
+                                right: 40,
+                                top: '50%',
+                                transform: 'translateY(-50%)',
+                                fontSize: 12,
+                                fontWeight: 600,
+                                color: 'rgba(255,255,255,0.2)',
+                                letterSpacing: '0.06em',
+                                textTransform: 'uppercase'
+                            }}>
+                                Awaiting Visual Asset
+                            </span>
+                        </>
+                    )}
                 </div>
 
                 {/* 2. Internal Details Area (1/4 Height) */}

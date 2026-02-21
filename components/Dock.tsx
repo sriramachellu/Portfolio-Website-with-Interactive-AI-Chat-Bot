@@ -34,12 +34,8 @@ export default function Dock() {
     const itemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
     const [sizes, setSizes] = useState<number[]>(NAV_ITEMS.map(() => BASE));
 
-    /* ── Scroll-velocity opacity ─────────────────────────────── */
-    const { scrollY } = useScroll();
-    const velocity = useVelocity(scrollY);
-    const absVel = useTransform(velocity, (v) => Math.min(Math.abs(v), 600));
-    const rawOpacity = useTransform(absVel, [0, 60, 600], [1, 0.90, 0.68]);
-    const dockOpacity = useSpring(rawOpacity, { stiffness: 55, damping: 22 });
+    /* ── Opacity ─────────────────────────────── */
+    const dockOpacity = 1;
 
     useEffect(() => {
         if (mouseX === null) {
@@ -69,13 +65,16 @@ export default function Dock() {
         >
             <motion.div
                 ref={dockRef}
-                className="glass-1"
                 style={{
                     display: 'flex',
                     alignItems: 'flex-end',
                     gap: 10,
                     padding: '10px 16px',
                     borderRadius: 28,
+                    background: 'rgba(255, 255, 255, 0.15)',
+                    backdropFilter: 'blur(16px) saturate(180%)',
+                    WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+                    border: '1px solid rgba(255, 255, 255, 0.2)',
                 }}
                 onMouseMove={(e) => setMouseX(e.clientX)}
                 onMouseLeave={() => setMouseX(null)}
@@ -108,7 +107,7 @@ export default function Dock() {
                                         ? 'var(--tint-glass)'
                                         : 'rgba(255,255,255,0.07)',
                                     border: isActive
-                                        ? '1px solid var(--tint-border)'
+                                        ? '1px solid var(--tint-primary)'
                                         : '1px solid rgba(255,255,255,0.10)',
                                     color: isActive ? 'var(--tint-primary)' : 'rgba(255,255,255,0.65)',
                                     transition: 'background 300ms, border-color 300ms, color 300ms',

@@ -1,10 +1,5 @@
 @import "tailwindcss";
 
-/* ============================================================
-   SRI.OS — Liquid Glass Design System
-   Inter loaded via next/font in layout.tsx
-   ============================================================ */
-
 /* ─── Tint Tokens ──────────────────────────────────────────── */
 :root,
 [data-tint="deep-blue"] {
@@ -287,15 +282,14 @@ body,
 }
 
 .text-glass-tint {
-  background: linear-gradient(
-    to bottom,
-    var(--tint-primary) 20%,
-    color-mix(in srgb, var(--tint-primary), transparent 60%) 100%
-  );
+  background: linear-gradient(to bottom,
+      var(--tint-primary) 20%,
+      color-mix(in srgb, var(--tint-primary), transparent 60%) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: transparent; /* Fallback */
+  color: transparent;
+  /* Fallback */
   filter: drop-shadow(0 0 15px var(--tint-glow));
   transition: filter var(--tint-transition);
 }

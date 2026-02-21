@@ -8,6 +8,8 @@ export interface TimelineItemData {
     duration: string;
     location: string;
     image?: string;
+    imageCaption?: string;
+    imageYears?: string;
 }
 
 export interface TimelineProps {
@@ -147,12 +149,19 @@ export function Timeline({ items }: TimelineProps) {
                                             </>
                                         ) : (
                                             <span style={{ fontSize: 24, fontWeight: 600, background: 'linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,255,255,0.2))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', opacity: 0.5 }}>
-                                                {item.company.charAt(0)}
+                                                {(item.imageCaption || item.company).charAt(0)}
                                             </span>
                                         )}
                                     </div>
                                     <div style={{ width: '100%', textAlign: 'center', fontSize: 11, fontWeight: 500, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.02em', lineHeight: 1.3 }}>
-                                        {item.company}
+                                        {item.imageCaption ? (
+                                            <>
+                                                <span style={{ color: '#fff' }}>{item.imageCaption}</span>
+                                                {item.imageYears && <><br /><span style={{ fontSize: 10, opacity: 0.7 }}>{item.imageYears}</span></>}
+                                            </>
+                                        ) : (
+                                            item.company
+                                        )}
                                     </div>
                                 </motion.div>
                             )}
@@ -220,12 +229,19 @@ export function Timeline({ items }: TimelineProps) {
                                             </>
                                         ) : (
                                             <span style={{ fontSize: 24, fontWeight: 600, background: 'linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,255,255,0.2))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', opacity: 0.5 }}>
-                                                {item.company.charAt(0)}
+                                                {(item.imageCaption || item.company).charAt(0)}
                                             </span>
                                         )}
                                     </div>
                                     <div style={{ width: '100%', textAlign: 'center', fontSize: 11, fontWeight: 500, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.02em', lineHeight: 1.3 }}>
-                                        {item.company}
+                                        {item.imageCaption ? (
+                                            <>
+                                                <span style={{ color: '#fff' }}>{item.imageCaption}</span>
+                                                {item.imageYears && <><br /><span style={{ fontSize: 10, opacity: 0.7 }}>{item.imageYears}</span></>}
+                                            </>
+                                        ) : (
+                                            item.company
+                                        )}
                                     </div>
                                 </motion.div>
                             )}

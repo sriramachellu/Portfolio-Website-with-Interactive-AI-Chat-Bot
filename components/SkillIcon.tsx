@@ -82,12 +82,17 @@ export function SkillIcon({ name, iconSlug }: SkillIconProps) {
                             position: 'absolute',
                             bottom: '100%',
                             marginBottom: 12,
-                            padding: '6px 10px',
+                            padding: '6px 12px',
                             whiteSpace: 'nowrap',
                             color: '#fff',
                             zIndex: 50,
                             pointerEvents: 'none',
                             boxShadow: '0 8px 24px rgba(0,0,0,0.4)',
+                            background: 'rgba(255, 255, 255, 0.15)',
+                            backdropFilter: 'blur(16px) saturate(180%)',
+                            WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+                            border: '1px solid rgba(255, 255, 255, 0.2)',
+                            borderRadius: '100px'
                         }}
                     >
                         {name}

@@ -11,6 +11,17 @@
   },
   "skills": [
     {
+      "category": "Programming Languages",
+      "items": [
+        "Python",
+        "C",
+        "R",
+        "SQL",
+        "JavaScript",
+        "TypeScript"
+      ]
+    },
+    {
       "category": "Machine Learning",
       "items": [
         "PyTorch",
@@ -45,6 +56,20 @@
       ]
     },
     {
+      "category": "Vibe Coding & IDEs",
+      "items": [
+        "Antigravity",
+        "Cursor AI",
+        "Clawbot",
+        "Claude Code",
+        "GitHub Copilot",
+        "ChatGPT",
+        "Perplexity Pro",
+        "VS Code",
+        "Vercel"
+      ]
+    },
+    {
       "category": "Data Engineering, Analytics & BI",
       "items": [
         "Apache Spark",
@@ -61,28 +86,14 @@
       ]
     },
     {
-      "category": "Vibe Coding",
+      "category": "Cloud & Deployment",
       "items": [
-        "Antigravity",
-        "Cursor AI",
-        "Clawbot",
-        "Claude Code",
-        "GitHub Copilot",
-        "ChatGPT",
-        "Perplexity Pro",
-        "VS Code",
-        "Vercel"
-      ]
-    },
-    {
-      "category": "Programming Languages",
-      "items": [
-        "Python",
-        "C",
-        "R",
-        "SQL",
-        "JavaScript",
-        "TypeScript"
+        "AWS",
+        "Google Cloud Platform (GCS, BigQuery, Dataflow)",
+        "Docker",
+        "Vercel",
+        "GitHub Actions",
+        "CI/CD Pipelines"
       ]
     },
     {
@@ -99,20 +110,13 @@
       "category": "Full Stack & UI",
       "items": [
         "React",
+        "Next.js",
+        "TypeScript",
+        "JavaScript",
+        "CSS",
         "FastAPI",
         "Tailwind CSS",
         "Framer Motion"
-      ]
-    },
-    {
-      "category": "Cloud & Deployment",
-      "items": [
-        "AWS",
-        "Google Cloud Platform (GCS, BigQuery, Dataflow)",
-        "Docker",
-        "Vercel",
-        "GitHub Actions",
-        "CI/CD Pipelines"
       ]
     },
     {
@@ -163,44 +167,8 @@
   "projects": [
     {
       "id": "1",
-      "title": "GenAI-Assisted Clinical Interpretation of Metagenomic Sequencing Data",
-      "description": "End-to-end AI-driven clinical decision support system for interpreting metagenomic next-generation sequencing (mNGS) reports. The pipeline integrates microbial signal processing, weighted pathogen ranking, contaminant filtering, host immune response analysis, PubMed-backed Retrieval-Augmented Generation (RAG), and safety-constrained LLM reasoning to generate structured, literature-grounded infectious disease reports with hallucination controls.",
-      "stack": [
-        "Python",
-        "Pandas",
-        "NumPy",
-        "scikit-learn",
-        "UMAP",
-        "Sentence-Transformers",
-        "Ollama",
-        "DeepSeek-R1 8B",
-        "FastAPI",
-        "PostgreSQL",
-        "NCBI Entrez API"
-      ],
-      "github": "https://github.com/sriramachellu/GenAI-Assisted-Interpretation-of-Metagenomic-Sequencing-Data",
-      "demo": null,
-      "category": "AI/ML Systems & Bioinformatics"
-    },
-    {
-      "id": "2",
-      "title": "Superstore Sales Analysis and Visualization",
-      "description": "End-to-end sales analytics and ETL project processing 50,000+ retail transactions to uncover revenue trends, category performance drivers, customer retention patterns, and regional profitability insights. Built scalable data pipelines and interactive KPI dashboards to enable standardized performance tracking and data-driven campaign evaluation.",
-      "stack": [
-        "Python",
-        "PySpark",
-        "SQL",
-        "MySQL",
-        "Power BI",
-        "Pandas",
-        "Weights & Biases"
-      ],
-      "category": "Data Engineering & Business Intelligence"
-    },
-    {
-      "id": "3",
-      "title": "LLM-Powered Portfolio Website with Interactive AI Chat & Custom RAG Engine",
-      "description": "Production-ready AI-native portfolio platform integrating Google Gemini APIs with a lightweight Retrieval-Augmented Generation (RAG) system. Features dynamic JSON-based context chunking, custom keyword scoring retrieval, model fallback handling, exponential backoff for rate limits, and strict prompt guardrails. Deployed on Vercel with serverless API routes and environment-secured LLM integration.",
+      "title": "LLM Powered Portfolio Website with Interactive AI Chat & Custom RAG Engine",
+      "description": "Production ready AI native personal portfolio website integrating Google Gemini APIs with a lightweight Retrieval-Augmented Generation (RAG) system. Features dynamic JSON based context chunking, custom keyword scoring retrieval, model fallback handling, exponential backoff for rate limits, and strict prompt guardrails. Deployed on Vercel with serverless API routes and environment secured LLM integration.",
       "stack": [
         "Next.js",
         "React",
@@ -213,24 +181,66 @@
         "Google Antigravity",
         "Vercel"
       ],
-      "github": "https://github.com/sriramachellu",
+      "github": "https://github.com/sriramachellu/LLM-Powered-Portfolio-Website-with-Interactive-AI-Chat-Custom-RAG-Engine",
       "demo": null,
-      "category": "AI Systems / LLM Engineering"
+      "category": "AI Systems / LLM Engineering",
+      "image": "/LLM Powered Portfolio Website with Interactive AI Chat & Custom RAG Engine.png"
+    },
+    {
+      "id": "2",
+      "title": "GenAI & LLM Assisted Clinical Interpretation of Metagenomic Sequencing Data",
+      "description": "End-to-end AI-driven clinical decision support system for interpreting metagenomic next-generation sequencing (mNGS) reports. The pipeline integrates microbial signal processing, weighted pathogen ranking, contaminant filtering, host immune response analysis, PubMed-backed Retrieval-Augmented Generation (RAG), and safety-constrained LLM reasoning to generate structured, literature-grounded infectious disease reports with hallucination controls.",
+      "stack": [
+        "Python",
+        "Pandas",
+        "NumPy",
+        "scikit-learn",
+        "UMAP",
+        "Sentence-Transformers",
+        "Ollama",
+        "DeepSeek-R1 8B LLM",
+        "FastAPI",
+        "PostgreSQL",
+        "NCBI Entrez API"
+      ],
+      "github": "https://github.com/sriramachellu/GenAI-Assisted-Interpretation-of-Metagenomic-Sequencing-Data",
+      "demo": null,
+      "category": "AI/ML Systems & Bioinformatics"
+    },
+    {
+      "id": "3",
+      "title": "Superstore Sales Analysis and Visualization",
+      "description": "End-to-end sales analytics and ETL project processing 50,000+ retail transactions to uncover revenue trends, category performance drivers, customer retention patterns, and regional profitability insights. Built scalable data pipelines and interactive KPI dashboards to enable standardized performance tracking and data-driven campaign evaluation.",
+      "stack": [
+        "Python",
+        "PySpark",
+        "SQL",
+        "MySQL",
+        "Power BI",
+        "Pandas",
+        "Weights & Biases"
+      ],
+      "github": null,
+      "demo": null,
+      "category": "Data Engineering & Business Intelligence",
+      "image": "/Superstore Sales Analysis and Visualization.png"
     },
     {
       "id": "4",
-      "title": "Multimodal Recipe Generator",
-      "description": "Given a photo of ingredients, generates step-by-step recipes using a vision-language model, with nutritional info and shopping list export.",
+      "title": "Pneumonia Detection Using Chest X-Rays",
+      "description": "Developed a deep learning-based medical imaging classifier using Convolutional Neural Networks (CNNs) to detect pneumonia from over 5,800 pediatric chest X-ray images. Implemented data augmentation, dropout regularization, and fine-tuning strategies to improve generalization. Achieved 79.17% test accuracy with precision-recall evaluation and 97%+ training accuracy.",
       "stack": [
         "Python",
-        "GPT-4o",
-        "Next.js",
-        "Vercel",
-        "PostgreSQL"
+        "PyTorch",
+        "CNN",
+        "Torchvision",
+        "Deep Learning",
+        "Medical Imaging"
       ],
-      "github": "https://github.com/sri/recipe-ai",
-      "demo": "https://recipe.demo",
-      "category": "Product AI"
+      "github": "https://github.com/sriramachellu/Pneumonia-Detection-Using-Chest-X-Rays",
+      "demo": null,
+      "category": "Machine Learning / neural networks",
+      "image": "/Pneumonia Detection Using Chest X-Rays.png"
     },
     {
       "id": "5",
@@ -276,10 +286,12 @@
         "Integrated AWS services including Lambda, API Gateway, Cognito, and MSK to support a secure microservices architecture with event driven communication patterns.",
         "Contributed to Git based CI/CD workflows with structured pull requests, automated testing pipelines, and deployment validation, while documenting architecture and resolving frontend integration issues using React and JavaScript to improve overall system reliability and maintainability."
       ],
-      "image": "/saayam.jpg"
+      "image": "/saayam.jpg",
+      "imageCaption": "Death Valley, CA",
+      "imageYears": "2025"
     },
     {
-      "company": "Florida State University",
+      "company": "Florida State University (FSU)",
       "role": "Master of Science in Data Science in Scientific Computing",
       "duration": "2023 - 2025",
       "location": "Tallahassee, FL",
@@ -288,10 +300,12 @@
         "Courses: Data Mining, Machine Learning, Regression Analysis, Data Visualization, Security Fundamentals",
         "Collaborated with peers on academic research and capstone problem solving in predictive modeling."
       ],
-      "image": "/FSU.jpg"
+      "image": "/FSU.jpg",
+      "imageCaption": "FSU, Tallahassee",
+      "imageYears": "2024"
     },
     {
-      "company": "Gokaraju Rangaraju Institute of Engineering and Technology",
+      "company": "Gokaraju Rangaraju Institute of Engineering and Technology (GRIET)",
       "role": "Data Analyst",
       "duration": "2021 – 2022",
       "location": "Hyderabad, India",
@@ -302,10 +316,12 @@
         "Worked closely with sponsorship teams and organizing committees to translate event objectives into clear analytical insights that guided strategic planning and post event evaluation.",
         "Led the planning and execution of workshops and hackathons as Chairperson of IEEE GRSS, while also creating digital promotional assets using Adobe Photoshop and Premiere Pro to maintain consistent branding and documentation."
       ],
-      "image": "/Gokaraju 1.jpg"
+      "image": "/Gokaraju 2.JPG",
+      "imageCaption": "GRIET, Hyderabad",
+      "imageYears": "2023"
     },
     {
-      "company": "Gokaraju Rangaraju Institute of Engineering and Technology",
+      "company": "Gokaraju Rangaraju Institute of Engineering and Technology (GRIET)",
       "role": "Bachelor of Technology in Electronics and Communication Engineering",
       "duration": "2019 - 2023",
       "location": "Hyderabad, India",
@@ -314,7 +330,9 @@
         "Coursework: Signals and Systems, Digital Communications, Probability and Random Processes, Embedded Systems, Microprocessors",
         "Led and organized 20+ technical events as IEEE GRSS Chair, applying data analysis and structured reporting to improve participation and operational efficiency."
       ],
-      "image": "/Gokaraju 2.JPG"
+      "image": "Gokaraju 1.jpg",
+      "imageCaption": "GRIET, Hyderabad",
+      "imageYears": "2022"
     }
   ],
   "photography": [

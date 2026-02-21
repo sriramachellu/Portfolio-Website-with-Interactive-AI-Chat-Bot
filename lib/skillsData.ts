@@ -14,13 +14,13 @@ const customSlugMap: Record<string, string> = {
     'OpenAI API': 'openai',
     'Google Gemini API': 'gemini-color',
     'Anthropic Claude': 'anthropic',
-    'LangChain': 'langchain-color',
+    'LangChain': 'langchain',
     'LlamaIndex': 'llamaindex-color',
     'Ollama': 'ollama',
     'DeepSeek-R1 8B': 'deepseek-color',
     'vLLM': 'vllm-color',
 
-    'Apache Spark': 'Apache_Spark_logo',
+    'Apache Spark': 'Apache Spark',
     'Apache Airflow': 'Apache Airflow',
     'Apache Beam': 'beam-logo-full-color-name-bottom',
     'Power BI': 'New_Power_BI_Logo',
@@ -53,6 +53,7 @@ const customSlugMap: Record<string, string> = {
     'React': 'React',
     'FastAPI': 'FastAPI',
     'Tailwind CSS': 'Tailwind CSS',
+    'Next.js': 'nextjs',
 
     'AWS': 'aws-color',
     'Google Cloud Platform (GCS, BigQuery, Dataflow)': 'Google Cloud',
@@ -72,17 +73,17 @@ const customSlugMap: Record<string, string> = {
 
 const validIcons = new Set([
     'Adobe Photoshop', 'Adobe Premiere Pro', 'After Effects', 'Antigravity', 'Apache Airflow',
-    'Apache_Spark_logo', 'Bash', 'C', 'Canva', 'Docker', 'FastAPI', 'Git', 'Google Cloud',
+    'Apache Spark', 'Bash', 'C', 'Canva', 'Docker', 'FastAPI', 'Git', 'Google Cloud',
     'JSON', 'JavaScript', 'Jupyter', 'Matplotlib', 'Microsoft_365_(2022)', 'MySQL',
     'New_Power_BI_Logo', 'Node.js', 'NumPy', 'OpenCV', 'Pandas', 'PostgresSQL', 'PyTorch',
     'Python', 'R', 'React', 'Tailwind CSS', 'TensorFlow', 'TypeScript', 'Vercel',
     'Visual Studio Code (VS Code)', 'aistudio', 'anthropic', 'aws-color',
     'beam-logo-full-color-name-bottom', 'claude-color', 'colab-color', 'cursor', 'deepai',
     'deepseek-color', 'excel-svgrepo-com', 'figma-color', 'gemini-color', 'github',
-    'githubcopilot', 'googlecloud-color', 'huggingface-color', 'langchain-color',
+    'githubcopilot', 'googlecloud-color', 'huggingface-color', 'langchain',
     'llamaindex-color', 'microsoft copilot-color', 'microsoft-excel', 'ollama', 'openai',
     'openclaw-color', 'perplexity-color (1)', 'perplexity-color', 'pytest', 'scikit-learn',
-    'supabase-logo-icon', 'tableau', 'vllm-color'
+    'supabase-logo-icon', 'tableau', 'vllm-color', 'nextjs'
 ]);
 
 const categoryDescriptions: Record<string, string> = {
@@ -140,5 +141,5 @@ export const ALL_SKILLS = portfolioData.skills.map((group) => {
     };
 });
 
-// The homepage only shows the core top 4 categories
-export const CORE_SKILLS = ALL_SKILLS.slice(0, 4);
+// The homepage only shows the core top 5 categories
+export const CORE_SKILLS = ALL_SKILLS.slice(0, 6);

@@ -15,6 +15,8 @@ export function SkillGroupCard({ category, desc, items, variants }: SkillGroupCa
     return (
         <motion.div
             variants={variants}
+            whileHover={{ y: -6, scale: 1.01 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
             className="glass-1 widget-card"
             style={{
                 padding: '24px 28px',
@@ -24,6 +26,7 @@ export function SkillGroupCard({ category, desc, items, variants }: SkillGroupCa
                 gap: 20,
                 marginBottom: 24,
                 breakInside: 'avoid',
+                cursor: 'default',
             }}
         >
             {/* Visuals Section (Top) */}
