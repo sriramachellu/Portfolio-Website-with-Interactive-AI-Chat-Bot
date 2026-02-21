@@ -1,26 +1,301 @@
 @import "tailwindcss";
 
+/* ============================================================
+   SRI.OS — Liquid Glass Design System
+   Inter loaded via next/font in layout.tsx
+   ============================================================ */
+
+/* ─── Tint Tokens ──────────────────────────────────────────── */
+:root,
+[data-tint="deep-blue"] {
+  --tint-primary: #2563EB;
+  --tint-glow: rgba(37, 99, 235, 0.30);
+  --tint-glass: rgba(37, 99, 235, 0.07);
+  --tint-background: #05101F;
+  --tint-shadow: rgba(37, 99, 235, 0.18);
+  --tint-border: rgba(37, 99, 235, 0.22);
+}
+
+[data-tint="sage"] {
+  --tint-primary: #5A8F6A;
+  --tint-glow: rgba(90, 143, 106, 0.28);
+  --tint-glass: rgba(90, 143, 106, 0.07);
+  --tint-background: #071209;
+  --tint-shadow: rgba(90, 143, 106, 0.18);
+  --tint-border: rgba(90, 143, 106, 0.22);
+}
+
+[data-tint="lavender"] {
+  --tint-primary: #8B6CBB;
+  --tint-glow: rgba(139, 108, 187, 0.30);
+  --tint-glass: rgba(139, 108, 187, 0.07);
+  --tint-background: #0C0710;
+  --tint-shadow: rgba(139, 108, 187, 0.18);
+  --tint-border: rgba(139, 108, 187, 0.22);
+}
+
+[data-tint="amber"] {
+  --tint-primary: #D97706;
+  --tint-glow: rgba(217, 119, 6, 0.28);
+  --tint-glass: rgba(217, 119, 6, 0.07);
+  --tint-background: #110A00;
+  --tint-shadow: rgba(217, 119, 6, 0.18);
+  --tint-border: rgba(217, 119, 6, 0.22);
+}
+
+[data-tint="teal"] {
+  --tint-primary: #0D9488;
+  --tint-glow: rgba(13, 148, 136, 0.28);
+  --tint-glass: rgba(13, 148, 136, 0.07);
+  --tint-background: #00100F;
+  --tint-shadow: rgba(13, 148, 136, 0.18);
+  --tint-border: rgba(13, 148, 136, 0.22);
+}
+
+[data-tint="rose"] {
+  --tint-primary: #BE185D;
+  --tint-glow: rgba(190, 24, 93, 0.28);
+  --tint-glass: rgba(190, 24, 93, 0.07);
+  --tint-background: #120007;
+  --tint-shadow: rgba(190, 24, 93, 0.18);
+  --tint-border: rgba(190, 24, 93, 0.22);
+}
+
+[data-tint="clear"] {
+  --tint-primary: rgba(255, 255, 255, 0.65);
+  --tint-glow: rgba(255, 255, 255, 0.10);
+  --tint-glass: rgba(255, 255, 255, 0.04);
+  --tint-background: #0B0B0F;
+  --tint-shadow: rgba(0, 0, 0, 0.15);
+  --tint-border: rgba(255, 255, 255, 0.14);
+}
+
+/* ─── Base / Reset ─────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  /* Background */
+  --bg-dark: #0B0B0F;
+  --bg-light: #F5F5F7;
+  /* Neutral glass base */
+  --glass-bg: rgba(255, 255, 255, 0.10);
+  --glass-border: rgba(255, 255, 255, 0.16);
+  --glass-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+  /* Typography scale */
+  --text-hero: clamp(64px, 10vw, 140px);
+  --text-section: clamp(40px, 6vw, 72px);
+  --text-card: clamp(18px, 1.5vw, 20px);
+  --text-body: clamp(14px, 1.1vw, 16px);
+  --text-micro: clamp(11px, 0.9vw, 13px);
+  /* Transitions */
+  --tint-transition: 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --spring: cubic-bezier(0.34, 1.2, 0.64, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-primary);
+  background-color: var(--bg-dark);
+  color: rgba(255, 255, 255, 0.90);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Tint Transitions ─────────────────────────────────────── */
+body,
+.glass-1,
+.glass-2,
+.glass-3,
+.tint-glow,
+.ambient-glow {
+  transition:
+    background-color var(--tint-transition),
+    border-color var(--tint-transition),
+    box-shadow var(--tint-transition);
+}
+
+/* ─── Glass Architecture ───────────────────────────────────── */
+/* Level 1 — Primary panels: blur 30px */
+.glass-1 {
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(30px) saturate(150%);
+  -webkit-backdrop-filter: blur(30px) saturate(150%);
+  border: 1px solid var(--glass-border);
+  border-radius: 28px;
+  box-shadow: var(--glass-shadow), 0 0 0 0.5px rgba(255, 255, 255, 0.06) inset;
+}
+
+/* Level 1 with tint */
+.glass-1-tinted {
+  background: var(--tint-glass);
+  backdrop-filter: blur(30px) saturate(150%);
+  -webkit-backdrop-filter: blur(30px) saturate(150%);
+  border: 1px solid var(--tint-border);
+  border-radius: 28px;
+  box-shadow: var(--glass-shadow), 0 0 40px var(--tint-shadow);
+}
+
+/* Level 2 — Secondary panels: blur 20px */
+.glass-2 {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.14);
+}
+
+/* Level 3 — Mini pills/tags: blur 12px */
+.glass-3 {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px) saturate(130%);
+  -webkit-backdrop-filter: blur(12px) saturate(130%);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 100px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+}
+
+/* ─── Background Layers ────────────────────────────────────── */
+.ambient-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(ellipse 80% 60% at calc(50% + var(--refract-x, 0%)) calc(35% + var(--refract-y, 0%)),
+      var(--tint-glow),
+      transparent 65%);
+  transition: background var(--tint-transition);
+}
+
+.page-bg {
+  background-color: var(--bg-dark);
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ─── Typography ───────────────────────────────────────────── */
+.text-hero {
+  font-size: var(--text-hero);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+}
+
+.text-section {
+  font-size: var(--text-section);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.text-card-title {
+  font-size: var(--text-card);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.text-body {
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+
+.text-micro {
+  font-size: var(--text-micro);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* ─── Card Hover ───────────────────────────────────────────── */
+.card-hover {
+  transition: transform 400ms var(--spring), box-shadow 400ms ease;
+}
+
+.card-hover:hover {
+  transform: scale(1.03) translateY(-8px);
+  box-shadow: var(--glass-shadow), 0 32px 80px var(--tint-shadow);
+}
+
+/* ─── Tint Pill (TintSwitcher) ─────────────────────────────── */
+.tint-pill {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 200ms ease, border-color 200ms ease;
+}
+
+.tint-pill:hover {
+  transform: scale(1.2);
+}
+
+.tint-pill.active {
+  border-color: rgba(255, 255, 255, 0.75);
+  transform: scale(1.25);
+}
+
+/* ─── Scrollbar ────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+
+/* ─── Reduced Motion ───────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ─── Utility — Tint text accent ───────────────────────────── */
+.text-tint {
+  color: var(--tint-primary);
+}
+
+.bg-tint-glow {
+  background: var(--tint-glow);
+}
+
+.border-tint {
+  border-color: var(--tint-border);
+}
+
+.text-glass-tint {
+  background: linear-gradient(
+    to bottom,
+    var(--tint-primary) 20%,
+    color-mix(in srgb, var(--tint-primary), transparent 60%) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent; /* Fallback */
+  filter: drop-shadow(0 0 15px var(--tint-glow));
+  transition: filter var(--tint-transition);
 }

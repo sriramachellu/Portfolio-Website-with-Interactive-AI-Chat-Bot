@@ -1,0 +1,99 @@
+import { useState } from 'react';
+import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
+
+export interface SkillIconProps {
+    name: string;
+    iconSlug?: string;
+}
+
+export function SkillIcon({ name, iconSlug }: SkillIconProps) {
+    const [isHovered, setIsHovered] = useState(false);
+    const [imageError, setImageError] = useState(false);
+
+    // Fallback to simpler slugification if not explicitly provided
+    const slug = iconSlug || name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+    const fallbackLetter = name.charAt(0).toUpperCase();
+
+    return (
+        <motion.div
+            className="relative flex items-center justify-center flex-shrink-0"
+            style={{
+                width: 48,
+                height: 48,
+                borderRadius: '50%',
+                background: 'rgba(255,255,255,0.04)',
+                border: '1px solid rgba(255,255,255,0.08)',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+                cursor: 'default',
+                overflow: 'visible', // for tooltip
+            }}
+            onHoverStart={() => setIsHovered(true)}
+            onHoverEnd={() => setIsHovered(false)}
+            whileHover={{ scale: 1.05, translateY: -4 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+        >
+            {/* Icon or Fallback */}
+            {!imageError ? (
+                <div style={{ position: 'relative', width: 24, height: 24 }}>
+                    {/* We load directly from public/skills/ where we cached the SVGs. */}
+                    <Image
+                        src={`/skills/${slug}.svg`}
+                        alt={name}
+                        fill
+                        sizes="24px"
+                        style={{ objectFit: 'contain' }}
+                        unoptimized // static svg 
+                        onError={() => setImageError(true)}
+                    />
+                </div>
+            ) : (
+                <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: 18, fontWeight: 600 }}>
+                    {fallbackLetter}
+                </span>
+            )}
+
+            {/* Hover glow ring */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: isHovered ? 1 : 0 }}
+                style={{
+                    position: 'absolute',
+                    inset: -1,
+                    borderRadius: '50%',
+                    border: '1px solid var(--tint-primary)',
+                    boxShadow: '0 0 12px var(--tint-primary)',
+                    pointerEvents: 'none',
+                    zIndex: 0,
+                }}
+            />
+
+            {/* Tooltip */}
+            <AnimatePresence>
+                {isHovered && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 4, scale: 0.95 }}
+                        transition={{ duration: 0.15 }}
+                        className="glass-3 text-micro"
+                        style={{
+                            position: 'absolute',
+                            bottom: '100%',
+                            marginBottom: 12,
+                            padding: '6px 10px',
+                            whiteSpace: 'nowrap',
+                            color: '#fff',
+                            zIndex: 50,
+                            pointerEvents: 'none',
+                            boxShadow: '0 8px 24px rgba(0,0,0,0.4)',
+                        }}
+                    >
+                        {name}
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </motion.div>
+    );
+}

@@ -1,0 +1,400 @@
+{
+  "personal": {
+    "name": "Srirama Murthy Chellu",
+    "title": "AI/ML Engineer also a Data Scientist & Data Analyst",
+    "tagline": "Building systems that think.",
+    "bio": "Production focused AI/ML engineer with a bias for elegant systems, clean abstractions, and shipping things that matter. I build at the intersection of machine intelligence and great product.",
+    "location": "San Francisco, CA",
+    "email": "[sriramamurthychellu@gmail.com]",
+    "github": "https://github.com/sriramachellu",
+    "linkedin": "https://linkedin.com/in/sriramamurthychellu"
+  },
+  "skills": [
+    {
+      "category": "Machine Learning",
+      "items": [
+        "PyTorch",
+        "TensorFlow",
+        "Scikit-learn",
+        "NumPy",
+        "Pandas",
+        "OpenCV",
+        "Matplotlib",
+        "Seaborn",
+        "MLflow",
+        "XGBoost",
+        "Jupyter Notebook"
+      ]
+    },
+    {
+      "category": "Gen & Agentic AI",
+      "items": [
+        "OpenAI API",
+        "Google Gemini API",
+        "Anthropic Claude",
+        "LangChain",
+        "LlamaIndex",
+        "Ollama",
+        "DeepSeek-R1 8B",
+        "RAGs",
+        "Vector DB",
+        "Prompt Engineering",
+        "LoRA Fine-Tuning",
+        "Large Language Models(LLMs)",
+        "vLLM"
+      ]
+    },
+    {
+      "category": "Data Engineering, Analytics & BI",
+      "items": [
+        "Apache Spark",
+        "Apache Airflow",
+        "Apache Beam",
+        "ETL Pipelines",
+        "Data Cleaning & Transformation",
+        "BigQuery Analytics",
+        "SQL Analytics",
+        "Power BI",
+        "Tableau",
+        "Microsoft Excel",
+        "Microsoft 365"
+      ]
+    },
+    {
+      "category": "Vibe Coding",
+      "items": [
+        "Antigravity",
+        "Cursor AI",
+        "Clawbot",
+        "Claude Code",
+        "GitHub Copilot",
+        "ChatGPT",
+        "Perplexity Pro",
+        "VS Code",
+        "Vercel"
+      ]
+    },
+    {
+      "category": "Programming Languages",
+      "items": [
+        "Python",
+        "C",
+        "R",
+        "SQL",
+        "JavaScript",
+        "TypeScript"
+      ]
+    },
+    {
+      "category": "Database Management",
+      "items": [
+        "MySQL",
+        "PostgreSQL",
+        "Supabase",
+        "BigQuery",
+        "AWS RDS"
+      ]
+    },
+    {
+      "category": "Full Stack & UI",
+      "items": [
+        "React",
+        "FastAPI",
+        "Tailwind CSS",
+        "Framer Motion"
+      ]
+    },
+    {
+      "category": "Cloud & Deployment",
+      "items": [
+        "AWS",
+        "Google Cloud Platform (GCS, BigQuery, Dataflow)",
+        "Docker",
+        "Vercel",
+        "GitHub Actions",
+        "CI/CD Pipelines"
+      ]
+    },
+    {
+      "category": "Version Control & Collaboration, Testing",
+      "items": [
+        "Git",
+        "GitHub",
+        "PyTest",
+        "A/B Testing",
+        "Integration Testing"
+      ]
+    },
+    {
+      "category": "Design & Video Editing",
+      "items": [
+        "Figma",
+        "Adobe Photoshop",
+        "Adobe Premiere Pro",
+        "Canva",
+        "Adobe After Effects"
+      ]
+    },
+    {
+      "category": "Core Computer Science Concepts",
+      "items": [
+        "Data Structures & Algorithms",
+        "System Design",
+        "Object-Oriented Programming",
+        "Operating Systems",
+        "Computer Networks",
+        "Distributed Systems",
+        "Database Systems"
+      ]
+    },
+    {
+      "category": "Personal Development",
+      "items": [
+        "Leadership",
+        "Communication",
+        "Time Management",
+        "Problem Solving",
+        "Strategic Thinking",
+        "Public Speaking",
+        "Event Management"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "1",
+      "title": "GenAI-Assisted Clinical Interpretation of Metagenomic Sequencing Data",
+      "description": "End-to-end AI-driven clinical decision support system for interpreting metagenomic next-generation sequencing (mNGS) reports. The pipeline integrates microbial signal processing, weighted pathogen ranking, contaminant filtering, host immune response analysis, PubMed-backed Retrieval-Augmented Generation (RAG), and safety-constrained LLM reasoning to generate structured, literature-grounded infectious disease reports with hallucination controls.",
+      "stack": [
+        "Python",
+        "Pandas",
+        "NumPy",
+        "scikit-learn",
+        "UMAP",
+        "Sentence-Transformers",
+        "Ollama",
+        "DeepSeek-R1 8B",
+        "FastAPI",
+        "PostgreSQL",
+        "NCBI Entrez API"
+      ],
+      "github": "https://github.com/sriramachellu/GenAI-Assisted-Interpretation-of-Metagenomic-Sequencing-Data",
+      "demo": null,
+      "category": "AI/ML Systems & Bioinformatics"
+    },
+    {
+      "id": "2",
+      "title": "Superstore Sales Analysis and Visualization",
+      "description": "End-to-end sales analytics and ETL project processing 50,000+ retail transactions to uncover revenue trends, category performance drivers, customer retention patterns, and regional profitability insights. Built scalable data pipelines and interactive KPI dashboards to enable standardized performance tracking and data-driven campaign evaluation.",
+      "stack": [
+        "Python",
+        "PySpark",
+        "SQL",
+        "MySQL",
+        "Power BI",
+        "Pandas",
+        "Weights & Biases"
+      ],
+      "category": "Data Engineering & Business Intelligence"
+    },
+    {
+      "id": "3",
+      "title": "LLM-Powered Portfolio Website with Interactive AI Chat & Custom RAG Engine",
+      "description": "Production-ready AI-native portfolio platform integrating Google Gemini APIs with a lightweight Retrieval-Augmented Generation (RAG) system. Features dynamic JSON-based context chunking, custom keyword scoring retrieval, model fallback handling, exponential backoff for rate limits, and strict prompt guardrails. Deployed on Vercel with serverless API routes and environment-secured LLM integration.",
+      "stack": [
+        "Next.js",
+        "React",
+        "TypeScript 5",
+        "Tailwind CSS 4",
+        "Framer Motion",
+        "Google Gemini API",
+        "Claude Sonnet 4.6",
+        "Custom RAG Architecture",
+        "Google Antigravity",
+        "Vercel"
+      ],
+      "github": "https://github.com/sriramachellu",
+      "demo": null,
+      "category": "AI Systems / LLM Engineering"
+    },
+    {
+      "id": "4",
+      "title": "Multimodal Recipe Generator",
+      "description": "Given a photo of ingredients, generates step-by-step recipes using a vision-language model, with nutritional info and shopping list export.",
+      "stack": [
+        "Python",
+        "GPT-4o",
+        "Next.js",
+        "Vercel",
+        "PostgreSQL"
+      ],
+      "github": "https://github.com/sri/recipe-ai",
+      "demo": "https://recipe.demo",
+      "category": "Product AI"
+    },
+    {
+      "id": "5",
+      "title": "Inference Optimizer",
+      "description": "CUDA kernel optimizations + quantization pipeline reducing LLM inference cost by 60% while maintaining 98% of output quality on standard benchmarks.",
+      "stack": [
+        "Python",
+        "CUDA",
+        "C++",
+        "TensorRT",
+        "ONNX"
+      ],
+      "github": "https://github.com/sri/inference-optimizer",
+      "demo": null,
+      "category": "ML Systems"
+    },
+    {
+      "id": "6",
+      "title": "Autonomous Data Labeler",
+      "description": "Active learning system that uses a weak LLM to propose labels, a human-in-the-loop UI for review, and a strong model to arbitrate — cut labeling cost by 80%.",
+      "stack": [
+        "Python",
+        "FastAPI",
+        "React",
+        "PostgreSQL",
+        "Anthropic"
+      ],
+      "github": "https://github.com/sri/data-labeler",
+      "demo": null,
+      "category": "AI Tooling"
+    }
+  ],
+  "workExperience": [
+    {
+      "company": "Saayam For All",
+      "role": "Full Stack Developer",
+      "duration": "July 2025 – Present",
+      "location": "San Jose, CA",
+      "bullets": [
+        "Built and maintained backend services and REST APIs in Python using Flask to power real time geospatial volunteer matching, enabling efficient and low latency request routing across active users.",
+        "Designed and optimized PostgreSQL schemas on AWS Aurora with spatial indexing to improve nearest neighbor searches and location based filtering, reducing query time and improving system responsiveness.",
+        "Refactored SQL queries and backend workflows to remove performance bottlenecks, improving API stability and maintaining reliable data availability under concurrent usage.",
+        "Integrated AWS services including Lambda, API Gateway, Cognito, and MSK to support a secure microservices architecture with event driven communication patterns.",
+        "Contributed to Git based CI/CD workflows with structured pull requests, automated testing pipelines, and deployment validation, while documenting architecture and resolving frontend integration issues using React and JavaScript to improve overall system reliability and maintainability."
+      ],
+      "image": "/saayam.jpg"
+    },
+    {
+      "company": "Florida State University",
+      "role": "Master of Science in Data Science in Scientific Computing",
+      "duration": "2023 - 2025",
+      "location": "Tallahassee, FL",
+      "bullets": [
+        "GPA: 3.897",
+        "Courses: Data Mining, Machine Learning, Regression Analysis, Data Visualization, Security Fundamentals",
+        "Collaborated with peers on academic research and capstone problem solving in predictive modeling."
+      ],
+      "image": "/FSU.jpg"
+    },
+    {
+      "company": "Gokaraju Rangaraju Institute of Engineering and Technology",
+      "role": "Data Analyst",
+      "duration": "2021 – 2022",
+      "location": "Hyderabad, India",
+      "bullets": [
+        "Collected, cleaned, and analyzed event participation data using SQL and Excel across more than 12 technical and cultural programs to support planning and improve decision making.",
+        "Built automated dashboards and recurring reports to track engagement trends, participation patterns, sponsorship performance, and key operational metrics, reducing manual reporting effort by 50 percent.",
+        "Standardized data preparation, validation, and reporting processes to improve data consistency and helped increase attendee engagement by 30 percent through data informed insights.",
+        "Worked closely with sponsorship teams and organizing committees to translate event objectives into clear analytical insights that guided strategic planning and post event evaluation.",
+        "Led the planning and execution of workshops and hackathons as Chairperson of IEEE GRSS, while also creating digital promotional assets using Adobe Photoshop and Premiere Pro to maintain consistent branding and documentation."
+      ],
+      "image": "/Gokaraju 1.jpg"
+    },
+    {
+      "company": "Gokaraju Rangaraju Institute of Engineering and Technology",
+      "role": "Bachelor of Technology in Electronics and Communication Engineering",
+      "duration": "2019 - 2023",
+      "location": "Hyderabad, India",
+      "bullets": [
+        "GPA: 3.30",
+        "Coursework: Signals and Systems, Digital Communications, Probability and Random Processes, Embedded Systems, Microprocessors",
+        "Led and organized 20+ technical events as IEEE GRSS Chair, applying data analysis and structured reporting to improve participation and operational efficiency."
+      ],
+      "image": "/Gokaraju 2.JPG"
+    }
+  ],
+  "photography": [
+    {
+      "id": "1",
+      "title": "Golden Gate at Dusk",
+      "category": "Landscape",
+      "location": "San Francisco"
+    },
+    {
+      "id": "2",
+      "title": "Yosemite Valley",
+      "category": "Landscape",
+      "location": "Yosemite"
+    },
+    {
+      "id": "3",
+      "title": "Tokyo Street",
+      "category": "Urban",
+      "location": "Tokyo"
+    },
+    {
+      "id": "4",
+      "title": "Fog Machine",
+      "category": "Abstract",
+      "location": "SF Bay"
+    },
+    {
+      "id": "5",
+      "title": "Neon Alley",
+      "category": "Urban",
+      "location": "Osaka"
+    },
+    {
+      "id": "6",
+      "title": "Summit Light",
+      "category": "Landscape",
+      "location": "Sierra Nevada"
+    }
+  ],
+  "cooking": [
+    {
+      "id": "1",
+      "title": "Saffron Risotto",
+      "description": "Slow-stirred Carnaroli rice with Parmesan, white wine, and a generous pour of Barolo saffron. 40 minutes of therapy.",
+      "tags": [
+        "Italian",
+        "Comfort",
+        "Weekend"
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Miso Ramen",
+      "description": "Tonkotsu-miso hybrid with chashu belly, soft-boiled tamago, nori, and crispy shallots. An 8-hour project worth every minute.",
+      "tags": [
+        "Japanese",
+        "Umami",
+        "Sunday"
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Sourdough Focaccia",
+      "description": "Dimpled, olive-oil-drenched focaccia from a 72-hour cold-fermented sourdough starter. Rosemary, sea salt, roasted garlic.",
+      "tags": [
+        "Baking",
+        "Bread",
+        "Sourdough"
+      ]
+    },
+    {
+      "id": "4",
+      "title": "Kerala Fish Curry",
+      "description": "Coconut milk, kudampuli, and fresh turmeric — my grandmother's recipe reconstructed from memory and three long calls home.",
+      "tags": [
+        "Indian",
+        "Seafood",
+        "Heritage"
+      ]
+    }
+  ]
+}
