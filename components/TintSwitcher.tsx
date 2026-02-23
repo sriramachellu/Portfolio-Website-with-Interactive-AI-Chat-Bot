@@ -18,7 +18,6 @@ export default function TintSwitcher() {
 
     return (
         <motion.div
-            className="glass-2"
             style={{
                 position: 'fixed',
                 top: 20,
@@ -27,22 +26,55 @@ export default function TintSwitcher() {
                 display: 'flex',
                 alignItems: 'center',
                 gap: 8,
-                padding: '8px 14px',
+                padding: '10px 16px',
                 borderRadius: 100,
+                background: 'rgba(255, 255, 255, 0.15)',
+                backdropFilter: 'blur(16px) saturate(180%)',
+                WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.05) inset',
             }}
             initial={{ y: -40, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 1.0, ease: [0.22, 1, 0.36, 1] }}
         >
-            {TINTS.map((t) => (
-                <button
-                    key={t.id}
-                    aria-label={`Set tint: ${t.label}`}
-                    className={`tint-pill ${activeTint === t.id ? 'active' : ''}`}
-                    style={{ background: t.color }}
-                    onClick={() => setTint(t.id)}
-                />
-            ))}
+            {TINTS.map((t) => {
+                const isActive = activeTint === t.id;
+                return (
+                    <button
+                        key={t.id}
+                        aria-label={`Set tint: ${t.label}`}
+                        className="tint-pill"
+                        style={{
+                            background: t.color,
+                            position: 'relative',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                        }}
+                        onClick={() => setTint(t.id)}
+                    >
+                        {isActive && (
+                            <motion.div
+                                layoutId="active-tint-ring"
+                                style={{
+                                    position: 'absolute',
+                                    inset: -4,
+                                    borderRadius: '50%',
+                                    border: '1.5px solid rgba(255, 255, 255, 0.5)',
+                                    boxShadow: '0 0 8px rgba(255,255,255,0.15)',
+                                    pointerEvents: 'none'
+                                }}
+                                transition={{
+                                    type: 'spring',
+                                    stiffness: 300,
+                                    damping: 30
+                                }}
+                            />
+                        )}
+                    </button>
+                );
+            })}
         </motion.div>
     );
 }

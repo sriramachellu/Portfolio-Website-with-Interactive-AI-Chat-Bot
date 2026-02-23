@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowUpRight } from 'lucide-react';
 
 export interface TimelineItemData {
     role: string;
@@ -10,15 +12,18 @@ export interface TimelineItemData {
     image?: string;
     imageCaption?: string;
     imageYears?: string;
+    bullets?: string[];
 }
 
 export interface TimelineProps {
     items: TimelineItemData[];
+    showBullets?: boolean;
+    showRedirection?: boolean;
 }
 
 
 
-export function Timeline({ items }: TimelineProps) {
+export function Timeline({ items, showBullets = true, showRedirection = false }: TimelineProps) {
     const [cacheBuster, setCacheBuster] = useState('');
 
     useEffect(() => {
@@ -47,10 +52,12 @@ export function Timeline({ items }: TimelineProps) {
 
             {items.map((item, index) => {
                 const isLeftText = index % 2 === 0;
+                const itemId = item.company.toLowerCase().replace(/[^a-z0-9]/g, '-');
 
                 return (
                     <motion.div
                         key={index}
+                        id={itemId}
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: '-80px' }}
@@ -94,6 +101,13 @@ export function Timeline({ items }: TimelineProps) {
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: 4, textAlign: 'right' }}>
                                     <h3 style={{ fontSize: 18, fontWeight: 600, color: '#fff', letterSpacing: '-0.01em', marginBottom: 2 }}>
                                         {item.role}
+                                        {showRedirection && (
+                                            <Link href={`/work#${itemId}`} style={{ display: 'inline-flex', marginLeft: 8, color: 'var(--tint-primary)', verticalAlign: 'middle' }}>
+                                                <motion.div whileHover={{ scale: 1.2, x: 2, y: -2 }}>
+                                                    <ArrowUpRight size={16} />
+                                                </motion.div>
+                                            </Link>
+                                        )}
                                     </h3>
                                     <span style={{ fontSize: 14, fontWeight: 500, color: 'var(--tint-primary)', marginBottom: 8 }}>
                                         {item.company}
@@ -104,6 +118,29 @@ export function Timeline({ items }: TimelineProps) {
                                     <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.3)', fontWeight: 400 }}>
                                         {item.location}
                                     </span>
+
+                                    {showBullets && item.bullets && item.bullets.length > 0 && (
+                                        <ul style={{
+                                            paddingLeft: 0,
+                                            listStyle: 'none',
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            gap: 8,
+                                            marginTop: 16,
+                                            alignItems: 'flex-end'
+                                        }}>
+                                            {item.bullets.map((bullet, bi) => (
+                                                <li key={bi} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', justifyContent: 'flex-end', textAlign: 'right' }}>
+                                                    <p className="text-body" style={{ color: 'rgba(255,255,255,0.6)', fontSize: 13, lineHeight: 1.5 }}>{bullet}</p>
+                                                    <span style={{ color: 'var(--tint-primary)', marginTop: 6, flexShrink: 0 }}>
+                                                        <svg width="6" height="6" viewBox="0 0 6 6" fill="currentColor">
+                                                            <circle cx="3" cy="3" r="3" />
+                                                        </svg>
+                                                    </span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
                                 </div>
                             ) : (
                                 // Image on Left
@@ -174,6 +211,13 @@ export function Timeline({ items }: TimelineProps) {
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: 4, textAlign: 'left' }}>
                                     <h3 style={{ fontSize: 18, fontWeight: 600, color: '#fff', letterSpacing: '-0.01em', marginBottom: 2 }}>
                                         {item.role}
+                                        {showRedirection && (
+                                            <Link href={`/work#${itemId}`} style={{ display: 'inline-flex', marginLeft: 8, color: 'var(--tint-primary)', verticalAlign: 'middle' }}>
+                                                <motion.div whileHover={{ scale: 1.2, x: 2, y: -2 }}>
+                                                    <ArrowUpRight size={16} />
+                                                </motion.div>
+                                            </Link>
+                                        )}
                                     </h3>
                                     <span style={{ fontSize: 14, fontWeight: 500, color: 'var(--tint-primary)', marginBottom: 8 }}>
                                         {item.company}
@@ -184,6 +228,29 @@ export function Timeline({ items }: TimelineProps) {
                                     <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.3)', fontWeight: 400 }}>
                                         {item.location}
                                     </span>
+
+                                    {showBullets && item.bullets && item.bullets.length > 0 && (
+                                        <ul style={{
+                                            paddingLeft: 0,
+                                            listStyle: 'none',
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            gap: 8,
+                                            marginTop: 16,
+                                            alignItems: 'flex-start'
+                                        }}>
+                                            {item.bullets.map((bullet, bi) => (
+                                                <li key={bi} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', justifyContent: 'flex-start', textAlign: 'left' }}>
+                                                    <span style={{ color: 'var(--tint-primary)', marginTop: 6, flexShrink: 0 }}>
+                                                        <svg width="6" height="6" viewBox="0 0 6 6" fill="currentColor">
+                                                            <circle cx="3" cy="3" r="3" />
+                                                        </svg>
+                                                    </span>
+                                                    <p className="text-body" style={{ color: 'rgba(255,255,255,0.6)', fontSize: 13, lineHeight: 1.5 }}>{bullet}</p>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
                                 </div>
                             ) : (
                                 // Image on Right

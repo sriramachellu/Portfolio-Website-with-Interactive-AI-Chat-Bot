@@ -15,11 +15,11 @@ export function SkillGroupCard({ category, desc, items, variants }: SkillGroupCa
     return (
         <motion.div
             variants={variants}
-            whileHover={{ y: -6, scale: 1.01 }}
+            whileHover={{ y: -6, scale: 1.01, zIndex: 100 }} // Higher z-index to stay on top
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
             className="glass-1 widget-card"
             style={{
-                padding: '24px 28px',
+                padding: '40px 28px 24px 28px', // Increased top padding for tooltip headroom
                 borderRadius: 24,
                 display: 'flex',
                 flexDirection: 'column',
@@ -27,6 +27,8 @@ export function SkillGroupCard({ category, desc, items, variants }: SkillGroupCa
                 marginBottom: 24,
                 breakInside: 'avoid',
                 cursor: 'default',
+                position: 'relative',
+                overflow: 'visible',
             }}
         >
             {/* Visuals Section (Top) */}

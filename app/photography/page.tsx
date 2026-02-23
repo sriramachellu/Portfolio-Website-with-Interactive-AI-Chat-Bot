@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import portfolioData from '@/lib/portfolio.json';
+import { PhotographyShowcaseCard } from '@/components/PhotographyShowcaseCard';
 
 const { photography } = portfolioData;
 
@@ -27,7 +28,7 @@ export default function PhotographyPage() {
         : photography.filter((p) => p.category === activeCategory);
 
     return (
-        <div style={{ minHeight: '100vh', padding: '100px 40px 160px', maxWidth: 1200, margin: '0 auto' }}>
+        <div style={{ minHeight: '100vh', padding: '120px 40px 200px', maxWidth: 1200, margin: '0 auto' }}>
             {/* Header */}
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -73,60 +74,37 @@ export default function PhotographyPage() {
                 ))}
             </motion.div>
 
-            {/* Grid */}
+            {/* Masonry Grid */}
             <motion.div
                 layout
                 style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-                    gap: 16,
+                    columnCount: filtered.length > 0 ? 3 : 1,
+                    columnGap: 24,
                 }}
+                className="photography-grid"
             >
+                <style jsx>{`
+                    .photography-grid {
+                        column-count: 1;
+                        column-gap: 24px;
+                        width: 100%;
+                    }
+                    @media (min-width: 768px) {
+                        .photography-grid { column-count: 2; }
+                    }
+                    @media (min-width: 1024px) {
+                        .photography-grid { column-count: 3; }
+                    }
+                `}</style>
                 <AnimatePresence mode="popLayout">
-                    {filtered.map((photo, i) => {
-                        const colors = PHOTO_COLORS[parseInt(photo.id) - 1] || PHOTO_COLORS[0];
-                        return (
-                            <motion.div
-                                key={photo.id}
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.92 }}
-                                transition={{ duration: 0.4, delay: i * 0.06 }}
-                                layout
-                                className="card-hover"
-                                onClick={() => setLightbox(photo)}
-                                style={{
-                                    height: i % 3 === 0 ? 280 : 220,
-                                    borderRadius: 20,
-                                    overflow: 'hidden',
-                                    cursor: 'pointer',
-                                    position: 'relative',
-                                    background: `linear-gradient(135deg, ${colors[0]}, ${colors[1]}, ${colors[2]})`,
-                                }}
-                            >
-                                {/* Overlay */}
-                                <div style={{
-                                    position: 'absolute',
-                                    inset: 0,
-                                    background: 'linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 50%)',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    justifyContent: 'flex-end',
-                                    padding: 18,
-                                }}>
-                                    <p className="text-card-title" style={{ color: '#fff', fontSize: 15 }}>{photo.title}</p>
-                                    <div style={{ display: 'flex', gap: 8, marginTop: 6 }}>
-                                        <span className="glass-3 text-micro" style={{ padding: '3px 10px', color: 'rgba(255,255,255,0.75)' }}>
-                                            {photo.category}
-                                        </span>
-                                        <span className="glass-3 text-micro" style={{ padding: '3px 10px', color: 'rgba(255,255,255,0.60)' }}>
-                                            {photo.location}
-                                        </span>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        );
-                    })}
+                    {filtered.map((photo, i) => (
+                        <PhotographyShowcaseCard
+                            key={photo.id}
+                            photo={photo}
+                            index={i}
+                            onClick={() => setLightbox(photo)}
+                        />
+                    ))}
                 </AnimatePresence>
             </motion.div>
 
@@ -145,37 +123,54 @@ export default function PhotographyPage() {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            background: 'rgba(0,0,0,0.80)',
-                            backdropFilter: 'blur(24px)',
-                            padding: 32,
+                            background: 'rgba(0,0,0,0.92)',
+                            backdropFilter: 'blur(12px)',
+                            padding: 24,
                         }}
                     >
                         <motion.div
-                            initial={{ scale: 0.88, y: 32 }}
+                            initial={{ scale: 0.9, y: 20 }}
                             animate={{ scale: 1, y: 0 }}
-                            exit={{ scale: 0.92, y: 16 }}
-                            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                            className="glass-1-tinted"
-                            style={{ maxWidth: 600, width: '100%', padding: 40, textAlign: 'center' }}
+                            exit={{ scale: 0.9, y: 20 }}
+                            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                            className="glass-1"
+                            style={{
+                                maxWidth: '90vw',
+                                maxHeight: '90vh',
+                                width: 'fit-content',
+                                padding: 12,
+                                textAlign: 'center',
+                                position: 'relative',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center'
+                            }}
                             onClick={(e) => e.stopPropagation()}
                         >
-                            <div style={{
-                                height: 320,
-                                borderRadius: 16,
-                                background: `linear-gradient(135deg, ${PHOTO_COLORS[parseInt(lightbox.id) - 1]?.[0]}, ${PHOTO_COLORS[parseInt(lightbox.id) - 1]?.[2]})`,
-                                marginBottom: 24,
-                            }} />
-                            <h2 className="text-card-title" style={{ color: '#fff', marginBottom: 8 }}>{lightbox.title}</h2>
-                            <p className="text-body" style={{ color: 'rgba(255,255,255,0.55)' }}>
-                                {lightbox.category} · {lightbox.location}
-                            </p>
-                            <button
-                                onClick={() => setLightbox(null)}
-                                className="glass-3"
-                                style={{ marginTop: 24, padding: '8px 24px', color: 'rgba(255,255,255,0.65)', border: 'none', cursor: 'pointer', fontSize: 14 }}
-                            >
-                                Close
-                            </button>
+                            <img
+                                src={lightbox.image}
+                                alt={lightbox.title}
+                                style={{
+                                    maxWidth: '100%',
+                                    maxHeight: '70vh',
+                                    borderRadius: 16,
+                                    objectFit: 'contain',
+                                    boxShadow: '0 20px 40px rgba(0,0,0,0.4)'
+                                }}
+                            />
+                            <div style={{ marginTop: 24, padding: '0 12px 12px' }}>
+                                <h2 className="text-section" style={{ color: '#fff', fontSize: 24, marginBottom: 8 }}>{lightbox.title}</h2>
+                                <p className="text-body" style={{ color: 'rgba(255,255,255,0.6)' }}>
+                                    {lightbox.location} · {lightbox.category} {lightbox.year && `· ${lightbox.year}`}
+                                </p>
+                                <button
+                                    onClick={() => setLightbox(null)}
+                                    className="glass-3"
+                                    style={{ marginTop: 20, padding: '10px 32px', color: '#fff', border: 'none', cursor: 'pointer', fontSize: 14, borderRadius: 100 }}
+                                >
+                                    Close
+                                </button>
+                            </div>
                         </motion.div>
                     </motion.div>
                 )}

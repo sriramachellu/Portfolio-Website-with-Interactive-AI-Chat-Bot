@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Github } from 'lucide-react';
+import { Github, ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 
 export interface ProjectShowcaseCardProps {
@@ -8,175 +8,191 @@ export interface ProjectShowcaseCardProps {
     category: string;
     stack: string[];
     github?: string | null;
+    demo?: string | null;
     image?: string | null;
     index: number;
+    variant?: 'compact' | 'full';
 }
 
-export function ProjectShowcaseCard({ title, description, category, stack, github, image, index }: ProjectShowcaseCardProps) {
+export function ProjectShowcaseCard({ title, description, category, stack, github, demo, image, index, variant = 'compact' }: ProjectShowcaseCardProps) {
+    const isFull = variant === 'full';
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] as const }}
-            style={{ display: 'flex', flexDirection: 'column', gap: 24 }}
+            style={{ width: '100%' }}
         >
-            {/* Visual & Info Container (Internal) */}
             <motion.div
-                whileHover={{ y: -6 }}
+                whileHover={{ y: -6, rotate: index % 2 === 0 ? -1 : 1 }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
                 className="glass-1"
                 style={{
-                    aspectRatio: '16 / 11',
+                    aspectRatio: isFull ? 'auto' : '16 / 13',
+                    minHeight: isFull ? 480 : 'auto',
                     borderRadius: 24,
                     overflow: 'hidden',
                     position: 'relative',
                     cursor: 'pointer',
                     display: 'flex',
                     flexDirection: 'column',
-                    border: '1px solid rgba(255,255,255,0.08)',
+                    padding: 12, // Polaroid border feel
+                    background: 'rgba(255,255,255,0.04)',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    boxShadow: '0 20px 40px rgba(0,0,0,0.3)',
                 }}
             >
                 {/* 1. Visual Asset Area (3/4 Height) */}
                 <div style={{
-                    flex: 3,
+                    flex: isFull ? 'none' : 3,
+                    aspectRatio: isFull ? '16 / 10' : 'auto',
                     position: 'relative',
+                    borderRadius: 14,
+                    overflow: 'hidden',
+                    background: 'rgba(0,0,0,0.15)', // Darker base for contained images
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    background: 'linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%)',
+                    padding: 8, // Gap around the image inside the frame
                 }}>
                     {image ? (
-                        <Image
-                            src={image}
-                            alt={title}
-                            fill
-                            sizes="(max-width: 768px) 100vw, 50vw"
-                            style={{ objectFit: 'cover' }}
-                            unoptimized={true}
-                        />
+                        <div style={{
+                            position: 'relative',
+                            width: '100%',
+                            height: '100%',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            filter: 'drop-shadow(0 8px 16px rgba(0,0,0,0.4))'
+                        }}>
+                            <Image
+                                src={image}
+                                alt={title}
+                                fill
+                                sizes="(max-width: 768px) 100vw, 50vw"
+                                style={{
+                                    objectFit: 'contain',
+                                    borderRadius: 8, // Round edges of the image itself
+                                }}
+                                unoptimized={true}
+                            />
+                        </div>
                     ) : (
-                        <>
-                            {/* Abstract visual hint */}
-                            <div style={{
-                                width: '60%',
-                                height: '60%',
-                                background: 'radial-gradient(circle, var(--tint-primary) 0%, transparent 70%)',
-                                opacity: 0.08,
-                                filter: 'blur(40px)',
-                            }} />
-
-                            <span style={{
-                                position: 'absolute',
-                                right: 40,
-                                top: '50%',
-                                transform: 'translateY(-50%)',
-                                fontSize: 12,
-                                fontWeight: 600,
-                                color: 'rgba(255,255,255,0.2)',
-                                letterSpacing: '0.06em',
-                                textTransform: 'uppercase'
-                            }}>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+                            <span style={{ fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.2)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
                                 Awaiting Visual Asset
                             </span>
-                        </>
+                        </div>
                     )}
                 </div>
 
                 {/* 2. Internal Details Area (1/4 Height) */}
                 <div style={{
-                    flex: 1,
-                    padding: '20px 24px',
+                    flex: 1.2, // Slightly more than 1/4 to accommodate title comfortably
+                    padding: '16px 8px 4px',
                     display: 'flex',
                     flexDirection: 'column',
-                    justifyContent: 'center',
-                    gap: 12,
-                    background: 'rgba(255,255,255,0.02)',
-                    backdropFilter: 'blur(20px)',
-                    borderTop: '1px solid rgba(255,255,255,0.05)',
+                    justifyContent: 'space-between',
                 }}>
-                    {/* Top Skills Tags */}
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                        {stack.slice(0, 8).map(tech => (
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12 }}>
+                        <div style={{ flex: 1 }}>
+                            <h3 style={{
+                                fontSize: 20,
+                                fontWeight: 600,
+                                color: '#fff',
+                                letterSpacing: '-0.02em',
+                                marginBottom: 4
+                            }}>
+                                {title}
+                            </h3>
+                            <p style={{
+                                fontSize: isFull ? 14 : 12,
+                                color: 'rgba(255,255,255,0.45)',
+                                lineHeight: 1.5,
+                                display: '-webkit-box',
+                                WebkitLineClamp: isFull ? 'initial' : 2,
+                                WebkitBoxOrient: 'vertical',
+                                overflow: isFull ? 'visible' : 'hidden',
+                            }}>
+                                {description}
+                            </p>
+                        </div>
+
+                        <div style={{ display: 'flex', gap: 8, flexShrink: 0 }}>
+                            {github && (
+                                <motion.a
+                                    href={github}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    whileHover={{ scale: 1.1, background: 'rgba(255,255,255,0.1)' }}
+                                    whileTap={{ scale: 0.95 }}
+                                    onClick={(e) => e.stopPropagation()}
+                                    style={{
+                                        width: 36,
+                                        height: 36,
+                                        borderRadius: '50%',
+                                        background: 'rgba(255,255,255,0.05)',
+                                        border: '1px solid rgba(255,255,255,0.15)',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        color: 'rgba(255,255,255,0.9)',
+                                    }}
+                                >
+                                    <Github size={18} />
+                                </motion.a>
+                            )}
+
+                            {demo && (
+                                <motion.a
+                                    href={demo}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    whileHover={{ scale: 1.1, background: 'var(--tint-glass)' }}
+                                    whileTap={{ scale: 0.95 }}
+                                    onClick={(e) => e.stopPropagation()}
+                                    style={{
+                                        width: 36,
+                                        height: 36,
+                                        borderRadius: '50%',
+                                        background: 'rgba(255,255,255,0.05)',
+                                        border: '1px solid var(--tint-primary)',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        color: 'var(--tint-primary)',
+                                    }}
+                                >
+                                    <ExternalLink size={18} />
+                                </motion.a>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Bottom Tech Stack */}
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 12 }}>
+                        {stack.slice().map(tech => (
                             <span
                                 key={tech}
-                                className="glass-3 text-micro"
                                 style={{
-                                    padding: '5px 12px',
-                                    borderRadius: 100,
-                                    color: 'rgba(255,255,255,0.6)',
+                                    fontSize: 10,
+                                    padding: '3px 8px',
+                                    borderRadius: 6,
+                                    background: 'rgba(255,255,255,0.03)',
+                                    border: '1px solid rgba(255,255,255,0.06)',
+                                    color: 'rgba(255,255,255,0.5)',
                                     fontWeight: 500,
-                                    border: '1px solid rgba(255,255,255,0.08)'
                                 }}
                             >
                                 {tech}
                             </span>
                         ))}
                     </div>
-
-                    {/* 2-line Description */}
-                    <p style={{
-                        fontSize: 13,
-                        color: 'rgba(255,255,255,0.4)',
-                        lineHeight: 1.5,
-                        display: '-webkit-box',
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: 'vertical',
-                        overflow: 'hidden',
-                    }}>
-                        {description}
-                    </p>
                 </div>
             </motion.div>
-
-            {/* Title & GitHub Section (External) */}
-            <div style={{ padding: '0 8px', display: 'flex', alignItems: 'center', gap: 16 }}>
-                {github ? (
-                    <motion.a
-                        href={github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.1, rotate: 5 }}
-                        whileTap={{ scale: 0.95 }}
-                        style={{
-                            width: 32,
-                            height: 32,
-                            borderRadius: '50%',
-                            background: 'rgba(255,255,255,0.05)',
-                            border: '1px solid rgba(255,255,255,0.15)',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            color: 'rgba(255,255,255,0.9)',
-                            textDecoration: 'none'
-                        }}
-                    >
-                        <Github size={16} />
-                    </motion.a>
-                ) : (
-                    <div style={{
-                        width: 32,
-                        height: 32,
-                        borderRadius: '50%',
-                        border: '1px solid rgba(255,255,255,0.1)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: 'rgba(255,255,255,0.3)'
-                    }}>
-                        <Github size={16} />
-                    </div>
-                )}
-
-                <h3 style={{
-                    fontSize: 22,
-                    fontWeight: 500,
-                    color: '#fff',
-                    letterSpacing: '-0.02em'
-                }}>
-                    {title}
-                </h3>
-            </div>
         </motion.div>
+
     );
 }
