@@ -8,7 +8,7 @@ import { ArrowUpRight, Github, ExternalLink, Linkedin, Mail } from 'lucide-react
 import portfolioData from '@/lib/portfolio.json';
 import { PortfolioAssistant } from '@/components/PortfolioAssistant';
 import { TopInfoBar } from '@/components/TimeZoneWidget';
-
+import SpotifyNowPlaying from '@/components/SpotifyNowPlaying';
 const { personal, projects } = portfolioData;
 
 const calculateAge = (birthDate: string) => {
@@ -97,6 +97,7 @@ function HeroSection() {
     >
       {/* ── Timezone widget — top left ───────────────────────── */}
       <TopInfoBar />
+      <SpotifyNowPlaying />
 
       {/* ── Layer 0: Big bg typography ──────────────────────── */}
       <div
@@ -475,20 +476,17 @@ export default function HomePage() {
           >
             <Link href="/projects" style={{ textDecoration: 'none' }}>
               <motion.span
-                whileHover={{ scale: 1.04, y: -2 }}
+                whileHover={{ scale: 1.04, y: -1 }}
                 whileTap={{ scale: 0.97 }}
                 className="glass-2"
                 style={{
-                  display: 'inline-flex', alignItems: 'center', gap: 8,
-                  padding: '12px 28px', borderRadius: 100,
-                  fontSize: 14, fontWeight: 500,
-                  color: 'rgba(255,255,255,0.85)',
-                  cursor: 'pointer',
-                  border: '1px solid rgba(255,255,255,0.1)'
+                  display: 'inline-flex', alignItems: 'center', gap: 6,
+                  padding: '9px 20px', borderRadius: 100,
+                  fontSize: 13, fontWeight: 500,
+                  color: 'rgba(255,255,255,0.72)', cursor: 'pointer',
                 }}
               >
-                <div style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--tint-primary)' }} />
-                Explore more
+                Explore more <ArrowUpRight size={12} style={{ color: 'var(--tint-primary)', filter: 'drop-shadow(0 0 5px var(--tint-glow))' }} />
               </motion.span>
             </Link>
           </motion.div>
@@ -518,21 +516,6 @@ export default function HomePage() {
             }}>
               Core <span className="text-glass-tint">skills & libraries</span> that fuel my passion
             </h2>
-            <Link href="/skills" style={{ textDecoration: 'none' }}>
-              <motion.span
-                whileHover={{ scale: 1.04, y: -1 }}
-                whileTap={{ scale: 0.97 }}
-                className="glass-2"
-                style={{
-                  display: 'inline-flex', alignItems: 'center', gap: 6,
-                  padding: '9px 20px', borderRadius: 100,
-                  fontSize: 13, fontWeight: 500,
-                  color: 'rgba(255,255,255,0.72)', cursor: 'pointer',
-                }}
-              >
-                View all skills <ArrowUpRight size={12} />
-              </motion.span>
-            </Link>
           </motion.div>
 
           {/* Native Masonry CSS Style Block */}
@@ -571,6 +554,30 @@ export default function HomePage() {
               />
             ))}
           </motion.div>
+
+          {/* View All Skills Button (Moved below grid) */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            style={{ display: 'flex', justifyContent: 'center', marginTop: 40 }}
+          >
+            <Link href="/skills" style={{ textDecoration: 'none' }}>
+              <motion.span
+                whileHover={{ scale: 1.04, y: -1 }}
+                whileTap={{ scale: 0.97 }}
+                className="glass-2"
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 6,
+                  padding: '9px 20px', borderRadius: 100,
+                  fontSize: 13, fontWeight: 500,
+                  color: 'rgba(255,255,255,0.72)', cursor: 'pointer',
+                }}
+              >
+                View all skills <ArrowUpRight size={12} style={{ color: 'var(--tint-primary)', filter: 'drop-shadow(0 0 5px var(--tint-glow))' }} />
+              </motion.span>
+            </Link>
+          </motion.div>
         </div>
       </section>
 
@@ -591,7 +598,7 @@ export default function HomePage() {
             </span>
           </motion.h2>
 
-          <Timeline items={portfolioData.workExperience} />
+          <Timeline items={portfolioData.workExperience} showBullets={false} showRedirection={true} />
         </div>
       </section>
 

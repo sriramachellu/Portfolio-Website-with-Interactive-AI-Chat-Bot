@@ -73,15 +73,15 @@ export function SkillIcon({ name, iconSlug }: SkillIconProps) {
             <AnimatePresence>
                 {isHovered && (
                     <motion.div
-                        initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                        initial={{ opacity: 0, y: 4, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 4, scale: 0.95 }}
+                        exit={{ opacity: 0, y: 2, scale: 0.95 }}
                         transition={{ duration: 0.15 }}
                         className="glass-3 text-micro"
                         style={{
                             position: 'absolute',
                             bottom: '100%',
-                            marginBottom: 12,
+                            marginBottom: 8, // Tighter margin to fit inside card padding
                             padding: '6px 12px',
                             whiteSpace: 'nowrap',
                             color: '#fff',

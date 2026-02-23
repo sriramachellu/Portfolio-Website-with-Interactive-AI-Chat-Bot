@@ -146,6 +146,8 @@ export function PortfolioAssistant() {
     const [chatVisible, setChatVisible] = useState(false);
     const [barVisible, setBarVisible] = useState(true);
     const [hasCursor, setHasCursor] = useState(false);
+    const [showHi, setShowHi] = useState(true);
+    const [isLanding, setIsLanding] = useState(true);
 
     const robotControls = useAnimation();
     const inactivityRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -156,8 +158,8 @@ export function PortfolioAssistant() {
 
     const cursorX = useMotionValue(0);
     const cursorY = useMotionValue(0);
-    const springX = useSpring(cursorX, { stiffness: 120, damping: 20 });
-    const springY = useSpring(cursorY, { stiffness: 120, damping: 20 });
+    const springX = useSpring(cursorX, { stiffness: 250, damping: 25 });
+    const springY = useSpring(cursorY, { stiffness: 250, damping: 25 });
 
     const isActive = botState === 'active' || botState === 'typing';
 
@@ -167,13 +169,18 @@ export function PortfolioAssistant() {
             mouseRef.current = { x: window.innerWidth * 0.47, y: window.innerHeight - 188 };
         }
         const handleMouseMove = (e: MouseEvent) => {
-            if (!hasCursor) setHasCursor(true);
+            if (!hasCursor) {
+                setHasCursor(true);
+                setShowHi(false);
+                setIsLanding(false);
+            }
             mouseRef.current = { x: e.clientX, y: e.clientY };
             if (botState === 'idle' || botState === 'inactive') {
-                const anchorX = window.innerWidth / 2 - 22;
-                const anchorY = window.innerHeight - 108 - 44;
-                cursorX.set(e.clientX - anchorX + 4);
-                cursorY.set(e.clientY - anchorY + 4);
+                const anchorX = window.innerWidth / 2;
+                const anchorY = window.innerHeight - 108 - 22;
+
+                cursorX.set(e.clientX - anchorX);
+                cursorY.set(e.clientY - anchorY);
             }
         };
         window.addEventListener('mousemove', handleMouseMove);
@@ -185,10 +192,10 @@ export function PortfolioAssistant() {
             cursorX.set(0);
             cursorY.set(0);
         } else if (hasCursor) {
-            const anchorX = typeof window !== 'undefined' ? window.innerWidth / 2 - 22 : 0;
-            const anchorY = typeof window !== 'undefined' ? window.innerHeight - 108 - 44 : 0;
-            cursorX.set(mouseRef.current.x - anchorX + 20);
-            cursorY.set(mouseRef.current.y - anchorY + 20);
+            const anchorX = typeof window !== 'undefined' ? window.innerWidth / 2 : 0;
+            const anchorY = typeof window !== 'undefined' ? window.innerHeight - 108 - 22 : 0;
+            cursorX.set(mouseRef.current.x - anchorX);
+            cursorY.set(mouseRef.current.y - anchorY);
         }
     }, [botState, hasCursor, cursorX, cursorY]);
 
@@ -204,10 +211,20 @@ export function PortfolioAssistant() {
     const DOCK_X = -260;
     const DOCK_Y = 8;
 
-    /* ── Intro sequence (Removed) ─────────────────────────────── */
+    /* ── Landing sequence logic ────────────────────────────── */
     useEffect(() => {
         // Start immediately in idle
         dispatch('RUN_DONE');
+
+        // After 5s, hide "Hi"
+        const hiTimer = setTimeout(() => setShowHi(false), 5000);
+        // After 10s, if still landing (no cursor), fade out
+        const landTimer = setTimeout(() => setIsLanding(false), 10000);
+
+        return () => {
+            clearTimeout(hiTimer);
+            clearTimeout(landTimer);
+        };
     }, []);
 
     /* ── State → robot position ────────────────────────────────── */
@@ -218,16 +235,22 @@ export function PortfolioAssistant() {
                 const anchorY = typeof window !== 'undefined' ? window.innerHeight - 108 - 44 : 0;
 
                 if (!hasCursor) {
-                    // Peek behind the top edge of the hero polaroid
+                    // Peek position: static above hero polaroid
                     robotControls.start({
-                        x: 'calc(28vw)', y: 'calc(-50vh - 160px)', scale: 0.7, opacity: 0.85,
-                        transition: { duration: 1.5, ease: [0.22, 1, 0.36, 1] as const },
+                        x: 'calc(28vw)',
+                        y: 'calc(-50vh - 160px)',
+                        scale: 0.7,
+                        opacity: isLanding ? 0.85 : 0, // Fades out if landing phase ends without interaction
+                        transition: { duration: 1.0, ease: [0.22, 1, 0.36, 1] as const },
                     });
                 } else {
                     robotControls.start({
                         x: 0, y: 0,
                         scale: 0.88, opacity: 0.85,
-                        transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
+                        transition: {
+                            duration: isLanding ? 0.8 : 0.55, // Slower arrival if coming from landing
+                            ease: [0.22, 1, 0.36, 1] as const
+                        },
                     });
                 }
                 break;
@@ -386,7 +409,34 @@ export function PortfolioAssistant() {
                     if (botState === 'idle' || botState === 'inactive') handleFocus();
                 }}
             >
-                <motion.div style={{ x: springX, y: springY }}>
+                <motion.div style={{ x: springX, y: springY, position: 'relative' }}>
+                    <AnimatePresence>
+                        {showHi && (
+                            <motion.div
+                                initial={{ opacity: 0, y: 10, scale: 0.8 }}
+                                animate={{ opacity: 1, y: 0, scale: 1 }}
+                                exit={{ opacity: 0, y: 5, scale: 0.8 }}
+                                style={{
+                                    position: 'absolute',
+                                    top: -36,
+                                    left: '50%',
+                                    transform: 'translateX(-50%)',
+                                    background: 'rgba(255,255,255,0.15)',
+                                    backdropFilter: 'blur(8px)',
+                                    padding: '4px 10px',
+                                    borderRadius: '10px 10px 10px 2px',
+                                    border: '1px solid rgba(255,255,255,0.2)',
+                                    color: '#fff',
+                                    fontSize: 16,
+                                    fontWeight: 600,
+                                    whiteSpace: 'nowrap',
+                                    pointerEvents: 'none'
+                                }}
+                            >
+                                Hi!
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                     <GlassRobot state={botState} />
                     {/* Glow ring */}
                     <motion.div

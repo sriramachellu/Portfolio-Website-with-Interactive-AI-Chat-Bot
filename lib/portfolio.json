@@ -50,6 +50,7 @@
         "RAGs",
         "Vector DB",
         "Prompt Engineering",
+        "AI Prompting",
         "LoRA Fine-Tuning",
         "Large Language Models(LLMs)",
         "vLLM"
@@ -167,7 +168,7 @@
   "projects": [
     {
       "id": "1",
-      "title": "LLM Powered Portfolio Website with Interactive AI Chat & Custom RAG Engine",
+      "title": "Portfolio Website with Interactive AI Chat using Custom LLM & RAG Engine",
       "description": "Production ready AI native personal portfolio website integrating Google Gemini APIs with a lightweight Retrieval-Augmented Generation (RAG) system. Features dynamic JSON based context chunking, custom keyword scoring retrieval, model fallback handling, exponential backoff for rate limits, and strict prompt guardrails. Deployed on Vercel with serverless API routes and environment secured LLM integration.",
       "stack": [
         "Next.js",
@@ -179,7 +180,8 @@
         "Claude Sonnet 4.6",
         "Custom RAG Architecture",
         "Google Antigravity",
-        "Vercel"
+        "Vercel",
+        "Spotify Web API & OAuth"
       ],
       "github": "https://github.com/sriramachellu/LLM-Powered-Portfolio-Website-with-Interactive-AI-Chat-Custom-RAG-Engine",
       "demo": null,
@@ -338,81 +340,393 @@
   "photography": [
     {
       "id": "1",
-      "title": "Golden Gate at Dusk",
-      "category": "Landscape",
-      "location": "San Francisco"
+      "title": "Above the Air",
+      "category": "Aerial",
+      "location": "Qatar",
+      "year": "2024",
+      "image": "/Photography/Above the Air  - Qatar - 2024.JPG"
     },
     {
       "id": "2",
-      "title": "Yosemite Valley",
-      "category": "Landscape",
-      "location": "Yosemite"
+      "title": "Armaan Concert (Shot 1)",
+      "category": "Event",
+      "location": "Live",
+      "year": "2024",
+      "image": "/Photography/Armaan Concert 2024.JPG"
     },
     {
       "id": "3",
-      "title": "Tokyo Street",
-      "category": "Urban",
-      "location": "Tokyo"
+      "title": "Armaan Concert (Shot 2)",
+      "category": "Event",
+      "location": "Live",
+      "year": "2024",
+      "image": "/Photography/Armaan Concert 2024 2.JPG"
     },
     {
       "id": "4",
-      "title": "Fog Machine",
-      "category": "Abstract",
-      "location": "SF Bay"
+      "title": "Armaan Concert (Shot 3)",
+      "category": "Event",
+      "location": "Live",
+      "year": "2024",
+      "image": "/Photography/Arman concet 2024.JPG"
     },
     {
       "id": "5",
-      "title": "Neon Alley",
-      "category": "Urban",
-      "location": "Osaka"
+      "title": "BAPS Mandir",
+      "category": "Architecture",
+      "location": "Los Angeles",
+      "year": "2025",
+      "image": "/Photography/BAPS Mandir - LA - 2025.JPG"
     },
     {
       "id": "6",
-      "title": "Summit Light",
+      "title": "Batman Funkopop",
+      "category": "Still Life",
+      "location": "Home",
+      "year": "2025",
+      "image": "/Photography/Batman Funkopop 2025.JPG"
+    },
+    {
+      "id": "7",
+      "title": "Charminar (Night View)",
+      "category": "Heritage",
+      "location": "Hyderabad",
+      "year": "2024",
+      "image": "/Photography/Charminar - Hyderbad - Dec - 2024.JPG"
+    },
+    {
+      "id": "8",
+      "title": "Charminar (Street View)",
+      "category": "Heritage",
+      "location": "Hyderabad",
+      "year": "2024",
+      "image": "/Photography/Charminar Hyderabad.JPG"
+    },
+    {
+      "id": "9",
+      "title": "Charminar (Detailed View)",
+      "category": "Heritage",
+      "location": "Hyderabad",
+      "year": "2024",
+      "image": "/Photography/Charminar hyd.JPG"
+    },
+    {
+      "id": "10",
+      "title": "Cinemark",
+      "category": "Urban",
+      "location": "Los Angeles",
+      "year": "2025",
+      "image": "/Photography/Cinemark LA - 2025.JPG"
+    },
+    {
+      "id": "11",
+      "title": "Death Valley Vista",
       "category": "Landscape",
-      "location": "Sierra Nevada"
+      "location": "California",
+      "year": "2025",
+      "image": "/Photography/Death Valley, CA - 2025.JPG"
+    },
+    {
+      "id": "12",
+      "title": "The Den",
+      "category": "University",
+      "location": "FSU",
+      "year": "2024",
+      "image": "/Photography/Den - FSU - 2024.JPG"
+    },
+    {
+      "id": "13",
+      "title": "Florida State University",
+      "category": "University",
+      "location": "Tallahassee",
+      "year": "2024",
+      "image": "/Photography/FSU - 2024.JPG"
+    },
+    {
+      "id": "14",
+      "title": "Gas Station Neon",
+      "category": "Urban",
+      "location": "Florida",
+      "year": "2024",
+      "image": "/Photography/Gas Station, FL.JPG"
+    },
+    {
+      "id": "15",
+      "title": "Great India Kitchen",
+      "category": "Street",
+      "location": "California",
+      "year": "2026",
+      "image": "/Photography/Great India Kitchen - California - 2026.JPG"
+    },
+    {
+      "id": "16",
+      "title": "Halloween Night",
+      "category": "Event",
+      "location": "USA",
+      "year": "2025",
+      "image": "/Photography/Halloween - 2025.JPG"
+    },
+    {
+      "id": "17",
+      "title": "Hollywood Sign",
+      "category": "Landmark",
+      "location": "California",
+      "year": "2025",
+      "image": "/Photography/Hollywood Sign, CA.JPG"
+    },
+    {
+      "id": "18",
+      "title": "In-N-Out Burger",
+      "category": "Urban",
+      "location": "LAX",
+      "year": "2025",
+      "image": "/Photography/In - N - Out - LAX - 2025.JPG"
+    },
+    {
+      "id": "19",
+      "title": "Karthik Live",
+      "category": "Event",
+      "location": "Atlanta",
+      "year": "2024",
+      "image": "/Photography/Karthik Concert Atlanta 2024.JPG"
+    },
+    {
+      "id": "20",
+      "title": "Las Vegas Strip",
+      "category": "Urban",
+      "location": "Las Vegas",
+      "year": "2025",
+      "image": "/Photography/Las Vegas - Dec 2025.JPG"
+    },
+    {
+      "id": "21",
+      "title": "Lawn Mower Detail",
+      "category": "Still Life",
+      "location": "Home",
+      "year": "2025",
+      "image": "/Photography/Lawn mover - 2025.JPG"
+    },
+    {
+      "id": "22",
+      "title": "The Moon",
+      "category": "Astro",
+      "location": "Hyderabad",
+      "year": "2022",
+      "image": "/Photography/Moon - Hyderbad - 2022.JPG"
+    },
+    {
+      "id": "23",
+      "title": "PS Cheese Cafe",
+      "category": "Street",
+      "location": "Hyderabad",
+      "year": "2023",
+      "image": "/Photography/PS cheese Cafe, Hyderbad.JPG"
+    },
+    {
+      "id": "24",
+      "title": "Palmer Beach Astro (Shot 1)",
+      "category": "Astro",
+      "location": "Florida",
+      "year": "2024",
+      "image": "/Photography/Palmer Beach, FL, Astro, Stargazing 1.JPG"
+    },
+    {
+      "id": "25",
+      "title": "Palmer Beach Astro (Shot 2)",
+      "category": "Astro",
+      "location": "Florida",
+      "year": "2024",
+      "image": "/Photography/Palmer Beach, FL, Astro, Stargazing 2.JPG"
+    },
+    {
+      "id": "26",
+      "title": "Qatar Wing View",
+      "category": "Aerial",
+      "location": "Above Qatar",
+      "year": "2024",
+      "image": "/Photography/Qatar Window view wing.JPG"
+    },
+    {
+      "id": "27",
+      "title": "Hotel Roof",
+      "category": "Architecture",
+      "location": "Travel",
+      "year": "2024",
+      "image": "/Photography/Roof in Hotel.JPG"
+    },
+    {
+      "id": "28",
+      "title": "Sri Kalahasthi",
+      "category": "Heritage",
+      "location": "Andhra Pradesh",
+      "year": "2023",
+      "image": "/Photography/Sri kalahasthi.JPG"
+    },
+    {
+      "id": "29",
+      "title": "KPHB Sunset",
+      "category": "Landscape",
+      "location": "Hyderabad",
+      "year": "2024",
+      "image": "/Photography/Sunet - KPHB Phase 6 - Hyderabad.JPG"
+    },
+    {
+      "id": "30",
+      "title": "Miami Airport Sunset",
+      "category": "Landscape",
+      "location": "Miami",
+      "year": "2024",
+      "image": "/Photography/Sunset - Miami Airport - 2024.JPG"
+    },
+    {
+      "id": "31",
+      "title": "West Godavari Sunset",
+      "category": "Landscape",
+      "location": "Andhra Pradesh",
+      "year": "2023",
+      "image": "/Photography/Sunset - West Godavaro.JPG"
+    },
+    {
+      "id": "32",
+      "title": "Tallahassee Night Sky",
+      "category": "Astro",
+      "location": "Tallahassee",
+      "year": "2023",
+      "image": "/Photography/Tallahassee Astro - 2023.JPG"
+    },
+    {
+      "id": "33",
+      "title": "Tirumala Tirupati",
+      "category": "Heritage",
+      "location": "Tirumala",
+      "year": "2024",
+      "image": "/Photography/Triumala Tiruapati.JPG"
     }
   ],
   "cooking": [
     {
       "id": "1",
-      "title": "Saffron Risotto",
-      "description": "Slow-stirred Carnaroli rice with Parmesan, white wine, and a generous pour of Barolo saffron. 40 minutes of therapy.",
+      "title": "Andhra Garlic Chicken Starter",
+      "description": "A spicy, crispy, and flavorful Andhra-style chicken starter loaded with fried garlic and green chilies.",
       "tags": [
-        "Italian",
-        "Comfort",
-        "Weekend"
-      ]
+        "Andhra",
+        "Spicy",
+        "Chicken",
+        "Starter"
+      ],
+      "image": "/cooking/Cooking - Andhra Garlic Chicken Starter.JPG"
     },
     {
       "id": "2",
-      "title": "Miso Ramen",
-      "description": "Tonkotsu-miso hybrid with chashu belly, soft-boiled tamago, nori, and crispy shallots. An 8-hour project worth every minute.",
+      "title": "Chicken Ghee Roast",
+      "description": "Rich and aromatic Mangalorean classic prepared with a unique spice blend and clarified butter.",
       "tags": [
-        "Japanese",
-        "Umami",
-        "Sunday"
-      ]
+        "Mangalorean",
+        "Rich",
+        "Chicken",
+        "Ghee"
+      ],
+      "image": "/cooking/Cooking - Chicken Ghee Roast .JPG"
     },
     {
       "id": "3",
-      "title": "Sourdough Focaccia",
-      "description": "Dimpled, olive-oil-drenched focaccia from a 72-hour cold-fermented sourdough starter. Rosemary, sea salt, roasted garlic.",
+      "title": "Classic Egg Sandwich",
+      "description": "Quick, nutritious, and perfectly seasoned egg sandwich for a high-energy breakfast.",
       "tags": [
-        "Baking",
-        "Bread",
-        "Sourdough"
-      ]
+        "Breakfast",
+        "Eggetarian",
+        "Quick"
+      ],
+      "image": "/cooking/Cooking - Egg Sandwich.JPG"
     },
     {
       "id": "4",
-      "title": "Kerala Fish Curry",
-      "description": "Coconut milk, kudampuli, and fresh turmeric — my grandmother's recipe reconstructed from memory and three long calls home.",
+      "title": "Mutton Dum Biryani",
+      "description": "Authentic dum-cooked mutton biryani with long-grain basmati rice and tender marinated meat.",
       "tags": [
-        "Indian",
+        "Hyderabadi",
+        "Signature",
+        "Mutton",
+        "Biryani"
+      ],
+      "image": "/cooking/Cooking - Mutton Dum Biryani.JPG"
+    },
+    {
+      "id": "5",
+      "title": "Healthy Oat Bowl",
+      "description": "A balanced and fiber-rich oat bowl topped with fresh fruits and nuts for the perfect start.",
+      "tags": [
+        "Healthy",
+        "Breakfast",
+        "Oats"
+      ],
+      "image": "/cooking/Cooking - Oat bowl.JPG"
+    },
+    {
+      "id": "6",
+      "title": "Traditional Pullatlu",
+      "description": "Fermented crepes from Coastal Andhra, served best with ginger or peanut chutney.",
+      "tags": [
+        "Andhra",
+        "Breakfast",
+        "Traditional"
+      ],
+      "image": "/cooking/Cooking - Pullatlu.JPG"
+    },
+    {
+      "id": "7",
+      "title": "Butter Garlic Wings",
+      "description": "Spicy butter garlic wings with a distinct Andhra twist. Comfort food at its best.",
+      "tags": [
+        "Fusion",
+        "Spicy",
+        "Appetizer"
+      ],
+      "image": "/cooking/Cooking - Spicy butter Garlic wings andhra style.JPG"
+    },
+    {
+      "id": "8",
+      "title": "Chicken Dum Biryani",
+      "description": "The gold standard of biryanis. Perfectly cooked rice and chicken with layers of flavor.",
+      "tags": [
+        "Signature",
+        "Chicken",
+        "Biryani"
+      ],
+      "image": "/cooking/Cooking 1 - Chicken Dum biryani.JPG"
+    },
+    {
+      "id": "9",
+      "title": "Prawns Dum Biryani",
+      "description": "A seafood specialty — succulent prawns dum-cooked with aromatic spices and basmati rice.",
+      "tags": [
         "Seafood",
-        "Heritage"
-      ]
+        "Specialty",
+        "Biryani"
+      ],
+      "image": "/cooking/Cooking 3 - Prawns Dum Biryani.JPG"
+    },
+    {
+      "id": "10",
+      "title": "Baby Corn Majestic",
+      "description": "Crispy baby corn manchuria and the classic Hyderabad-special baby corn majestic.",
+      "tags": [
+        "Vegetarian",
+        "Appetizer",
+        "Indo-Chinese"
+      ],
+      "image": "/cooking/Cooking 4 - Baby Corn Manchuria and Baby Corn majestic.JPG"
+    },
+    {
+      "id": "11",
+      "title": "Set Dosa & Peanut Chutney",
+      "description": "Soft and spongy set dosas paired with creamy, roasted peanut chutney.",
+      "tags": [
+        "South Indian",
+        "Comfort",
+        "Breakfast"
+      ],
+      "image": "/cooking/Cooking 5 - Set Dosa with peanut chutney.JPG"
     }
   ]
 }
