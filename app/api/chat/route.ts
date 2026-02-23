@@ -35,6 +35,40 @@ function buildChunks(): Chunk[] {
         });
     }
 
+    if (portfolioData.photography && portfolioData.photography.length > 0) {
+        const categories = Array.from(new Set(portfolioData.photography.map(p => p.category))).join(', ');
+        const locations = Array.from(new Set(portfolioData.photography.map(p => p.location))).join(', ');
+        chunks.push({
+            section: 'Photography Overview',
+            text: `Srirama is passionate about photography. His photography skills cover various categories/types of photos including: ${categories}. He has shot photos in locations such as: ${locations}.`,
+        });
+        for (const photo of portfolioData.photography) {
+            chunks.push({
+                section: `Photography: ${photo.title}`,
+                text: `Photograph "${photo.title}" (Type/Category: ${photo.category}): Shot in ${photo.location} (${photo.year}).`,
+            });
+        }
+    }
+
+    if (portfolioData.cooking && portfolioData.cooking.length > 0) {
+        const tags = Array.from(new Set(portfolioData.cooking.flatMap(r => r.tags))).join(', ');
+        chunks.push({
+            section: 'Cooking Overview',
+            text: `Srirama is passionate about cooking. He makes dishes with various styles/tags including: ${tags}.`,
+        });
+        for (const recipe of portfolioData.cooking) {
+            chunks.push({
+                section: `Cooking: ${recipe.title}`,
+                text: `Recipe "${recipe.title}": ${recipe.description} Tags: ${recipe.tags.join(', ')}.`,
+            });
+        }
+    }
+
+    chunks.push({
+        section: 'Website Overview',
+        text: `This portfolio website contains the following pages: Landing (Home), Skills, Projects, Work, Photography, Cooking, and a Mini Game.`,
+    });
+
     return chunks;
 }
 
