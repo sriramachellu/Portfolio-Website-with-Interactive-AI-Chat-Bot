@@ -262,7 +262,7 @@
     {
       "id": "6",
       "title": "Autonomous Data Labeler",
-      "description": "Active learning system that uses a weak LLM to propose labels, a human-in-the-loop UI for review, and a strong model to arbitrate — cut labeling cost by 80%.",
+      "description": "Active learning system that uses a weak LLM to propose labels, a human-in-the-loop UI for review, and a strong model to arbitrate \u2014 cut labeling cost by 80%.",
       "stack": [
         "Python",
         "FastAPI",
@@ -279,7 +279,7 @@
     {
       "company": "Saayam For All",
       "role": "Full Stack Developer",
-      "duration": "July 2025 – Present",
+      "duration": "July 2025 \u2013 Present",
       "location": "San Jose, CA",
       "bullets": [
         "Built and maintained backend services and REST APIs in Python using Flask to power real time geospatial volunteer matching, enabling efficient and low latency request routing across active users.",
@@ -309,7 +309,7 @@
     {
       "company": "Gokaraju Rangaraju Institute of Engineering and Technology (GRIET)",
       "role": "Data Analyst",
-      "duration": "2021 – 2022",
+      "duration": "2021 \u2013 2022",
       "location": "Hyderabad, India",
       "bullets": [
         "Collected, cleaned, and analyzed event participation data using SQL and Excel across more than 12 technical and cultural programs to support planning and improve decision making.",
@@ -344,31 +344,47 @@
       "category": "Aerial",
       "location": "Qatar",
       "year": "2024",
-      "image": "/Photography/Above the Air  - Qatar - 2024.JPG"
+      "image": "/Photography/Above the Air  - Qatar - 2024.JPG",
+      "width": 4284,
+      "height": 5712,
+      "aspectRatio": 0.75,
+      "orientation": "portrait"
     },
     {
       "id": "2",
-      "title": "Armaan Concert (Shot 1)",
+      "title": "Armaan Live \u2014 Frame I",
       "category": "Event",
-      "location": "Live",
+      "location": "Live Concert",
       "year": "2024",
-      "image": "/Photography/Armaan Concert 2024.JPG"
+      "image": "/Photography/Armaan Concert 2024.JPG",
+      "width": 3840,
+      "height": 2160,
+      "aspectRatio": 1.7777777777777777,
+      "orientation": "landscape"
     },
     {
       "id": "3",
-      "title": "Armaan Concert (Shot 2)",
+      "title": "Armaan Live \u2014 Frame II",
       "category": "Event",
-      "location": "Live",
+      "location": "Live Concert",
       "year": "2024",
-      "image": "/Photography/Armaan Concert 2024 2.JPG"
+      "image": "/Photography/Armaan Concert 2024 2.JPG",
+      "width": 4032,
+      "height": 3024,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
     },
     {
       "id": "4",
-      "title": "Armaan Concert (Shot 3)",
+      "title": "Armaan Live \u2014 Frame III",
       "category": "Event",
-      "location": "Live",
+      "location": "Live Concert",
       "year": "2024",
-      "image": "/Photography/Arman concet 2024.JPG"
+      "image": "/Photography/Arman concet 2024.JPG",
+      "width": 4032,
+      "height": 3024,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
     },
     {
       "id": "5",
@@ -376,63 +392,95 @@
       "category": "Architecture",
       "location": "Los Angeles",
       "year": "2025",
-      "image": "/Photography/BAPS Mandir - LA - 2025.JPG"
+      "image": "/Photography/BAPS Mandir - LA - 2025.JPG",
+      "width": 5712,
+      "height": 4284,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
     },
     {
       "id": "6",
       "title": "Batman Funkopop",
       "category": "Still Life",
-      "location": "Home",
+      "location": "Home Studio",
       "year": "2025",
-      "image": "/Photography/Batman Funkopop 2025.JPG"
+      "image": "/Photography/Batman Funkopop 2025.JPG",
+      "width": 4032,
+      "height": 3024,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
     },
     {
       "id": "7",
-      "title": "Charminar (Night View)",
+      "title": "Charminar",
       "category": "Heritage",
       "location": "Hyderabad",
       "year": "2024",
-      "image": "/Photography/Charminar - Hyderbad - Dec - 2024.JPG"
+      "image": "/Photography/Charminar - Hyderbad - Dec - 2024.JPG",
+      "width": 4032,
+      "height": 3024,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
     },
     {
       "id": "8",
-      "title": "Charminar (Street View)",
+      "title": "Charminar",
       "category": "Heritage",
       "location": "Hyderabad",
       "year": "2024",
-      "image": "/Photography/Charminar Hyderabad.JPG"
+      "image": "/Photography/Charminar Hyderabad.JPG",
+      "width": 4032,
+      "height": 3024,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
     },
     {
       "id": "9",
-      "title": "Charminar (Detailed View)",
+      "title": "Charminar",
       "category": "Heritage",
       "location": "Hyderabad",
       "year": "2024",
-      "image": "/Photography/Charminar hyd.JPG"
+      "image": "/Photography/Charminar hyd.JPG",
+      "width": 4032,
+      "height": 3024,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
     },
     {
       "id": "10",
-      "title": "Cinemark",
+      "title": "Cinemark Nights",
       "category": "Urban",
       "location": "Los Angeles",
       "year": "2025",
-      "image": "/Photography/Cinemark LA - 2025.JPG"
+      "image": "/Photography/Cinemark LA - 2025.JPG",
+      "width": 4032,
+      "height": 3024,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
     },
     {
       "id": "11",
-      "title": "Death Valley Vista",
+      "title": "Death Valley",
       "category": "Landscape",
       "location": "California",
       "year": "2025",
-      "image": "/Photography/Death Valley, CA - 2025.JPG"
+      "image": "/Photography/Death Valley, CA - 2025.JPG",
+      "width": 4032,
+      "height": 3024,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
     },
     {
       "id": "12",
-      "title": "The Den",
+      "title": "The Den \u2014 FSU",
       "category": "University",
-      "location": "FSU",
+      "location": "Tallahassee",
       "year": "2024",
-      "image": "/Photography/Den - FSU - 2024.JPG"
+      "image": "/Photography/Den - FSU - 2024.JPG",
+      "width": 4032,
+      "height": 3024,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
     },
     {
       "id": "13",
@@ -440,7 +488,11 @@
       "category": "University",
       "location": "Tallahassee",
       "year": "2024",
-      "image": "/Photography/FSU - 2024.JPG"
+      "image": "/Photography/FSU - 2024.JPG",
+      "width": 4032,
+      "height": 3024,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
     },
     {
       "id": "14",
@@ -448,7 +500,11 @@
       "category": "Urban",
       "location": "Florida",
       "year": "2024",
-      "image": "/Photography/Gas Station, FL.JPG"
+      "image": "/Photography/Gas Station, FL.JPG",
+      "width": 4032,
+      "height": 3024,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
     },
     {
       "id": "15",
@@ -456,7 +512,11 @@
       "category": "Street",
       "location": "California",
       "year": "2026",
-      "image": "/Photography/Great India Kitchen - California - 2026.JPG"
+      "image": "/Photography/Great India Kitchen - California - 2026.JPG",
+      "width": 4032,
+      "height": 3024,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
     },
     {
       "id": "16",
@@ -464,7 +524,11 @@
       "category": "Event",
       "location": "USA",
       "year": "2025",
-      "image": "/Photography/Halloween - 2025.JPG"
+      "image": "/Photography/Halloween - 2025.JPG",
+      "width": 8064,
+      "height": 6048,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
     },
     {
       "id": "17",
@@ -472,15 +536,23 @@
       "category": "Landmark",
       "location": "California",
       "year": "2025",
-      "image": "/Photography/Hollywood Sign, CA.JPG"
+      "image": "/Photography/Hollywood Sign, CA.JPG",
+      "width": 3024,
+      "height": 4032,
+      "aspectRatio": 0.75,
+      "orientation": "portrait"
     },
     {
       "id": "18",
-      "title": "In-N-Out Burger",
+      "title": "In-N-Out \u2014 LAX",
       "category": "Urban",
-      "location": "LAX",
+      "location": "Los Angeles",
       "year": "2025",
-      "image": "/Photography/In - N - Out - LAX - 2025.JPG"
+      "image": "/Photography/In - N - Out - LAX - 2025.JPG",
+      "width": 5712,
+      "height": 4284,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
     },
     {
       "id": "19",
@@ -488,23 +560,35 @@
       "category": "Event",
       "location": "Atlanta",
       "year": "2024",
-      "image": "/Photography/Karthik Concert Atlanta 2024.JPG"
+      "image": "/Photography/Karthik Concert Atlanta 2024.JPG",
+      "width": 3520,
+      "height": 1980,
+      "aspectRatio": 1.7777777777777777,
+      "orientation": "landscape"
     },
     {
       "id": "20",
-      "title": "Las Vegas Strip",
+      "title": "Las Vegas",
       "category": "Urban",
       "location": "Las Vegas",
       "year": "2025",
-      "image": "/Photography/Las Vegas - Dec 2025.JPG"
+      "image": "/Photography/Las Vegas - Dec 2025.JPG",
+      "width": 1440,
+      "height": 812,
+      "aspectRatio": 1.7733990147783252,
+      "orientation": "landscape"
     },
     {
       "id": "21",
-      "title": "Lawn Mower Detail",
+      "title": "Lawn Mower",
       "category": "Still Life",
-      "location": "Home",
+      "location": "Home Studio",
       "year": "2025",
-      "image": "/Photography/Lawn mover - 2025.JPG"
+      "image": "/Photography/Lawn mover - 2025.JPG",
+      "width": 4032,
+      "height": 3024,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
     },
     {
       "id": "22",
@@ -512,55 +596,83 @@
       "category": "Astro",
       "location": "Hyderabad",
       "year": "2022",
-      "image": "/Photography/Moon - Hyderbad - 2022.JPG"
+      "image": "/Photography/Moon - Hyderbad - 2022.JPG",
+      "width": 772,
+      "height": 1374,
+      "aspectRatio": 0.5618631732168851,
+      "orientation": "portrait"
     },
     {
       "id": "23",
-      "title": "PS Cheese Cafe",
+      "title": "PS Cheese Caf\u00e9",
       "category": "Street",
       "location": "Hyderabad",
       "year": "2023",
-      "image": "/Photography/PS cheese Cafe, Hyderbad.JPG"
+      "image": "/Photography/PS cheese Cafe, Hyderbad.JPG",
+      "width": 5712,
+      "height": 4284,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
     },
     {
       "id": "24",
-      "title": "Palmer Beach Astro (Shot 1)",
+      "title": "Palmer Beach \u2014 Frame I",
       "category": "Astro",
       "location": "Florida",
       "year": "2024",
-      "image": "/Photography/Palmer Beach, FL, Astro, Stargazing 1.JPG"
+      "image": "/Photography/Palmer Beach, FL, Astro, Stargazing 1.JPG",
+      "width": 4032,
+      "height": 3024,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
     },
     {
       "id": "25",
-      "title": "Palmer Beach Astro (Shot 2)",
+      "title": "Palmer Beach \u2014 Frame II",
       "category": "Astro",
       "location": "Florida",
       "year": "2024",
-      "image": "/Photography/Palmer Beach, FL, Astro, Stargazing 2.JPG"
+      "image": "/Photography/Palmer Beach, FL, Astro, Stargazing 2.JPG",
+      "width": 4032,
+      "height": 3024,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
     },
     {
       "id": "26",
       "title": "Qatar Wing View",
       "category": "Aerial",
-      "location": "Above Qatar",
+      "location": "Qatar",
       "year": "2024",
-      "image": "/Photography/Qatar Window view wing.JPG"
+      "image": "/Photography/Qatar Window view wing.JPG",
+      "width": 4032,
+      "height": 3024,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
     },
     {
       "id": "27",
-      "title": "Hotel Roof",
+      "title": "Hotel Rooftop",
       "category": "Architecture",
-      "location": "Travel",
+      "location": "Hyderabad",
       "year": "2024",
-      "image": "/Photography/Roof in Hotel.JPG"
+      "image": "/Photography/Roof in Hotel.JPG",
+      "width": 4032,
+      "height": 3024,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
     },
     {
       "id": "28",
-      "title": "Sri Kalahasthi",
+      "title": "Sri Kalahasti Temple",
       "category": "Heritage",
       "location": "Andhra Pradesh",
       "year": "2023",
-      "image": "/Photography/Sri kalahasthi.JPG"
+      "image": "/Photography/Sri kalahasthi.JPG",
+      "width": 4032,
+      "height": 3024,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
     },
     {
       "id": "29",
@@ -568,7 +680,11 @@
       "category": "Landscape",
       "location": "Hyderabad",
       "year": "2024",
-      "image": "/Photography/Sunet - KPHB Phase 6 - Hyderabad.JPG"
+      "image": "/Photography/Sunet - KPHB Phase 6 - Hyderabad.JPG",
+      "width": 4032,
+      "height": 3024,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
     },
     {
       "id": "30",
@@ -576,7 +692,11 @@
       "category": "Landscape",
       "location": "Miami",
       "year": "2024",
-      "image": "/Photography/Sunset - Miami Airport - 2024.JPG"
+      "image": "/Photography/Sunset - Miami Airport - 2024.JPG",
+      "width": 4032,
+      "height": 3024,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
     },
     {
       "id": "31",
@@ -584,7 +704,11 @@
       "category": "Landscape",
       "location": "Andhra Pradesh",
       "year": "2023",
-      "image": "/Photography/Sunset - West Godavaro.JPG"
+      "image": "/Photography/Sunset - West Godavaro.JPG",
+      "width": 4032,
+      "height": 3024,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
     },
     {
       "id": "32",
@@ -592,7 +716,11 @@
       "category": "Astro",
       "location": "Tallahassee",
       "year": "2023",
-      "image": "/Photography/Tallahassee Astro - 2023.JPG"
+      "image": "/Photography/Tallahassee Astro - 2023.JPG",
+      "width": 3024,
+      "height": 4032,
+      "aspectRatio": 0.75,
+      "orientation": "portrait"
     },
     {
       "id": "33",
@@ -600,14 +728,234 @@
       "category": "Heritage",
       "location": "Tirumala",
       "year": "2024",
-      "image": "/Photography/Triumala Tiruapati.JPG"
+      "image": "/Photography/Triumala Tiruapati.JPG",
+      "width": 4032,
+      "height": 3024,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
+    },
+    {
+      "id": "34",
+      "title": "Artist\u2019s Palette",
+      "category": "Urban",
+      "location": "Death Valley, CA",
+      "year": "2025",
+      "image": "/Photography/Artist pallatte - Death Valley, CA - 2025.jpg",
+      "width": 4032,
+      "height": 3024,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
+    },
+    {
+      "id": "35",
+      "title": "Bellagio Fountains",
+      "category": "Urban",
+      "location": "Las Vegas",
+      "year": "2025",
+      "image": "/Photography/Bellagia Fountains - Las Vegas - 2025.jpg",
+      "width": 9398,
+      "height": 3792,
+      "aspectRatio": 2.4783755274261603,
+      "orientation": "landscape"
+    },
+    {
+      "id": "36",
+      "title": "Beverly Hills",
+      "category": "Urban",
+      "location": "Los Angeles",
+      "year": "2025",
+      "image": "/Photography/Beverly Hills, LA.jpg",
+      "width": 4032,
+      "height": 3024,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
+    },
+    {
+      "id": "37",
+      "title": "Brasstown Bald \u2014 Frame I",
+      "category": "Landscape",
+      "location": "Georgia",
+      "year": "2025",
+      "image": "/Photography/Brasstown bald, GA 1.jpg",
+      "width": 4032,
+      "height": 3024,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
+    },
+    {
+      "id": "38",
+      "title": "Brasstown Bald \u2014 Frame II",
+      "category": "Landscape",
+      "location": "Georgia",
+      "year": "2025",
+      "image": "/Photography/Brasstown bald. GA.jpg",
+      "width": 3024,
+      "height": 4032,
+      "aspectRatio": 0.75,
+      "orientation": "portrait"
+    },
+    {
+      "id": "39",
+      "title": "Brooklyn Bridge Panorama",
+      "category": "Architecture",
+      "location": "New York City",
+      "year": "2023",
+      "image": "/Photography/Brooklyn Bridge - Panaroma - NYC - 2023.jpg",
+      "width": 15904,
+      "height": 3672,
+      "aspectRatio": 4.331154684095861,
+      "orientation": "landscape"
+    },
+    {
+      "id": "40",
+      "title": "Central Park",
+      "category": "Urban",
+      "location": "New York City",
+      "year": "2023",
+      "image": "/Photography/Central park - NYC - 2023.jpg",
+      "width": 4032,
+      "height": 3024,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
+    },
+    {
+      "id": "41",
+      "title": "Eataly Las Vegas",
+      "category": "Food",
+      "location": "Las Vegas",
+      "year": "2025",
+      "image": "/Photography/Eataly - Las Vegas.jpg",
+      "width": 4032,
+      "height": 3024,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
+    },
+    {
+      "id": "42",
+      "title": "Edwards Cinemas",
+      "category": "Architecture",
+      "location": "California",
+      "year": "2025",
+      "image": "/Photography/Edwards Cinemas, CA.jpg",
+      "width": 8064,
+      "height": 6048,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
+    },
+    {
+      "id": "43",
+      "title": "Exchange Place",
+      "category": "Urban",
+      "location": "New York City",
+      "year": "2023",
+      "image": "/Photography/Exchange Place, NYC - 2023.jpg",
+      "width": 3024,
+      "height": 4032,
+      "aspectRatio": 0.75,
+      "orientation": "portrait"
+    },
+    {
+      "id": "44",
+      "title": "Joe Mama\u2019s Pizza",
+      "category": "Food",
+      "location": "Tallahassee",
+      "year": "2024",
+      "image": "/Photography/Joe Mama's Pizza - FSU - 2024.jpg",
+      "width": 3024,
+      "height": 4032,
+      "aspectRatio": 0.75,
+      "orientation": "portrait"
+    },
+    {
+      "id": "45",
+      "title": "Las Vegas Nights",
+      "category": "Urban",
+      "location": "Las Vegas",
+      "year": "2025",
+      "image": "/Photography/Las vegas - 2025.jpg",
+      "width": 3024,
+      "height": 4032,
+      "aspectRatio": 0.75,
+      "orientation": "portrait"
+    },
+    {
+      "id": "46",
+      "title": "Las Vegas Architecture",
+      "category": "Urban",
+      "location": "Las Vegas",
+      "year": "2025",
+      "image": "/Photography/Las vegas - archeiture - 2025.jpg",
+      "width": 4032,
+      "height": 3024,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
+    },
+    {
+      "id": "47",
+      "title": "Regal Simi Valley",
+      "category": "Urban",
+      "location": "California",
+      "year": "2025",
+      "image": "/Photography/Regal Simi Valley - 2025.jpg",
+      "width": 3024,
+      "height": 4032,
+      "aspectRatio": 0.75,
+      "orientation": "portrait"
+    },
+    {
+      "id": "48",
+      "title": "Santa Clarita Freeway Sunset",
+      "category": "Landscape",
+      "location": "California",
+      "year": "2025",
+      "image": "/Photography/Sunset - Santa Clarta Freeway.jpg",
+      "width": 4032,
+      "height": 3024,
+      "aspectRatio": 1.3333333333333333,
+      "orientation": "landscape"
+    },
+    {
+      "id": "49",
+      "title": "California Sunset",
+      "category": "Landscape",
+      "location": "California",
+      "year": "2025",
+      "image": "/Photography/Sunset California.jpg",
+      "width": 3024,
+      "height": 4032,
+      "aspectRatio": 0.75,
+      "orientation": "portrait"
+    },
+    {
+      "id": "50",
+      "title": "TCL Chinese Theatre",
+      "category": "Architecture",
+      "location": "Los Angeles",
+      "year": "2025",
+      "image": "/Photography/TCL Chineese theatre - LA hollywood - 2025.jpg",
+      "width": 3024,
+      "height": 4032,
+      "aspectRatio": 0.75,
+      "orientation": "portrait"
+    },
+    {
+      "id": "51",
+      "title": "The Vessel",
+      "category": "Architecture",
+      "location": "New York City",
+      "year": "2023",
+      "image": "/Photography/The Vessel - NYC - 2023.jpg",
+      "width": 3878,
+      "height": 4418,
+      "aspectRatio": 0.8777727478497057,
+      "orientation": "square"
     }
   ],
   "cooking": [
     {
       "id": "1",
-      "title": "Andhra Garlic Chicken Starter",
-      "description": "A spicy, crispy, and flavorful Andhra-style chicken starter loaded with fried garlic and green chilies.",
+      "title": "Andhra Garlic Chicken",
+      "description": "Crispy and incredibly flavorful Andhra style chicken starter generously loaded with fried garlic and chilies.",
       "tags": [
         "Andhra",
         "Spicy",
@@ -619,7 +967,7 @@
     {
       "id": "2",
       "title": "Chicken Ghee Roast",
-      "description": "Rich and aromatic Mangalorean classic prepared with a unique spice blend and clarified butter.",
+      "description": "A rich and deeply aromatic Mangalorean classic prepared using a unique homemade aromatic spice blend.",
       "tags": [
         "Mangalorean",
         "Rich",
@@ -631,10 +979,11 @@
     {
       "id": "3",
       "title": "Classic Egg Sandwich",
-      "description": "Quick, nutritious, and perfectly seasoned egg sandwich for a high-energy breakfast.",
+      "description": "A quick nutritious and perfectly seasoned egg sandwich crafted for a delicious high energy morning.",
       "tags": [
         "Breakfast",
-        "Eggetarian",
+        "Simple",
+        "Egg",
         "Quick"
       ],
       "image": "/cooking/Cooking - Egg Sandwich.JPG"
@@ -642,7 +991,7 @@
     {
       "id": "4",
       "title": "Mutton Dum Biryani",
-      "description": "Authentic dum-cooked mutton biryani with long-grain basmati rice and tender marinated meat.",
+      "description": "Authentic slow cooked mutton biryani layered with aromatic basmati rice and incredibly tender marinated meat.",
       "tags": [
         "Hyderabadi",
         "Signature",
@@ -654,79 +1003,170 @@
     {
       "id": "5",
       "title": "Healthy Oat Bowl",
-      "description": "A balanced and fiber-rich oat bowl topped with fresh fruits and nuts for the perfect start.",
+      "description": "A balanced and delightfully rich wholesome oat bowl topped with fresh fruits and crunchy nuts.",
       "tags": [
         "Healthy",
         "Breakfast",
-        "Oats"
+        "Oats",
+        "Fruit"
       ],
       "image": "/cooking/Cooking - Oat bowl.JPG"
     },
     {
       "id": "6",
       "title": "Traditional Pullatlu",
-      "description": "Fermented crepes from Coastal Andhra, served best with ginger or peanut chutney.",
+      "description": "Perfectly fermented soft crepes from Coastal Andhra served alongside a fresh traditional spicy peanut chutney.",
       "tags": [
         "Andhra",
         "Breakfast",
-        "Traditional"
+        "Traditional",
+        "Crepes"
       ],
       "image": "/cooking/Cooking - Pullatlu.JPG"
     },
     {
       "id": "7",
       "title": "Butter Garlic Wings",
-      "description": "Spicy butter garlic wings with a distinct Andhra twist. Comfort food at its best.",
+      "description": "Incredibly crispy butter garlic wings crafted with a distinct Andhra twist for ultimate comfort food.",
       "tags": [
         "Fusion",
         "Spicy",
-        "Appetizer"
+        "Chicken",
+        "Wings"
       ],
       "image": "/cooking/Cooking - Spicy butter Garlic wings andhra style.JPG"
     },
     {
       "id": "8",
       "title": "Chicken Dum Biryani",
-      "description": "The gold standard of biryanis. Perfectly cooked rice and chicken with layers of flavor.",
+      "description": "The absolute gold standard of biryanis featuring perfectly cooked rice and deeply flavored chicken layers.",
       "tags": [
         "Signature",
         "Chicken",
-        "Biryani"
+        "Biryani",
+        "Classic"
       ],
       "image": "/cooking/Cooking 1 - Chicken Dum biryani.JPG"
     },
     {
       "id": "9",
       "title": "Prawns Dum Biryani",
-      "description": "A seafood specialty — succulent prawns dum-cooked with aromatic spices and basmati rice.",
+      "description": "An indulgent seafood specialty featuring succulent prawns slowly cooked with perfectly aromatic spices and rice.",
       "tags": [
         "Seafood",
         "Specialty",
-        "Biryani"
+        "Biryani",
+        "Prawns"
       ],
       "image": "/cooking/Cooking 3 - Prawns Dum Biryani.JPG"
     },
     {
       "id": "10",
       "title": "Baby Corn Majestic",
-      "description": "Crispy baby corn manchuria and the classic Hyderabad-special baby corn majestic.",
+      "description": "Wonderfully crispy baby corn dishes including the classic and highly authentic Hyderabad special corn majestic.",
       "tags": [
         "Vegetarian",
         "Appetizer",
-        "Indo-Chinese"
+        "Crispy",
+        "Corn"
       ],
       "image": "/cooking/Cooking 4 - Baby Corn Manchuria and Baby Corn majestic.JPG"
     },
     {
       "id": "11",
-      "title": "Set Dosa & Peanut Chutney",
-      "description": "Soft and spongy set dosas paired with creamy, roasted peanut chutney.",
+      "title": "Set Dosa & Chutney",
+      "description": "Incredibly soft and beautifully spongy set dosas perfectly paired with a creamy roasted peanut chutney.",
       "tags": [
-        "South Indian",
+        "SouthIndian",
         "Comfort",
-        "Breakfast"
+        "Breakfast",
+        "Dosa"
       ],
       "image": "/cooking/Cooking 5 - Set Dosa with peanut chutney.JPG"
+    },
+    {
+      "id": "12",
+      "title": "Chicken Mandi",
+      "description": "A beautifully spiced traditional Arabian chicken mandi served over incredibly fragrant and perfectly cooked rice.",
+      "tags": [
+        "Arabian",
+        "Traditional",
+        "Chicken",
+        "Rice"
+      ],
+      "image": "/cooking/Cooking - Chicken Mandi.jpg"
+    },
+    {
+      "id": "13",
+      "title": "Grilled Paneer",
+      "description": "Perfectly golden grilled paneer cubes served delightfully alongside incredibly aromatic and lightly toasted jeera rice.",
+      "tags": [
+        "Vegetarian",
+        "NorthIndian",
+        "Paneer",
+        "Rice"
+      ],
+      "image": "/cooking/Cooking - Grilled Panner & Jeera Rice.jpg"
+    },
+    {
+      "id": "14",
+      "title": "Idli & Dosa",
+      "description": "Classic and incredibly comforting steamed idli and crispy dosa served with freshly ground peanut chutney.",
+      "tags": [
+        "SouthIndian",
+        "Breakfast",
+        "Classic",
+        "Comfort"
+      ],
+      "image": "/cooking/Cooking - IDlI & DOSA with peanut chutney.jpg"
+    },
+    {
+      "id": "15",
+      "title": "Shahi Tukda",
+      "description": "A wonderfully rich and decadent royal dessert featuring fried bread soaked in sweetened thickened milk.",
+      "tags": [
+        "Dessert",
+        "Royal",
+        "Sweet",
+        "Rich"
+      ],
+      "image": "/cooking/Cooking - Shahi Tukda.jpg"
+    },
+    {
+      "id": "16",
+      "title": "Pesto Spaghetti",
+      "description": "A uniquely vibrant spinach pesto spaghetti perfectly paired with a incredibly fluffy and savory omelette.",
+      "tags": [
+        "Italian",
+        "Pasta",
+        "Fusion",
+        "Healthy"
+      ],
+      "image": "/cooking/Cooking 2 - Spinach Pesto Spagateeti with omellette.jpg"
+    },
+    {
+      "id": "17",
+      "title": "Paneer Dum Biryani",
+      "description": "A wonderfully fragrant and richly spiced vegetarian dum biryani loaded with incredibly soft paneer cubes.",
+      "tags": [
+        "Vegetarian",
+        "Biryani",
+        "Paneer",
+        "Spicy"
+      ],
+      "image": "/cooking/Cooking 4 - Paneer Dum Biryani.jpg"
+    },
+    {
+      "id": "18",
+      "title": "Chicken Noodles",
+      "description": "Perfectly tossed and incredibly savory street style chicken noodles packed with fresh vegetables and sauces.",
+      "tags": [
+        "IndoChinese",
+        "Noodles",
+        "Chicken",
+        "StreetFood"
+      ],
+      "image": "/cooking/Cooking 6 - Chicken Noodles.jpg"
     }
   ]
 }

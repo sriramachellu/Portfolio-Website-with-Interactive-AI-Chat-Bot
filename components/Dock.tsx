@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Home, Cpu, FolderOpen, Briefcase, Camera, ChefHat, Gamepad2 } from 'lucide-react';
 import { motion, useScroll, useVelocity, useTransform, useSpring } from 'framer-motion';
+import { useLightbox } from '@/lib/LightboxContext';
 
 const NAV_ITEMS = [
     { href: '/', icon: Home, label: 'Home' },
@@ -29,13 +30,11 @@ function getMagnification(mouseX: number, itemX: number): number {
 
 export default function Dock() {
     const pathname = usePathname();
+    const { isLightboxOpen } = useLightbox();
     const [mouseX, setMouseX] = useState<number | null>(null);
     const dockRef = useRef<HTMLDivElement>(null);
     const itemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
     const [sizes, setSizes] = useState<number[]>(NAV_ITEMS.map(() => BASE));
-
-    /* ── Opacity ─────────────────────────────── */
-    const dockOpacity = 1;
 
     useEffect(() => {
         if (mouseX === null) {
@@ -60,8 +59,10 @@ export default function Dock() {
                 translateX: '-50%',
                 zIndex: 100,
                 padding: '0 20px',
-                opacity: dockOpacity,
+                pointerEvents: isLightboxOpen ? "none" : "auto",
             }}
+            animate={{ opacity: isLightboxOpen ? 0 : 1, y: isLightboxOpen ? 20 : 0 }}
+            transition={{ duration: 0.3 }}
         >
             <motion.div
                 ref={dockRef}

@@ -15,19 +15,27 @@ export default function ProjectsPage() {
     return (
         <div style={{ minHeight: '100vh', padding: '120px 24px 160px', maxWidth: 1280, margin: '0 auto' }}>
             {/* Header */}
-            <motion.div
-                initial={{ opacity: 0, y: 32 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] as const }}
-                style={{ marginBottom: 64, textAlign: 'center' }}
-            >
-                <p className="text-micro" style={{ color: 'var(--tint-primary)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 16 }}>
+            <div style={{ marginBottom: 64 }}>
+                <p className="text-micro" style={{ color: 'var(--tint-primary)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 16, fontSize: 12 }}>
                     Projects
                 </p>
-                <h1 className="text-section" style={{ color: '#fff', marginBottom: 20 }}><span className="text-glass-tint">Systems</span> That Learn</h1>
-                <p className="text-body" style={{ color: 'rgba(255,255,255,0.45)', maxWidth: 540, margin: '0 auto' }}>
-                    I design and build AI driven systems from retrieval augmented assistants to full stack ML platforms focused on performance, reliability, and real world impact.                </p>
-            </motion.div>
+
+                <h1 style={{ fontSize: 'clamp(36px, 5vw, 54px)', fontWeight: 600, letterSpacing: '-0.02em', marginBottom: 24 }}>
+                    The <span className="text-glass-tint">Systems</span> and <span className="text-glass-tint">Architectures</span><br />
+                    I design to learn, adapt, and scale.
+                </h1>
+
+                <div style={{ width: '100%', height: 1, backgroundColor: 'rgba(255,255,255,0.1)', marginBottom: 24 }}></div>
+
+                <motion.p
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.1 }}
+                    style={{ fontSize: 'clamp(15px, 2vw, 17px)', color: 'rgba(255,255,255,0.65)', lineHeight: 1.6 }}
+                >
+                    From retrieval-augmented assistants to full stack ML platforms each project is engineered for performance, reliability, and real world impact.
+                </motion.p>
+            </div>
 
             {/* Category Filter */}
             <motion.div

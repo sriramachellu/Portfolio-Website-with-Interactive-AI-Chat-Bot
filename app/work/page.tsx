@@ -19,10 +19,11 @@ export default function WorkPage() {
                 <p className="text-micro" style={{ color: 'var(--tint-primary)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 16 }}>
                     Career Journey
                 </p>
-                <h1 className="text-section" style={{ color: '#fff', marginBottom: 20 }}>Education & <span className="text-glass-tint">Experience</span></h1>
+                <h1 className="text-section" style={{ color: '#fff', marginBottom: 20 }}>
+                    The <span className="text-glass-tint">Education</span> and <span className="text-glass-tint">Experiences</span><br />
+                </h1>
                 <p className="text-body" style={{ color: 'rgba(255,255,255,0.45)', maxWidth: 600, margin: '0 auto' }}>
-                    A timeline of my professional growth, from academic research to building
-                    production ready AI systems and full stack applications.
+                    A timeline of growth from academic exploration to building production ready AI systems and scalable applications.
                 </p>
             </motion.div>
 

@@ -45,7 +45,7 @@ export default function SkillsPage() {
                         marginBottom: 24,
                     }}
                 >
-                    The <span className="text-glass-tint">Languages</span>, <span className="text-glass-tint">Systems</span>, and <span className="text-glass-tint">Frameworks </span><br /> i use to design intelligent, scalable software.
+                    The <span className="text-glass-tint">Languages</span>, <span className="text-glass-tint">Systems</span>, and <span className="text-glass-tint">Frameworks </span><br /> I use to design intelligent, scalable software.
                 </h1>
                 <div style={{ width: '100%', height: 1, backgroundColor: 'rgba(255,255,255,0.1)', marginBottom: 24 }}></div>
                 <motion.p

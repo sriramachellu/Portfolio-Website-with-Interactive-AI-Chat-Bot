@@ -33,13 +33,16 @@ const fadeUp = {
 };
 
 const stagger = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.05 } }
 };
 
 import { CORE_SKILLS } from '@/lib/skillsData';
 import { SkillGroupCard } from '@/components/SkillGroupCard';
 import { Timeline } from '@/components/Timeline';
+import { CookingShowcaseCard } from '@/components/CookingShowcaseCard';
+import { PhotographyShowcaseCard } from '@/components/PhotographyShowcaseCard';
+import { useLightbox } from '@/lib/LightboxContext';
 
 /* ─── Background Word Lines ──────────────────────────────────── */
 const BG_LINES = ['AI SYSTEMS', 'LLMs', 'PRODUCTION', 'RAG', 'ML'];
@@ -376,6 +379,43 @@ import { ProjectShowcaseCard } from '@/components/ProjectShowcaseCard';
 
 /* ─── Page Root ───────────────────────────────────────────────── */
 export default function HomePage() {
+  const { setIsLightboxOpen } = useLightbox();
+  const [selectedPhoto, setSelectedPhoto] = useState<any | null>(null);
+
+  useEffect(() => {
+    setIsLightboxOpen(selectedPhoto !== null);
+  }, [selectedPhoto, setIsLightboxOpen]);
+
+  // Use a shuffled state instead of shuffling on render to avoid hydration mismatch
+  const [isMounted, setIsMounted] = useState(false);
+  const [randomPhotos, setRandomPhotos] = useState<any[]>([]);
+  const [randomRecipes, setRandomRecipes] = useState<any[]>([]);
+
+  useEffect(() => {
+    // Generate valid shuffled arrays only on the client
+    // Balance Photography Grid:
+    // We want 3 columns to have equal heights. By interleaving 3 Portraits and 3 Landscapes,
+    // the CSS column balancer perfectly allocates 1 Portrait and 1 Landscape per column.
+    const allPhotos = [...portfolioData.photography];
+    const portraits = allPhotos.filter((p: any) => p.orientation === 'portrait').sort(() => 0.5 - Math.random());
+    const landscapes = allPhotos.filter((p: any) => p.orientation === 'landscape').sort(() => 0.5 - Math.random());
+
+    // Pick 3 of each
+    const p3 = portraits.slice(0, 3);
+    const l3 = landscapes.slice(0, 3);
+
+    // Interleave: P, L, P, L, P, L
+    const balancedPhotos = [];
+    for (let i = 0; i < 3; i++) {
+      if (p3[i]) balancedPhotos.push(p3[i]);
+      if (l3[i]) balancedPhotos.push(l3[i]);
+    }
+
+    setRandomPhotos(balancedPhotos);
+    setRandomRecipes([...portfolioData.cooking].sort(() => 0.5 - Math.random()).slice(0, 3));
+    setIsMounted(true);
+  }, []);
+
   return (
     <div style={{ minHeight: '100vh', overflowX: 'hidden', paddingBottom: 160 }}>
 
@@ -428,7 +468,7 @@ export default function HomePage() {
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
             style={{ marginBottom: 64, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, alignItems: 'flex-start' }}
           >
@@ -450,7 +490,7 @@ export default function HomePage() {
             variants={stagger}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, margin: '-60px' }}
+            viewport={{ once: true, amount: 0.1 }}
             style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '64px 40px', marginBottom: 80 }}
           >
             {projects.slice(0, 4).map((p, i) => (
@@ -501,7 +541,7 @@ export default function HomePage() {
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
             style={{ textAlign: 'center', marginBottom: 56 }}
           >
@@ -542,7 +582,7 @@ export default function HomePage() {
             variants={stagger}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, margin: '-60px' }}
+            viewport={{ once: true, amount: 0.1 }}
             className="masonry-home"
           >
             {CORE_SKILLS.map((group) => (
@@ -588,7 +628,7 @@ export default function HomePage() {
             className="text-section"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
             style={{ color: '#fff', marginBottom: 64, textAlign: 'center' }}
           >
@@ -602,8 +642,191 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* SECTION 6 — Photography Preview */}
+      <section style={{ padding: '0 clamp(24px, 6vw, 80px)', marginTop: 'clamp(80px, 10vw, 120px)' }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
+            style={{ marginBottom: 64, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, alignItems: 'flex-start' }}
+          >
+            <h2 className="text-section" style={{ color: '#fff', fontSize: 'clamp(40px, 6vw, 64px)', fontWeight: 600, letterSpacing: '-0.03em' }}>
+              Through {' '}
+              <span className="text-glass-tint" style={{ transition: '600ms cubic-bezier(0.25, 0.46, 0.45, 0.94)' }}>
+                The Lens
+              </span>
+            </h2>
+            <div style={{ textAlign: 'right', maxWidth: 320, marginLeft: 'auto' }}>
+              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', lineHeight: 1.6, fontWeight: 500, translate: '0 12px' }}>
+                CAPTURING MOMENTS, ARCHITECTURE, AND LANDSCAPES FROM AROUND THE WORLD.
+              </p>
+            </div>
+          </motion.div>
+
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.1 }}
+            className="masonry-home"
+          >
+            {isMounted && randomPhotos.map((photo, i) => (
+              <PhotographyShowcaseCard
+                key={photo.id}
+                photo={photo}
+                index={i}
+                onClick={() => setSelectedPhoto(photo)}
+              />
+            ))}
+          </motion.div>
+
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: 40 }}>
+            <Link href="/photography" style={{ textDecoration: 'none' }}>
+              <motion.span
+                whileHover={{ scale: 1.04, y: -1 }}
+                whileTap={{ scale: 0.97 }}
+                className="glass-2"
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 6,
+                  padding: '9px 20px', borderRadius: 100,
+                  fontSize: 13, fontWeight: 500,
+                  color: 'rgba(255,255,255,0.72)', cursor: 'pointer',
+                }}
+              >
+                View gallery <ArrowUpRight size={12} style={{ color: 'var(--tint-primary)', filter: 'drop-shadow(0 0 5px var(--tint-glow))' }} />
+              </motion.span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 7 — Cooking Preview */}
+      <section style={{ padding: '0 clamp(24px, 6vw, 80px)', marginTop: 'clamp(80px, 10vw, 120px)', marginBottom: 'clamp(80px, 10vw, 120px)' }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
+            style={{ marginBottom: 64, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, alignItems: 'flex-start' }}
+          >
+            <h2 className="text-section" style={{ color: '#fff', fontSize: 'clamp(40px, 6vw, 64px)', fontWeight: 600, letterSpacing: '-0.03em' }}>
+              From {' '}
+              <span className="text-glass-tint" style={{ transition: '600ms cubic-bezier(0.25, 0.46, 0.45, 0.94)' }}>
+                The Kitchen
+              </span>
+            </h2>
+            <div style={{ textAlign: 'right', maxWidth: 320, marginLeft: 'auto' }}>
+              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', lineHeight: 1.6, fontWeight: 500, translate: '0 12px' }}>
+                FOOD IS BOTH CRAFT AND SYSTEM. EXPLORING TECHNIQUE, PRECISION, AND TASTE.
+              </p>
+            </div>
+          </motion.div>
+
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.1 }}
+            className="masonry-home"
+          >
+            {isMounted && randomRecipes.map((recipe, i) => (
+              <CookingShowcaseCard key={recipe.id} recipe={recipe} index={i} />
+            ))}
+          </motion.div>
+
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: 40 }}>
+            <Link href="/cooking" style={{ textDecoration: 'none' }}>
+              <motion.span
+                whileHover={{ scale: 1.04, y: -1 }}
+                whileTap={{ scale: 0.97 }}
+                className="glass-2"
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 6,
+                  padding: '9px 20px', borderRadius: 100,
+                  fontSize: 13, fontWeight: 500,
+                  color: 'rgba(255,255,255,0.72)', cursor: 'pointer',
+                }}
+              >
+                View all recipes <ArrowUpRight size={12} style={{ color: 'var(--tint-primary)', filter: 'drop-shadow(0 0 5px var(--tint-glow))' }} />
+              </motion.span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* AI Assistant — fixed position, no layout impact */}
       <PortfolioAssistant />
+
+      {/* Lightbox Overlay */}
+      <AnimatePresence>
+        {selectedPhoto && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedPhoto(null)}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              zIndex: 200,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              background: 'rgba(0,0,0,0.92)',
+              backdropFilter: 'blur(12px)',
+              padding: 24,
+            }}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              className="glass-1"
+              style={{
+                maxWidth: '90vw',
+                maxHeight: '90vh',
+                width: 'fit-content',
+                padding: 12,
+                textAlign: 'center',
+                position: 'relative',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center'
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={selectedPhoto.image}
+                alt={selectedPhoto.title}
+                style={{
+                  maxWidth: '100%',
+                  maxHeight: '70vh',
+                  borderRadius: 16,
+                  objectFit: 'contain',
+                  boxShadow: '0 20px 40px rgba(0,0,0,0.4)'
+                }}
+              />
+              <div style={{ marginTop: 24, padding: '0 12px 12px' }}>
+                <h2 className="text-section" style={{ color: '#fff', fontSize: 24, marginBottom: 8 }}>{selectedPhoto.title}</h2>
+                <p className="text-body" style={{ color: 'rgba(255,255,255,0.6)' }}>
+                  {selectedPhoto.location} · {selectedPhoto.category} {selectedPhoto.year && `· ${selectedPhoto.year}`}
+                </p>
+                <button
+                  onClick={() => setSelectedPhoto(null)}
+                  className="glass-3"
+                  style={{ marginTop: 20, padding: '10px 32px', color: '#fff', border: 'none', cursor: 'pointer', fontSize: 14, borderRadius: 100 }}
+                >
+                  Close
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

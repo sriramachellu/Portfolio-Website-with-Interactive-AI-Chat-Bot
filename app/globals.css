@@ -129,6 +129,8 @@ body,
   border: 1px solid var(--glass-border);
   border-radius: 28px;
   box-shadow: var(--glass-shadow), 0 0 0 0.5px rgba(255, 255, 255, 0.06) inset;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 /* Level 1 with tint */
@@ -149,6 +151,8 @@ body,
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 24px;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.14);
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 /* Level 3 — Mini pills/tags: blur 12px */
@@ -159,6 +163,8 @@ body,
   border: 1px solid rgba(255, 255, 255, 0.10);
   border-radius: 100px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 /* ─── Background Layers ────────────────────────────────────── */

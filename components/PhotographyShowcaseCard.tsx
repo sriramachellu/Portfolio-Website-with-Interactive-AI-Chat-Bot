@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export interface PhotographyShowcaseCardProps {
     photo: any;
@@ -8,12 +8,6 @@ export interface PhotographyShowcaseCardProps {
 }
 
 export function PhotographyShowcaseCard({ photo, index, onClick }: PhotographyShowcaseCardProps) {
-    const [cacheBuster, setCacheBuster] = useState('');
-
-    useEffect(() => {
-        setCacheBuster(Date.now().toString());
-    }, []);
-
     return (
         <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -33,12 +27,18 @@ export function PhotographyShowcaseCard({ photo, index, onClick }: PhotographySh
                 background: 'rgba(255,255,255,0.03)',
                 boxShadow: '0 10px 40px rgba(0,0,0,0.4)',
                 border: '1px solid rgba(255,255,255,0.06)',
+                willChange: 'transform, opacity' // GPU Accel
             }}
         >
             <div style={{ position: 'relative', width: '100%', height: 'auto', display: 'flex' }}>
-                <img
-                    src={`${photo.image}?v=${cacheBuster}`}
+                <Image
+                    src={photo.image}
                     alt={photo.title}
+                    width={800}
+                    height={800}
+                    loading={index < 2 ? "eager" : "lazy"} // Better load balancing
+                    priority={index < 2} // Restrict priority to top viewport items only
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     style={{
                         width: '100%',
                         height: 'auto',

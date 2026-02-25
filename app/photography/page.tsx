@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import portfolioData from '@/lib/portfolio.json';
 import { PhotographyShowcaseCard } from '@/components/PhotographyShowcaseCard';
+import { useLightbox } from '@/lib/LightboxContext';
 
 const { photography } = portfolioData;
 
@@ -20,8 +21,13 @@ const PHOTO_COLORS = [
 const CATEGORIES = ['All', ...Array.from(new Set(photography.map((p) => p.category)))];
 
 export default function PhotographyPage() {
+    const { setIsLightboxOpen } = useLightbox();
     const [activeCategory, setActiveCategory] = useState('All');
     const [lightbox, setLightbox] = useState<(typeof photography)[0] | null>(null);
+
+    useEffect(() => {
+        setIsLightboxOpen(lightbox !== null);
+    }, [lightbox, setIsLightboxOpen]);
 
     const filtered = activeCategory === 'All'
         ? photography
@@ -30,20 +36,43 @@ export default function PhotographyPage() {
     return (
         <div style={{ minHeight: '100vh', padding: '120px 40px 200px', maxWidth: 1200, margin: '0 auto' }}>
             {/* Header */}
-            <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                style={{ marginBottom: 48 }}
-            >
-                <p className="text-micro" style={{ color: 'var(--tint-primary)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 12 }}>
+            <div style={{ marginBottom: 40 }}>
+                <p
+                    style={{
+                        color: 'var(--tint-primary)',
+                        letterSpacing: '0.12em',
+                        textTransform: 'uppercase',
+                        marginBottom: 16,
+                        fontSize: 12,
+                    }}
+                >
                     Through the Lens
                 </p>
-                <h1 className="text-section" style={{ color: '#fff' }}>Photography</h1>
-                <p className="text-body" style={{ color: 'rgba(255,255,255,0.5)', marginTop: 12, maxWidth: 480 }}>
-                    Light, shadow, and the quiet moments between.
-                </p>
-            </motion.div>
+
+                <h1
+                    style={{
+                        fontSize: 'clamp(36px, 5vw, 54px)',
+                        fontWeight: 600,
+                        letterSpacing: '-0.02em',
+                        marginBottom: 24,
+                    }}
+                >
+                    The <span className="text-glass-tint">Light</span>, <span className="text-glass-tint">Composition</span>, and <span className="text-glass-tint">Moments</span><br /> I capture with intention and precision.
+                </h1>
+                <div style={{ width: '100%', height: 1, backgroundColor: 'rgba(255,255,255,0.1)', marginBottom: 24 }}></div>
+                <motion.p
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.1 }}
+                    style={{
+                        fontSize: 'clamp(15px, 2vw, 17px)',
+                        color: 'rgba(255,255,255,0.65)',
+                        lineHeight: 1.6,
+                    }}
+                >
+                    Every frame is an exercise in observation balancing contrast, depth, and timing to tell quiet, powerful stories.
+                </motion.p>
+            </div>
 
             {/* Filter */}
             <motion.div

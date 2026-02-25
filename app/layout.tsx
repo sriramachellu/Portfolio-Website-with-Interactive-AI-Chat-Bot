@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { TintProvider } from "@/lib/TintContext";
+import { LightboxProvider } from "@/lib/LightboxContext";
 import Dock from "@/components/Dock";
 import TintSwitcher from "@/components/TintSwitcher";
 import AmbientGlow from "@/components/AmbientGlow";
+import { PageTransition } from "@/components/PageTransition";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -30,14 +32,16 @@ export default function RootLayout({
   return (
     <html lang="en" data-tint="deep-blue">
       <body className={inter.variable} style={{ fontFamily: "'Inter', sans-serif" }} suppressHydrationWarning>
-        <TintProvider>
-          <AmbientGlow />
-          <main style={{ position: "relative", zIndex: 1 }}>
-            {children}
-          </main>
-          <TintSwitcher />
-          <Dock />
-        </TintProvider>
+        <LightboxProvider>
+          <TintProvider>
+            <AmbientGlow />
+            <main style={{ position: "relative", zIndex: 1, minHeight: "100vh" }}>
+              <PageTransition>{children}</PageTransition>
+            </main>
+            <TintSwitcher />
+            <Dock />
+          </TintProvider>
+        </LightboxProvider>
       </body>
     </html>
   );
