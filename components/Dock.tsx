@@ -17,7 +17,7 @@ const NAV_ITEMS = [
     { href: '/game', icon: Gamepad2, label: 'Game' },
 ];
 
-const BASE = 44;
+const BASE = 40;
 const MAX = 64;
 const SPREAD = 120;
 

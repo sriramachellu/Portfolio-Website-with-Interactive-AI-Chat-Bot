@@ -7,18 +7,25 @@ import {
 } from 'framer-motion';
 
 /* ─── Types ──────────────────────────────────────────────────── */
-type BotState = 'intro' | 'idle' | 'active' | 'typing' | 'inactive';
-type BotAction = 'RUN_DONE' | 'FOCUS' | 'BLUR' | 'TYPE' | 'INACTIVE' | 'SEND' | 'CLOSE';
+type BotState = 'landing' | 'arrival' | 'cursor-follow' | 'idle' | 'dock' | 'typing' | 'inactive';
+type BotAction = 'MOVE' | 'STOP' | 'STAY' | 'FOCUS' | 'TYPE' | 'SEND' | 'CLOSE' | 'INACTIVE';
 type Message = { role: 'user' | 'assistant'; text: string };
 
 function botReducer(state: BotState, action: BotAction): BotState {
     switch (action) {
-        case 'RUN_DONE': return 'idle';
-        case 'FOCUS': return 'active';
+        case 'MOVE':
+            if (state === 'dock' || state === 'typing') return state;
+            return 'cursor-follow';
+        case 'STOP':
+            if (state === 'dock' || state === 'typing') return state;
+            return 'arrival';
+        case 'STAY':
+            if (state === 'arrival') return 'idle';
+            return state;
+        case 'FOCUS': return 'dock';
         case 'TYPE': return 'typing';
-        case 'SEND': return 'active';
-        case 'CLOSE': return 'idle';
-        case 'BLUR': return state === 'active' || state === 'typing' ? 'idle' : state;
+        case 'SEND': return 'dock';
+        case 'CLOSE': return 'cursor-follow';
         case 'INACTIVE': return 'inactive';
         default: return state;
     }
@@ -73,8 +80,8 @@ function renderMd(text: string): React.ReactNode {
 /* ─── Robot visual ───────────────────────────────────────────── */
 function GlassRobot({ state }: { state: BotState }) {
     const isTyping = state === 'typing';
-    const isIdle = state === 'idle';
-    const isActive = state === 'active';
+    const isIdle = state === 'idle' || state === 'arrival';
+    const isDocked = state === 'dock' || state === 'typing';
 
     return (
         <motion.div
@@ -118,7 +125,7 @@ function GlassRobot({ state }: { state: BotState }) {
                         style={{
                             width: 5, height: 5, borderRadius: '50%',
                             background: 'rgba(255,255,255,0.92)',
-                            boxShadow: isActive || isTyping || isIdle
+                            boxShadow: isDocked || isTyping || isIdle
                                 ? '0 0 8px var(--tint-primary)'
                                 : '0 0 4px rgba(255,255,255,0.4)',
                         }}
@@ -138,7 +145,7 @@ function GlassRobot({ state }: { state: BotState }) {
 
 /* ─── Main Component ─────────────────────────────────────────── */
 export function PortfolioAssistant() {
-    const [botState, dispatch] = useReducer(botReducer, 'idle');
+    const [botState, dispatch] = useReducer(botReducer, 'landing');
     const [messages, setMessages] = useState<Message[]>([]);
     const [input, setInput] = useState('');
     const [loading, setLoading] = useState(false);
@@ -151,6 +158,8 @@ export function PortfolioAssistant() {
 
     const robotControls = useAnimation();
     const inactivityRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const mouseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const stayTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const messagesEnd = useRef<HTMLDivElement>(null);
     const chatRef = useRef<HTMLDivElement>(null);
     const robotRef = useRef<HTMLDivElement>(null);
@@ -161,7 +170,7 @@ export function PortfolioAssistant() {
     const springX = useSpring(cursorX, { stiffness: 250, damping: 25 });
     const springY = useSpring(cursorY, { stiffness: 250, damping: 25 });
 
-    const isActive = botState === 'active' || botState === 'typing';
+    const isActive = botState === 'dock' || botState === 'typing';
 
     useEffect(() => {
         // Safe check for window for initial value
@@ -175,7 +184,17 @@ export function PortfolioAssistant() {
                 setIsLanding(false);
             }
             mouseRef.current = { x: e.clientX, y: e.clientY };
-            if (botState === 'idle' || botState === 'inactive') {
+            dispatch('MOVE');
+
+            // Reset stop timers
+            if (mouseTimerRef.current) clearTimeout(mouseTimerRef.current);
+            if (stayTimerRef.current) clearTimeout(stayTimerRef.current);
+
+            mouseTimerRef.current = setTimeout(() => {
+                dispatch('STOP');
+            }, 800);
+
+            if (botState === 'cursor-follow' || botState === 'inactive' || botState === 'arrival' || botState === 'idle') {
                 const anchorX = window.innerWidth / 2;
                 const anchorY = window.innerHeight - 108 - 22;
 
@@ -188,7 +207,7 @@ export function PortfolioAssistant() {
     }, [botState, hasCursor, cursorX, cursorY]);
 
     useEffect(() => {
-        if (botState === 'active' || botState === 'typing') {
+        if (botState === 'dock' || botState === 'typing') {
             cursorX.set(0);
             cursorY.set(0);
         } else if (hasCursor) {
@@ -208,14 +227,12 @@ export function PortfolioAssistant() {
     // Dock = left of 440px chat bar    (x = -(220 + 10 + 22) = -252)
     const HOME_X = 'calc(47vw - 22px)';
     const HOME_Y = -80;
-    const DOCK_X = -260;
+    const DOCK_X = -202;
     const DOCK_Y = 8;
 
     /* ── Landing sequence logic ────────────────────────────── */
     useEffect(() => {
-        // Start immediately in idle
-        dispatch('RUN_DONE');
-
+        // Start immediately in landing/arrival
         // After 5s, hide "Hi"
         const hiTimer = setTimeout(() => setShowHi(false), 5000);
         // After 10s, if still landing (no cursor), fade out
@@ -230,17 +247,16 @@ export function PortfolioAssistant() {
     /* ── State → robot position ────────────────────────────────── */
     useEffect(() => {
         switch (botState) {
+            case 'landing':
+            case 'arrival':
             case 'idle': {
-                const anchorX = typeof window !== 'undefined' ? window.innerWidth / 2 - 22 : 0;
-                const anchorY = typeof window !== 'undefined' ? window.innerHeight - 108 - 44 : 0;
-
                 if (!hasCursor) {
                     // Peek position: static above hero polaroid
                     robotControls.start({
                         x: 'calc(28vw)',
                         y: 'calc(-50vh - 160px)',
                         scale: 0.7,
-                        opacity: isLanding ? 0.85 : 0, // Fades out if landing phase ends without interaction
+                        opacity: isLanding ? 0.85 : 0,
                         transition: { duration: 1.0, ease: [0.22, 1, 0.36, 1] as const },
                     });
                 } else {
@@ -248,14 +264,24 @@ export function PortfolioAssistant() {
                         x: 0, y: 0,
                         scale: 0.88, opacity: 0.85,
                         transition: {
-                            duration: isLanding ? 0.8 : 0.55, // Slower arrival if coming from landing
+                            duration: botState === 'arrival' ? 0.8 : 0.55,
                             ease: [0.22, 1, 0.36, 1] as const
                         },
+                    }).then(() => {
+                        if (botState === 'arrival') {
+                            stayTimerRef.current = setTimeout(() => dispatch('STAY'), 500);
+                        }
                     });
                 }
                 break;
             }
-            case 'active':
+            case 'cursor-follow':
+                robotControls.start({
+                    x: 0, y: 0, scale: 0.88, opacity: 0.85,
+                    transition: { duration: 0.3 }
+                });
+                break;
+            case 'dock':
                 robotControls.start({
                     x: DOCK_X, y: DOCK_Y, scale: 1.05, opacity: 1,
                     transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const },
@@ -283,8 +309,7 @@ export function PortfolioAssistant() {
                 break;
             }
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [botState, robotControls, hasCursor]);
+    }, [botState, robotControls, hasCursor, isLanding]);
 
     /* ── Inactivity timer ──────────────────────────────────────── */
     const resetInactivity = useCallback(() => {
@@ -296,7 +321,7 @@ export function PortfolioAssistant() {
     }, []);
 
     useEffect(() => {
-        if (botState !== 'intro') resetInactivity();
+        if (botState !== 'landing') resetInactivity();
         return () => { if (inactivityRef.current) clearTimeout(inactivityRef.current); };
     }, [botState, resetInactivity]);
 
@@ -321,7 +346,7 @@ export function PortfolioAssistant() {
     const handleBlur = () => {
         // Only update bot state — do NOT close the chat panel.
         // Messages stay visible so user can keep reading.
-        if (!input.trim()) dispatch('BLUR');
+        // We don't have BLUR action anymore, it transitions automatically via STOP/MOVE
     };
 
     const handleClose = () => {
@@ -403,10 +428,10 @@ export function PortfolioAssistant() {
                     left: '50%',
                     marginLeft: -22,
                     zIndex: hasCursor ? 51 : 1, // behind polaroid when no cursor
-                    cursor: botState === 'idle' || botState === 'inactive' ? 'pointer' : 'default',
+                    cursor: (botState === 'idle' || botState === 'arrival' || botState === 'cursor-follow' || botState === 'inactive') ? 'pointer' : 'default',
                 }}
                 onClick={() => {
-                    if (botState === 'idle' || botState === 'inactive') handleFocus();
+                    if (botState === 'idle' || botState === 'arrival' || botState === 'cursor-follow' || botState === 'inactive') handleFocus();
                 }}
             >
                 <motion.div style={{ x: springX, y: springY, position: 'relative' }}>
@@ -478,9 +503,8 @@ export function PortfolioAssistant() {
                                 animate={{ opacity: 1, y: 0, scale: 1 }}
                                 exit={{ opacity: 0, y: 10, scale: 0.97 }}
                                 transition={{ duration: 0.25 }}
-                                className="glass-3 text-micro"
                                 style={{
-                                    width: 'min(460px, 90vw)',
+                                    width: 'min(340px, 72vw)',
                                     maxHeight: 280,
                                     overflowY: 'auto',
                                     padding: '14px 14px 10px',
@@ -490,6 +514,10 @@ export function PortfolioAssistant() {
                                     borderRadius: 20,
                                     position: 'relative',
                                     pointerEvents: 'auto',
+                                    background: 'rgba(255, 255, 255, 0.15)',
+                                    backdropFilter: 'blur(16px) saturate(180%)',
+                                    WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+                                    border: '1px solid rgba(255, 255, 255, 0.2)',
                                 }}
                             >
                                 {/* No close button here — moved below */}
@@ -550,7 +578,7 @@ export function PortfolioAssistant() {
                                 style={{
                                     display: 'flex',
                                     justifyContent: 'flex-end',
-                                    width: 'min(460px, 90vw)',
+                                    width: 'min(340px, 72vw)',
                                     pointerEvents: 'auto',
                                 }}
                             >
@@ -574,9 +602,8 @@ export function PortfolioAssistant() {
 
                     {/* Input pill */}
                     <motion.div
-                        animate={{ width: isActive ? 'min(460px, 90vw)' : 'min(340px, 72vw)' }}
-                        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] as const }}
                         style={{
+                            width: 'min(340px, 72vw)',
                             borderRadius: 100,
                             display: 'flex', alignItems: 'center',
                             padding: '11px 16px', gap: 8,

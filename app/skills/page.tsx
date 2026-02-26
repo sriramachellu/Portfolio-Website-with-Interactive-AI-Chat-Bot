@@ -66,8 +66,7 @@ export default function SkillsPage() {
             <style>{`
               .masonry-skills {
                 column-count: 1;
-                column-gap: 24px;
-                width: 100%;*-sfda*-czxs
+                width: 100%;
               }
               @media (min-width: 768px) {
                 .masonry-skills { column-count: 2; }
