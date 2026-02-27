@@ -25,7 +25,7 @@ export function SkillGroupCard({ category, desc, items, variants }: SkillGroupCa
                 cursor: 'default',
                 display: 'flex',
                 flexDirection: 'column',
-                padding: 24,
+                padding: '40px 28px 24px 28px',
                 background: 'rgba(255,255,255,0.02)',
                 border: '1px solid rgba(255,255,255,0.08)',
                 boxShadow: '0 20px 40px rgba(0,0,0,0.2)',

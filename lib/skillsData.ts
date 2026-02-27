@@ -19,6 +19,7 @@ const customSlugMap: Record<string, string> = {
     'Ollama': 'ollama',
     'DeepSeek-R1 8B': 'deepseek-color',
     'vLLM': 'vllm-color',
+    'Convex': 'convex',
 
     'Apache Spark': 'Apache Spark',
     'Apache Airflow': 'Apache Airflow',
@@ -83,7 +84,7 @@ const validIcons = new Set([
     'githubcopilot', 'googlecloud-color', 'huggingface-color', 'langchain',
     'llamaindex-color', 'microsoft copilot-color', 'microsoft-excel', 'ollama', 'openai',
     'openclaw-color', 'perplexity-color (1)', 'perplexity-color', 'pytest', 'scikit-learn',
-    'supabase-logo-icon', 'tableau', 'vllm-color', 'nextjs'
+    'supabase-logo-icon', 'tableau', 'vllm-color', 'nextjs', 'convex'
 ]);
 
 const categoryDescriptions: Record<string, string> = {
@@ -142,4 +143,4 @@ export const ALL_SKILLS = portfolioData.skills.map((group) => {
 });
 
 // The homepage only shows the core top 5 categories
-export const CORE_SKILLS = ALL_SKILLS.slice(0, 6);
+export const CORE_SKILLS = ALL_SKILLS.slice(0, 7);

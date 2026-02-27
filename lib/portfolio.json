@@ -14,134 +14,117 @@
       "category": "Programming Languages",
       "items": [
         "Python",
-        "C",
-        "R",
         "SQL",
+        "TypeScript",
         "JavaScript",
-        "TypeScript"
+        "C",
+        "R"
       ]
     },
     {
-      "category": "Machine Learning",
+      "category": "Machine Learning & AI",
       "items": [
         "PyTorch",
         "TensorFlow",
         "Scikit-learn",
+        "XGBoost",
+        "MLflow",
         "NumPy",
         "Pandas",
         "OpenCV",
-        "Matplotlib",
-        "Seaborn",
-        "MLflow",
-        "XGBoost",
-        "Jupyter Notebook"
+        "Model Evaluation & Validation",
+        "Feature Engineering"
       ]
     },
     {
-      "category": "Gen & Agentic AI",
+      "category": "Generative & Agentic AI",
       "items": [
+        "Large Language Models (LLMs)",
+        "RAG Pipelines",
+        "LoRA Fine-Tuning",
+        "vLLM",
         "OpenAI API",
         "Google Gemini API",
         "Anthropic Claude",
         "LangChain",
         "LlamaIndex",
         "Ollama",
-        "DeepSeek-R1 8B",
-        "RAGs",
-        "Vector DB",
-        "Prompt Engineering",
-        "AI Prompting",
-        "LoRA Fine-Tuning",
-        "Large Language Models(LLMs)",
-        "vLLM"
+        "Vector Databases",
+        "Prompt Engineering"
       ]
     },
     {
-      "category": "Vibe Coding & IDEs",
+      "category": "Data Engineering & Analytics",
       "items": [
-        "Antigravity",
-        "Cursor AI",
-        "Clawbot",
-        "Claude Code",
-        "GitHub Copilot",
-        "ChatGPT",
-        "Perplexity Pro",
-        "VS Code",
+        "Apache Spark (PySpark)",
+        "Apache Beam",
+        "Apache Airflow",
+        "ETL Pipelines",
+        "Data Cleaning & Transformation",
+        "BigQuery",
+        "SQL Analytics",
+        "Power BI",
+        "Tableau",
+        "Microsoft Excel"
+      ]
+    },
+    {
+      "category": "Cloud & Infrastructure",
+      "items": [
+        "Google Cloud Platform (GCS, BigQuery, Dataflow)",
+        "AWS",
+        "Docker",
+        "GitHub Actions",
+        "CI/CD Pipelines",
         "Vercel"
       ]
     },
     {
-      "category": "Data Engineering, Analytics & BI",
-      "items": [
-        "Apache Spark",
-        "Apache Airflow",
-        "Apache Beam",
-        "ETL Pipelines",
-        "Data Cleaning & Transformation",
-        "BigQuery Analytics",
-        "SQL Analytics",
-        "Power BI",
-        "Tableau",
-        "Microsoft Excel",
-        "Microsoft 365"
-      ]
-    },
-    {
-      "category": "Cloud & Deployment",
-      "items": [
-        "AWS",
-        "Google Cloud Platform (GCS, BigQuery, Dataflow)",
-        "Docker",
-        "Vercel",
-        "GitHub Actions",
-        "CI/CD Pipelines"
-      ]
-    },
-    {
-      "category": "Database Management",
+      "category": "Databases",
       "items": [
         "MySQL",
         "PostgreSQL",
         "Supabase",
-        "BigQuery",
-        "AWS RDS"
+        "Convex",
+        "BigQuery"
       ]
     },
     {
-      "category": "Full Stack & UI",
+      "category": "AI Assisted Tools & IDEs",
+      "items": [
+        "GitHub Copilot",
+        "Claude Code",
+        "Cursor AI",
+        "ChatGPT",
+        "Perplexity Pro",
+        "VS Code",
+        "Antigravity"
+      ]
+    },
+    {
+      "category": "Full Stack Development",
       "items": [
         "React",
         "Next.js",
-        "TypeScript",
-        "JavaScript",
-        "CSS",
         "FastAPI",
+        "REST APIs",
         "Tailwind CSS",
-        "Framer Motion"
+        "Framer Motion",
+        "CSS"
       ]
     },
     {
-      "category": "Version Control & Collaboration, Testing",
+      "category": "Testing & Version Control",
       "items": [
         "Git",
         "GitHub",
         "PyTest",
-        "A/B Testing",
-        "Integration Testing"
+        "Integration Testing",
+        "A/B Testing"
       ]
     },
     {
-      "category": "Design & Video Editing",
-      "items": [
-        "Figma",
-        "Adobe Photoshop",
-        "Adobe Premiere Pro",
-        "Canva",
-        "Adobe After Effects"
-      ]
-    },
-    {
-      "category": "Core Computer Science Concepts",
+      "category": "Core Computer Science",
       "items": [
         "Data Structures & Algorithms",
         "System Design",
@@ -150,6 +133,16 @@
         "Computer Networks",
         "Distributed Systems",
         "Database Systems"
+      ]
+    },
+    {
+      "category": "Design & Media",
+      "items": [
+        "Figma",
+        "Adobe Photoshop",
+        "Adobe Premiere Pro",
+        "Adobe After Effects",
+        "Canva"
       ]
     },
     {
@@ -234,7 +227,7 @@
     },
     {
       "id": "3",
-      "title": "GenAI Assisted Interpretation of Metagenomic Sequencing Data",
+      "title": "Interpretation of Metagenomic Data using GenAI",
       "tagline": "Bridging Metagenomics and Clinical Action through LLMs",
       "description": "End-to-end AI-driven clinical decision support system for interpreting metagenomic next-generation sequencing (mNGS) reports. The pipeline integrates microbial signal processing, weighted pathogen ranking, contaminant filtering, host immune response analysis, PubMed-backed Retrieval-Augmented Generation (RAG), and safety-constrained LLM reasoning to generate structured, literature-grounded infectious disease reports with hallucination controls.",
       "architecture": [

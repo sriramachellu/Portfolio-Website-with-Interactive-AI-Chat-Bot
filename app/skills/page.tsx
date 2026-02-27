@@ -67,6 +67,7 @@ export default function SkillsPage() {
               .masonry-skills {
                 column-count: 1;
                 width: 100%;
+                column-gap: 32px;
               }
               @media (min-width: 768px) {
                 .masonry-skills { column-count: 2; }
@@ -76,7 +77,7 @@ export default function SkillsPage() {
               }
               .masonry-skills > div {
                 break-inside: avoid;
-                margin-bottom: 24px;
+                margin-bottom: 32px;
               }
             `}</style>
 
