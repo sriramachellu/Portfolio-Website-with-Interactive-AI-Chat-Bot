@@ -1,3 +1,4 @@
+require('dotenv').config({ path: '.env.local' });
 import fs from 'fs';
 import path from 'path';
 import { GoogleGenerativeAI } from '@google/generative-ai';
@@ -92,7 +93,7 @@ async function generateEmbeddings() {
 
     const genAI = new GoogleGenerativeAI(apiKey);
     // Google recommended model for text embedding
-    const model = genAI.getGenerativeModel({ model: 'text-embedding-004' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-embedding-001' });
 
     console.log('Building chunks...');
     const chunks = buildChunks();

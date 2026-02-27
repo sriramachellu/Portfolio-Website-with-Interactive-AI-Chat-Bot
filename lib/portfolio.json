@@ -168,111 +168,193 @@
   "projects": [
     {
       "id": "1",
-      "title": "Portfolio Website with Interactive AI Chat using Custom LLM & RAG Engine",
-      "description": "Production ready AI native personal portfolio website integrating Google Gemini APIs with a lightweight Retrieval-Augmented Generation (RAG) system. Features dynamic JSON based context chunking, custom keyword scoring retrieval, model fallback handling, exponential backoff for rate limits, and strict prompt guardrails. Deployed on Vercel with serverless API routes and environment secured LLM integration.",
-      "stack": [
-        "Next.js",
-        "React",
-        "TypeScript 5",
-        "Tailwind CSS 4",
-        "Framer Motion",
-        "Google Gemini API",
-        "Claude Sonnet 4.6",
-        "Custom RAG Architecture",
-        "Google Antigravity",
-        "Vercel",
-        "Spotify Web API & OAuth"
+      "title": "OpenNoteLM (Inspired by Google NotebookLM)",
+      "tagline": "AI-Driven Document Intelligence Workspace",
+      "description": "AI document intelligence workspace inspired by Google NotebookLM. Engineered a full Retrieval-Augmented Generation (RAG) system using Gemini 2.5 Flash and Vertex AI embeddings to enable low-latency streaming chat over user-uploaded PDFs. Built real-time reactive architecture with Convex, integrated native vector search over 768-D embeddings, and implemented strict grounding mechanisms to eliminate hallucinations. Designed modular knowledge transformation tools (Quiz, Flashcards, Mind Maps) and optimized end-to-end inference latency (~120–250ms TTFT) with retrieval under ~50ms. Serverless architecture ensures cost-efficient scaling with zero idle infrastructure overhead.",
+      "architecture": [
+        "Full RAG Pipeline",
+        "Reactive Data Layer",
+        "Vector Search Engine",
+        "Grounding Framework"
       ],
-      "github": "https://github.com/sriramachellu/LLM-Powered-Portfolio-Website-with-Interactive-AI-Chat-Custom-RAG-Engine",
-      "demo": null,
-      "category": "AI Systems / LLM Engineering",
-      "image": "/LLM Powered Portfolio Website with Interactive AI Chat & Custom RAG Engine.png"
+      "impact": [
+        "Latency: 120-250ms TTFT",
+        "Retrieval: <50ms",
+        "Zero Idle Infrastructure Cost"
+      ],
+      "stack": [
+        "Gemini 2.5 Flash",
+        "Vertex AI",
+        "Vector Search",
+        "Convex",
+        "Next.js",
+        "TypeScript",
+        "Python",
+        "Serverless Architecture",
+        "text-embedding-004",
+        "Material UI",
+        "React"
+      ],
+      "category": "AI Systems",
+      "image": "/OpenNoteLM.jpg"
     },
     {
       "id": "2",
-      "title": "GenAI & LLM Assisted Clinical Interpretation of Metagenomic Sequencing Data",
-      "description": "End-to-end AI-driven clinical decision support system for interpreting metagenomic next-generation sequencing (mNGS) reports. The pipeline integrates microbial signal processing, weighted pathogen ranking, contaminant filtering, host immune response analysis, PubMed-backed Retrieval-Augmented Generation (RAG), and safety-constrained LLM reasoning to generate structured, literature-grounded infectious disease reports with hallucination controls.",
-      "stack": [
-        "Python",
-        "Pandas",
-        "NumPy",
-        "scikit-learn",
-        "UMAP",
-        "Sentence-Transformers",
-        "Ollama",
-        "DeepSeek-R1 8B LLM",
-        "FastAPI",
-        "PostgreSQL",
-        "NCBI Entrez API"
+      "title": "Portfolio Website with Interactive AI Chat Bot",
+      "tagline": "Apple Liquid Glass Inspired UI/UX",
+      "description": "Production ready AI native personal portfolio website integrating Google Gemini APIs with a lightweight Retrieval-Augmented Generation (RAG) system. Features dynamic JSON based context chunking, custom keyword scoring retrieval, model fallback handling, exponential backoff for rate limits, and strict prompt guardrails. Deployed on Vercel with serverless API routes and environment secured LLM integration.",
+      "architecture": [
+        "JSON-Based Context Chunking",
+        "Keyword Scoring Retrieval",
+        "Serverless LLM Integration",
+        "Prompt Guardrail System"
       ],
-      "github": "https://github.com/sriramachellu/GenAI-Assisted-Interpretation-of-Metagenomic-Sequencing-Data",
+      "impact": [
+        "Production Ready RAG Engine",
+        "Adaptive model fallback",
+        "Secure environment architecture"
+      ],
+      "stack": [
+        "Google Gemini API",
+        "Custom RAG Architecture",
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Framer Motion",
+        "Claude Sonnet 4.6",
+        "Google Antigravity",
+        "Vercel",
+        "Spotify Web API & OAuth",
+        "React"
+      ],
+      "github": "https://github.com/sriramachellu/LLM-Powered-Portfolio-Website-with-Interactive-AI-Chat-Custom-RAG-Engine",
       "demo": null,
-      "category": "AI/ML Systems & Bioinformatics"
+      "category": "AI Systems",
+      "image": "/LLM Powered Portfolio Website with Interactive AI Chat & Custom RAG Engine.jpg"
     },
     {
       "id": "3",
-      "title": "Superstore Sales Analysis and Visualization",
-      "description": "End-to-end sales analytics and ETL project processing 50,000+ retail transactions to uncover revenue trends, category performance drivers, customer retention patterns, and regional profitability insights. Built scalable data pipelines and interactive KPI dashboards to enable standardized performance tracking and data-driven campaign evaluation.",
-      "stack": [
-        "Python",
-        "PySpark",
-        "SQL",
-        "MySQL",
-        "Power BI",
-        "Pandas",
-        "Weights & Biases"
+      "title": "GenAI Assisted Interpretation of Metagenomic Sequencing Data",
+      "tagline": "Bridging Metagenomics and Clinical Action through LLMs",
+      "description": "End-to-end AI-driven clinical decision support system for interpreting metagenomic next-generation sequencing (mNGS) reports. The pipeline integrates microbial signal processing, weighted pathogen ranking, contaminant filtering, host immune response analysis, PubMed-backed Retrieval-Augmented Generation (RAG), and safety-constrained LLM reasoning to generate structured, literature-grounded infectious disease reports with hallucination controls.",
+      "architecture": [
+        "Signal Processing Pipeline",
+        "PubMed-Backed RAG",
+        "Pathogen Ranking Engine",
+        "Safety-Constrained Reasoning"
       ],
-      "github": null,
+      "impact": [
+        "Literature Grounded Reports",
+        "Pathogen Ranking: Weighted",
+        "Automated Contaminant Filtering"
+      ],
+      "stack": [
+        "DeepSeek-R1 8B LLM",
+        "Python",
+        "FastAPI",
+        "UMAP",
+        "Sentence-Transformers",
+        "PubMed-Backed RAG",
+        "Bioinformatics",
+        "NCBI Entrez API",
+        "Pandas",
+        "NumPy",
+        "scikit-learn",
+        "PostgreSQL",
+        "Ollama"
+      ],
+      "github": "https://github.com/sriramachellu/GenAI-Assisted-Interpretation-of-Metagenomic-Sequencing-Data",
       "demo": null,
-      "category": "Data Engineering & Business Intelligence",
-      "image": "/Superstore Sales Analysis and Visualization.png"
+      "category": "Bioinformatics",
+      "image": "/GenAI Bioinfo.jpg"
     },
     {
       "id": "4",
-      "title": "Pneumonia Detection Using Chest X-Rays",
-      "description": "Developed a deep learning-based medical imaging classifier using Convolutional Neural Networks (CNNs) to detect pneumonia from over 5,800 pediatric chest X-ray images. Implemented data augmentation, dropout regularization, and fine-tuning strategies to improve generalization. Achieved 79.17% test accuracy with precision-recall evaluation and 97%+ training accuracy.",
-      "stack": [
-        "Python",
-        "PyTorch",
-        "CNN",
-        "Torchvision",
-        "Deep Learning",
-        "Medical Imaging"
+      "title": "Superstore Sales Analysis and Visualization",
+      "tagline": "Retail Analytics Dashboard & ETL Pipeline",
+      "description": "End-to-end sales analytics and ETL project processing 50,000+ retail transactions to uncover revenue trends, category performance drivers, customer retention patterns, and regional profitability insights. Built scalable data pipelines and interactive KPI dashboards to enable standardized performance tracking and data-driven campaign evaluation.",
+      "architecture": [
+        "ETL Data Pipeline",
+        "Interactive KPI Dashboards",
+        "Predictive Modeling Layer",
+        "Regional Profitability Analysis"
       ],
-      "github": "https://github.com/sriramachellu/Pneumonia-Detection-Using-Chest-X-Rays",
+      "impact": [
+        "Processed 50,000+ Transactions",
+        "50% Reduction in Manual Reporting",
+        "30% Increase in Participation Insights"
+      ],
+      "stack": [
+        "Power BI",
+        "PySpark",
+        "SQL",
+        "Python",
+        "MySQL",
+        "Pandas",
+        "Weights & Biases"
+      ],
+      "github": "https://github.com/sriramachellu/Sales-Performance-Profit-Insights-Analysis-Dashboard-Visualization-SQL-Power-BI-Tableau",
       "demo": null,
-      "category": "Machine Learning / neural networks",
-      "image": "/Pneumonia Detection Using Chest X-Rays.png"
+      "category": "Data Engineering",
+      "image": "/Superstore Sales Analysis and Visualization.png"
     },
     {
       "id": "5",
-      "title": "Inference Optimizer",
-      "description": "CUDA kernel optimizations + quantization pipeline reducing LLM inference cost by 60% while maintaining 98% of output quality on standard benchmarks.",
-      "stack": [
-        "Python",
-        "CUDA",
-        "C++",
-        "TensorRT",
-        "ONNX"
+      "title": "Pneumonia Detection Using Chest X-Rays",
+      "tagline": "CNN Based Pneumonia Detection",
+      "description": "Developed a deep learning based medical imaging classifier using Convolutional Neural Networks (CNNs) to detect pneumonia from over 5,800 pediatric chest X-ray images. Implemented data augmentation, dropout regularization, and fine-tuning strategies to improve generalization. Achieved 79.17% test accuracy with precision-recall evaluation and 97%+ training accuracy.",
+      "architecture": [
+        "CNN Architecture",
+        "Data Preprocessing Pipeline",
+        "Augmentation Strategy",
+        "Evaluation Framework"
       ],
-      "github": "https://github.com/sri/inference-optimizer",
+      "impact": [
+        "Accuracy: 79.17% test accuracy",
+        "97%+ Training Accuracy",
+        "Reduced manual screening time"
+      ],
+      "stack": [
+        "PyTorch",
+        "CNN",
+        "Deep Learning",
+        "Python",
+        "Medical Imaging",
+        "Torchvision"
+      ],
+      "github": "https://github.com/sriramachellu/Pneumonia-Detection-Using-Chest-X-Rays",
       "demo": null,
-      "category": "ML Systems"
+      "category": "Machine Learning",
+      "image": "/Pneumonia Detection Using Chest X-Rays.png"
     },
     {
       "id": "6",
       "title": "Autonomous Data Labeler",
-      "description": "Active learning system that uses a weak LLM to propose labels, a human-in-the-loop UI for review, and a strong model to arbitrate \u2014 cut labeling cost by 80%.",
+      "tagline": "Active Learning Data Labeling System",
+      "description": "Active learning system that uses a weak LLM to propose labels, a human-in-the-loop UI for review, and a strong model to arbitrate — cut labeling cost by 80%.",
+      "architecture": [
+        "Proposal Engine (Weak LLM)",
+        "Human-in-the-Loop UI",
+        "Arbitration System (Strong LLM)",
+        "Feedback Integration Loop"
+      ],
+      "impact": [
+        "80% Reduction in Labeling Cost",
+        "Scalable Data Annotation",
+        "Hybrid Auto-Human Workflow"
+      ],
       "stack": [
+        "Anthropic",
         "Python",
+        "Active Learning",
         "FastAPI",
         "React",
-        "PostgreSQL",
-        "Anthropic"
+        "PostgreSQL"
       ],
       "github": "https://github.com/sri/data-labeler",
       "demo": null,
-      "category": "AI Tooling"
+      "category": "AI Systems",
+      "image": "/data_labeler_showcase.png"
     }
   ],
   "workExperience": [

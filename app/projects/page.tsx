@@ -81,13 +81,16 @@ export default function ProjectsPage() {
                             key={project.id}
                             index={index}
                             title={project.title}
+                            tagline={(project as any).tagline}
                             description={project.description}
                             category={project.category}
+                            architecture={(project as any).architecture}
+                            impact={(project as any).impact}
                             stack={project.stack}
                             github={project.github}
                             demo={project.demo}
                             image={project.image}
-                            variant="full"
+                            displayType="architectural"
                         />
                     ))}
                 </AnimatePresence>

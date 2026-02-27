@@ -16,22 +16,20 @@ export function CookingShowcaseCard({ recipe, index }: CookingShowcaseCardProps)
             style={{ width: '100%', breakInside: 'avoid', marginBottom: 24 }}
         >
             <motion.div
-                whileHover={{ y: -6, rotate: index % 2 === 0 ? -1 : 1 }}
+                whileHover={{ y: -4, borderColor: 'var(--tint-primary)' }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
                 className="glass-1 recipe-card"
                 style={{
-                    background: 'rgba(255,255,255,0.07)',
-                    backdropFilter: 'blur(24px) saturate(140%)',
-                    WebkitBackdropFilter: 'blur(24px) saturate(140%)',
-                    border: '1px solid rgba(255,255,255,0.14)',
-                    borderRadius: 18,
-                    padding: '14px 14px 24px 14px',
-                    boxShadow: '0 32px 80px rgba(0,0,0,0.55), 0 8px 24px rgba(0,0,0,0.35), 0 0 0 0.5px rgba(255,255,255,0.06) inset',
-                    cursor: 'default',
+                    borderRadius: 20,
                     overflow: 'hidden',
                     position: 'relative',
+                    cursor: 'default',
                     display: 'flex',
                     flexDirection: 'column',
+                    padding: 24,
+                    background: 'rgba(255,255,255,0.02)',
+                    border: '1px solid rgba(255,255,255,0.08)',
+                    boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
                 }}
             >
                 {/* Visual Asset Area */}

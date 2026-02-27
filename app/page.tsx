@@ -168,17 +168,17 @@ function HeroSection() {
           <motion.div
             initial={{ opacity: 0, y: 40, rotate: -6 }}
             animate={{ opacity: 1, y: 0, rotate: -4 }}
-            whileHover={{ scale: 1.04, rotate: -6 }}
+            whileHover={{ scale: 1.04, rotate: -6, borderColor: 'var(--tint-primary)' }}
             transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] as const }}
             style={{
               width: 'clamp(240px, 28vw, 380px)',
-              background: 'rgba(255,255,255,0.07)',
+              background: 'rgba(255,255,255,0.02)',
               backdropFilter: 'blur(24px) saturate(140%)',
               WebkitBackdropFilter: 'blur(24px) saturate(140%)',
-              border: '1px solid rgba(255,255,255,0.14)',
+              border: '1px solid rgba(255,255,255,0.08)',
               borderRadius: 18,
               padding: '14px 14px 56px 14px',
-              boxShadow: '0 32px 80px rgba(0,0,0,0.55), 0 8px 24px rgba(0,0,0,0.35), 0 0 0 0.5px rgba(255,255,255,0.06) inset',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.2), 0 0 0 0.5px rgba(255,255,255,0.06) inset',
               cursor: 'default',
             }}
           >
@@ -497,12 +497,17 @@ export default function HomePage() {
               <ProjectShowcaseCard
                 key={p.id}
                 title={p.title}
+                tagline={(p as any).tagline}
                 description={p.description}
                 category={p.category}
+                architecture={(p as any).architecture}
+                impact={(p as any).impact}
                 stack={p.stack}
                 github={p.github}
+                demo={p.demo}
                 image={(p as any).image}
                 index={i}
+                displayType="visual"
               />
             ))}
           </motion.div>

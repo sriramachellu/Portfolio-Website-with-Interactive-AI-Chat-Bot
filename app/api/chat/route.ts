@@ -67,7 +67,7 @@ export async function POST(req: NextRequest) {
         let queryEmbedding: number[] = [];
 
         try {
-            const embedModel = genAI.getGenerativeModel({ model: 'text-embedding-004' });
+            const embedModel = genAI.getGenerativeModel({ model: 'gemini-embedding-001' });
             const embedResult = await embedModel.embedContent(message);
             queryEmbedding = embedResult.embedding.values;
         } catch (err) {

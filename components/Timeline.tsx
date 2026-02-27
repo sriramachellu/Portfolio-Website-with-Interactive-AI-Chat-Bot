@@ -145,15 +145,15 @@ export function Timeline({ items, showBullets = true, showRedirection = false }:
                             ) : (
                                 // Image on Left
                                 <motion.div
-                                    whileHover={{ scale: 1.05, rotate: 0 }}
+                                    whileHover={{ scale: 1.05, rotate: 0, borderColor: 'var(--tint-primary)' }}
                                     style={{
                                         width: 220,
                                         height: 184,
-                                        background: 'rgba(255,255,255,0.03)',
+                                        background: 'rgba(255,255,255,0.02)',
                                         border: '1px solid rgba(255,255,255,0.08)',
                                         borderRadius: 12,
                                         padding: '8px 8px 12px 8px',
-                                        boxShadow: '0 12px 32px rgba(0,0,0,0.3)',
+                                        boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
                                         backdropFilter: 'blur(12px)',
                                         WebkitBackdropFilter: 'blur(12px)',
                                         position: 'relative',
@@ -255,15 +255,15 @@ export function Timeline({ items, showBullets = true, showRedirection = false }:
                             ) : (
                                 // Image on Right
                                 <motion.div
-                                    whileHover={{ scale: 1.05, rotate: 0 }}
+                                    whileHover={{ scale: 1.05, rotate: 0, borderColor: 'var(--tint-primary)' }}
                                     style={{
                                         width: 220,
                                         height: 184,
-                                        background: 'rgba(255,255,255,0.03)',
+                                        background: 'rgba(255,255,255,0.02)',
                                         border: '1px solid rgba(255,255,255,0.08)',
                                         borderRadius: 12,
                                         padding: '8px 8px 12px 8px',
-                                        boxShadow: '0 12px 32px rgba(0,0,0,0.3)',
+                                        boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
                                         backdropFilter: 'blur(12px)',
                                         WebkitBackdropFilter: 'blur(12px)',
                                         position: 'relative',

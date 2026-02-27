@@ -15,20 +15,23 @@ export function SkillGroupCard({ category, desc, items, variants }: SkillGroupCa
     return (
         <motion.div
             variants={variants}
-            whileHover={{ y: -6, scale: 1.01, zIndex: 100 }} // Higher z-index to stay on top
+            whileHover={{ y: -4, borderColor: 'var(--tint-primary)' }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
             className="glass-1 widget-card"
             style={{
-                padding: '40px 28px 24px 28px', // Increased top padding for tooltip headroom
-                borderRadius: 24,
+                borderRadius: 20,
+                overflow: 'visible',
+                position: 'relative',
+                cursor: 'default',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: 20,
+                padding: 24,
+                background: 'rgba(255,255,255,0.02)',
+                border: '1px solid rgba(255,255,255,0.08)',
+                boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
                 marginBottom: 24,
                 breakInside: 'avoid',
-                cursor: 'default',
-                position: 'relative',
-                overflow: 'visible',
+                gap: 20,
             }}
         >
             {/* Visuals Section (Top) */}
@@ -71,7 +74,7 @@ export function SkillGroupCard({ category, desc, items, variants }: SkillGroupCa
                 <h3
                     style={{
                         color: '#fff',
-                        fontSize: 16,
+                        fontSize: 18,
                         fontWeight: 600,
                         letterSpacing: '-0.01em',
                     }}
@@ -81,8 +84,8 @@ export function SkillGroupCard({ category, desc, items, variants }: SkillGroupCa
                 {desc && (
                     <p
                         style={{
-                            fontSize: 13,
-                            color: 'rgba(255,255,255,0.45)',
+                            fontSize: 14,
+                            color: 'rgba(255,255,255,0.65)',
                             lineHeight: 1.5,
                         }}
                     >
