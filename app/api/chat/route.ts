@@ -4,6 +4,23 @@ import fs from 'fs';
 import path from 'path';
 import { EmbeddedChunk, searchChunks } from '@/lib/rag';
 
+/* ─── Simple in-memory rate limiter (per IP, server-scoped) ──── */
+const rateMap = new Map<string, { count: number; reset: number }>();
+const RATE_LIMIT = 10;      // requests
+const RATE_WINDOW = 60_000; // per 60 seconds
+
+function isRateLimited(ip: string): boolean {
+    const now = Date.now();
+    const entry = rateMap.get(ip);
+    if (!entry || now > entry.reset) {
+        rateMap.set(ip, { count: 1, reset: now + RATE_WINDOW });
+        return false;
+    }
+    if (entry.count >= RATE_LIMIT) return true;
+    entry.count++;
+    return false;
+}
+
 // Load embeddings once
 let embeddingsCache: EmbeddedChunk[] | null = null;
 function getEmbeddings(): EmbeddedChunk[] {
@@ -49,10 +66,24 @@ async function callGemini(apiKey: string, prompt: string): Promise<string> {
 /* ─── Route handler ──────────────────────────────────────────── */
 export async function POST(req: NextRequest) {
     try {
+        // Rate limiting
+        const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
+        if (isRateLimited(ip)) {
+            return NextResponse.json(
+                { error: 'Too many requests. Please wait a moment.' },
+                { status: 429 },
+            );
+        }
+
         const { message } = await req.json();
 
         if (!message || typeof message !== 'string' || !message.trim()) {
             return NextResponse.json({ error: 'Invalid message.' }, { status: 400 });
+        }
+
+        // Message length cap — prevent massive prompt injections / API cost abuse
+        if (message.length > 1000) {
+            return NextResponse.json({ error: 'Message too long (max 1000 characters).' }, { status: 400 });
         }
 
         const apiKey = process.env.GEMINI_API_KEY;

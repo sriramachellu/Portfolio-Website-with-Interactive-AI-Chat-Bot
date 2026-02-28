@@ -36,6 +36,6 @@ export async function GET() {
         });
     } catch (error: any) {
         console.error('API Route Error:', error.message);
-        return NextResponse.json({ isPlaying: false, error: error.message }, { status: 500 });
+        return NextResponse.json({ isPlaying: false }, { status: 500 });
     }
 }
