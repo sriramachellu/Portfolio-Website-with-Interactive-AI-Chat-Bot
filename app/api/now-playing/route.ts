@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getNowPlaying } from '@/lib/spotify';
 
-export const runtime = 'edge';
-
 export async function GET() {
     try {
         const response = await getNowPlaying();
