@@ -241,7 +241,7 @@ function MobileHeroSection() {
                             href={href}
                             target={label !== 'Email' ? '_blank' : undefined}
                             rel={label !== 'Email' ? 'noopener noreferrer' : undefined}
-                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 1.12, borderColor: 'var(--tint-primary)', boxShadow: '0 0 14px var(--tint-glow)' }}
                             className="glass-3"
                             style={{
                                 display: 'flex',
@@ -250,9 +250,10 @@ function MobileHeroSection() {
                                 width: 40,
                                 height: 40,
                                 borderRadius: '50%',
-                                color: 'rgba(255,255,255,0.45)',
+                                color: 'rgba(255,255,255,0.55)',
                                 border: '1px solid rgba(255,255,255,0.08)',
                                 background: 'rgba(255,255,255,0.03)',
+                                transition: 'box-shadow 0.2s ease, border-color 0.2s ease',
                             }}
                         >
                             {icon}
