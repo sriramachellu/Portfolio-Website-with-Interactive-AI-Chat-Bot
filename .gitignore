@@ -49,3 +49,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# dev/debug scripts at root level (not part of the app)
+models.json
+list-models.js
+test-embed.js
