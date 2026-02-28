@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { SkillIcon } from './SkillIcon';
+import { useIsMobile } from '@/lib/useIsMobile';
 
 export interface SkillGroupCardProps {
     category: string;
@@ -11,11 +12,14 @@ export interface SkillGroupCardProps {
 export function SkillGroupCard({ category, desc, items, variants }: SkillGroupCardProps) {
     const iconItems = items.filter(item => item.slug);
     const pillItems = items.filter(item => !item.slug);
+    const isMobile = useIsMobile();
+    const mobile = isMobile === true;
 
     return (
         <motion.div
             variants={variants}
-            whileHover={{ y: -4, borderColor: 'var(--tint-primary)' }}
+            whileHover={!mobile ? { y: -4, borderColor: 'var(--tint-primary)' } : undefined}
+            whileTap={mobile ? { y: -4, borderColor: 'var(--tint-primary)' } : undefined}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
             className="glass-1 widget-card"
             style={{

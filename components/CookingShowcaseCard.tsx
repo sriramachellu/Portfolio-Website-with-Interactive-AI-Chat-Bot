@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useIsMobile } from '@/lib/useIsMobile';
 
 export interface CookingShowcaseCardProps {
     recipe: any;
@@ -7,6 +8,9 @@ export interface CookingShowcaseCardProps {
 }
 
 export function CookingShowcaseCard({ recipe, index }: CookingShowcaseCardProps) {
+    const isMobile = useIsMobile();
+    const mobile = isMobile === true;
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -16,7 +20,8 @@ export function CookingShowcaseCard({ recipe, index }: CookingShowcaseCardProps)
             style={{ width: '100%', breakInside: 'avoid', marginBottom: 24 }}
         >
             <motion.div
-                whileHover={{ y: -4, borderColor: 'var(--tint-primary)' }}
+                whileHover={!mobile ? { y: -4, borderColor: 'var(--tint-primary)' } : undefined}
+                whileTap={mobile ? { y: -4, borderColor: 'var(--tint-primary)' } : undefined}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
                 className="glass-1 recipe-card"
                 style={{

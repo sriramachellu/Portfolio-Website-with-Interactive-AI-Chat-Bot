@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useIsMobile } from '@/lib/useIsMobile';
 
 export interface SkillIconProps {
     name: string;
@@ -10,6 +11,8 @@ export interface SkillIconProps {
 export function SkillIcon({ name, iconSlug }: SkillIconProps) {
     const [isHovered, setIsHovered] = useState(false);
     const [imageError, setImageError] = useState(false);
+    const isMobile = useIsMobile();
+    const mobile = isMobile === true;
 
     // Fallback to simpler slugification if not explicitly provided
     const slug = iconSlug || name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
@@ -29,9 +32,13 @@ export function SkillIcon({ name, iconSlug }: SkillIconProps) {
                 cursor: 'default',
                 overflow: 'visible', // for tooltip
             }}
-            onHoverStart={() => setIsHovered(true)}
-            onHoverEnd={() => setIsHovered(false)}
-            whileHover={{ scale: 1.05, translateY: -4 }}
+            onHoverStart={() => !mobile && setIsHovered(true)}
+            onHoverEnd={() => !mobile && setIsHovered(false)}
+            onTapStart={() => mobile && setIsHovered(true)}
+            onTapCancel={() => mobile && setIsHovered(false)}
+            onTap={() => mobile && setIsHovered(false)}
+            whileHover={!mobile ? { scale: 1.05, translateY: -4 } : undefined}
+            whileTap={mobile ? { scale: 1.05, translateY: -4 } : undefined}
             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
         >
             {/* Icon or Fallback */}

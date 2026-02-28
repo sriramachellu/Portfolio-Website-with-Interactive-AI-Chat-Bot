@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { SkillIcon } from './SkillIcon';
+import { useIsMobile } from '@/lib/useIsMobile';
 
 export interface CoreSkillWidgetProps {
     category: string;
@@ -7,6 +8,9 @@ export interface CoreSkillWidgetProps {
 }
 
 export function CoreSkillWidget({ category, items }: CoreSkillWidgetProps) {
+    const isMobile = useIsMobile();
+    const mobile = isMobile === true;
+
     return (
         <motion.div
             className="glass-2 widget-card"
@@ -19,7 +23,8 @@ export function CoreSkillWidget({ category, items }: CoreSkillWidgetProps) {
                 minWidth: 300,
                 flex: '1 1 auto',
             }}
-            whileHover={{ y: -4 }}
+            whileHover={!mobile ? { y: -4 } : undefined}
+            whileTap={mobile ? { y: -4 } : undefined}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
         >
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>

@@ -5,6 +5,8 @@ import {
     motion, useAnimation, AnimatePresence,
     useScroll, useVelocity, useTransform, useSpring, useMotionValue,
 } from 'framer-motion';
+import { usePathname } from 'next/navigation';
+import { useIsMobile } from '@/lib/useIsMobile';
 
 /* ─── Types ──────────────────────────────────────────────────── */
 type BotState = 'landing' | 'arrival' | 'cursor-follow' | 'idle' | 'dock' | 'typing' | 'inactive';
@@ -25,7 +27,7 @@ function botReducer(state: BotState, action: BotAction): BotState {
         case 'FOCUS': return 'dock';
         case 'TYPE': return 'typing';
         case 'SEND': return 'dock';
-        case 'CLOSE': return 'cursor-follow';
+        case 'CLOSE': return 'idle';
         case 'INACTIVE': return 'inactive';
         default: return state;
     }
@@ -145,6 +147,7 @@ function GlassRobot({ state }: { state: BotState }) {
 
 /* ─── Main Component ─────────────────────────────────────────── */
 export function PortfolioAssistant() {
+    const pathname = usePathname();
     const [botState, dispatch] = useReducer(botReducer, 'landing');
     const [messages, setMessages] = useState<Message[]>([]);
     const [input, setInput] = useState('');
@@ -164,6 +167,15 @@ export function PortfolioAssistant() {
     const chatRef = useRef<HTMLDivElement>(null);
     const robotRef = useRef<HTMLDivElement>(null);
     const mouseRef = useRef({ x: 0, y: 0 });
+    const isGameHoveredRef = useRef(false);
+
+    useEffect(() => {
+        const handleGameHover = (e: any) => {
+            isGameHoveredRef.current = e.detail;
+        };
+        window.addEventListener('game-hover', handleGameHover);
+        return () => window.removeEventListener('game-hover', handleGameHover);
+    }, []);
 
     const cursorX = useMotionValue(0);
     const cursorY = useMotionValue(0);
@@ -171,19 +183,34 @@ export function PortfolioAssistant() {
     const springY = useSpring(cursorY, { stiffness: 250, damping: 25 });
 
     const isActive = botState === 'dock' || botState === 'typing';
+    const isMobile = useIsMobile();
+    const mobile = isMobile === true;
+    const hideBotOnMobile = mobile && pathname === '/';
 
     useEffect(() => {
         // Safe check for window for initial value
         if (typeof window !== 'undefined' && mouseRef.current.x === 0) {
             mouseRef.current = { x: window.innerWidth * 0.47, y: window.innerHeight - 188 };
         }
-        const handleMouseMove = (e: MouseEvent) => {
+        const handleMouseMove = (e: MouseEvent | TouchEvent) => {
+            if (isGameHoveredRef.current) return;
+
             if (!hasCursor) {
                 setHasCursor(true);
                 setShowHi(false);
                 setIsLanding(false);
             }
-            mouseRef.current = { x: e.clientX, y: e.clientY };
+
+            let clientX, clientY;
+            if ('touches' in e) {
+                clientX = e.touches[0].clientX;
+                clientY = e.touches[0].clientY;
+            } else {
+                clientX = e.clientX;
+                clientY = e.clientY;
+            }
+
+            mouseRef.current = { x: clientX, y: clientY };
             dispatch('MOVE');
 
             // Reset stop timers
@@ -196,14 +223,18 @@ export function PortfolioAssistant() {
 
             if (botState === 'cursor-follow' || botState === 'inactive' || botState === 'arrival' || botState === 'idle') {
                 const anchorX = window.innerWidth / 2;
-                const anchorY = window.innerHeight - 108 - 22;
+                const anchorY = window.innerHeight - (mobile ? 144 : 108) - 22;
 
-                cursorX.set(e.clientX - anchorX);
-                cursorY.set(e.clientY - anchorY);
+                cursorX.set(clientX - anchorX);
+                cursorY.set(clientY - anchorY);
             }
         };
         window.addEventListener('mousemove', handleMouseMove);
-        return () => window.removeEventListener('mousemove', handleMouseMove);
+        // window.addEventListener('touchstart', handleMouseMove);
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            // window.removeEventListener('touchstart', handleMouseMove);
+        }
     }, [botState, hasCursor, cursorX, cursorY]);
 
     useEffect(() => {
@@ -212,11 +243,11 @@ export function PortfolioAssistant() {
             cursorY.set(0);
         } else if (hasCursor) {
             const anchorX = typeof window !== 'undefined' ? window.innerWidth / 2 : 0;
-            const anchorY = typeof window !== 'undefined' ? window.innerHeight - 108 - 22 : 0;
+            const anchorY = typeof window !== 'undefined' ? window.innerHeight - (mobile ? 144 : 108) - 22 : 0;
             cursorX.set(mouseRef.current.x - anchorX);
             cursorY.set(mouseRef.current.y - anchorY);
         }
-    }, [botState, hasCursor, cursorX, cursorY]);
+    }, [botState, hasCursor, cursorX, cursorY, mobile]);
 
     /* ── Opacity ─────────────────────────────── */
     const containerOpacity = 1;
@@ -253,8 +284,8 @@ export function PortfolioAssistant() {
                 if (!hasCursor) {
                     // Peek position: static above hero polaroid
                     robotControls.start({
-                        x: 'calc(28vw)',
-                        y: 'calc(-50vh - 160px)',
+                        x: mobile ? 0 : 'calc(28vw)',
+                        y: mobile ? 'calc(-100dvh + 300px)' : 'calc(-50vh - 160px)',
                         scale: 0.7,
                         opacity: isLanding ? 0.85 : 0,
                         transition: { duration: 1.0, ease: [0.22, 1, 0.36, 1] as const },
@@ -283,13 +314,17 @@ export function PortfolioAssistant() {
                 break;
             case 'dock':
                 robotControls.start({
-                    x: DOCK_X, y: DOCK_Y, scale: 1.05, opacity: 1,
+                    x: mobile ? -154 : DOCK_X,
+                    y: DOCK_Y,
+                    scale: 1.05, opacity: 1,
                     transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const },
                 });
                 break;
             case 'typing':
                 robotControls.start({
-                    x: DOCK_X, y: DOCK_Y, scale: 1.05, opacity: 1,
+                    x: mobile ? -154 : DOCK_X,
+                    y: DOCK_Y,
+                    scale: 1.05, opacity: 1,
                     transition: { duration: 0.3 },
                 });
                 break;
@@ -309,7 +344,7 @@ export function PortfolioAssistant() {
                 break;
             }
         }
-    }, [botState, robotControls, hasCursor, isLanding]);
+    }, [botState, robotControls, hasCursor, isLanding, mobile, messages.length]);
 
     /* ── Inactivity timer ──────────────────────────────────────── */
     const resetInactivity = useCallback(() => {
@@ -417,73 +452,75 @@ export function PortfolioAssistant() {
     /* ─────────────────────────────────────────────────────────── */
     return (
         <>
-            {/* ── Robot — separate fixed element ───────────────────── */}
-            <motion.div
-                ref={robotRef}
-                animate={robotControls}
-                initial={{ x: 'calc(28vw)', y: 'calc(-50vh - 160px)', opacity: 0, scale: 0.7 }}
-                style={{
-                    position: 'fixed',
-                    bottom: 108,
-                    left: '50%',
-                    marginLeft: -22,
-                    zIndex: hasCursor ? 51 : 1, // behind polaroid when no cursor
-                    cursor: (botState === 'idle' || botState === 'arrival' || botState === 'cursor-follow' || botState === 'inactive') ? 'pointer' : 'default',
-                }}
-                onClick={() => {
-                    if (botState === 'idle' || botState === 'arrival' || botState === 'cursor-follow' || botState === 'inactive') handleFocus();
-                }}
-            >
-                <motion.div style={{ x: springX, y: springY, position: 'relative' }}>
-                    <AnimatePresence>
-                        {showHi && (
-                            <motion.div
-                                initial={{ opacity: 0, y: 10, scale: 0.8 }}
-                                animate={{ opacity: 1, y: 0, scale: 1 }}
-                                exit={{ opacity: 0, y: 5, scale: 0.8 }}
-                                style={{
-                                    position: 'absolute',
-                                    top: -36,
-                                    left: '50%',
-                                    transform: 'translateX(-50%)',
-                                    background: 'rgba(255,255,255,0.15)',
-                                    backdropFilter: 'blur(8px)',
-                                    padding: '4px 10px',
-                                    borderRadius: '10px 10px 10px 2px',
-                                    border: '1px solid rgba(255,255,255,0.2)',
-                                    color: '#fff',
-                                    fontSize: 16,
-                                    fontWeight: 600,
-                                    whiteSpace: 'nowrap',
-                                    pointerEvents: 'none'
-                                }}
-                            >
-                                Hi!
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-                    <GlassRobot state={botState} />
-                    {/* Glow ring */}
-                    <motion.div
-                        animate={{ opacity: glowOpacity }}
-                        transition={{ duration: 0.6 }}
-                        style={{
-                            position: 'absolute', bottom: -8, left: '50%', marginLeft: -20,
-                            width: 40, height: 12, background: 'var(--tint-primary)',
-                            borderRadius: '50%', filter: 'blur(10px)', pointerEvents: 'none',
-                            transition: 'background 600ms cubic-bezier(0.25,0.46,0.45,0.94)',
-                        }}
-                    />
+            {/* ── Robot — mobile fixed or tracking ── */}
+            {!hideBotOnMobile && (
+                <motion.div
+                    ref={robotRef}
+                    animate={robotControls}
+                    initial={{ x: mobile ? 0 : 'calc(28vw)', y: mobile ? 'calc(-100dvh + 280px)' : 'calc(-50vh - 160px)', opacity: 0, scale: 0.7 }}
+                    style={{
+                        position: 'fixed',
+                        bottom: mobile ? 144 : 108,
+                        left: '50%',
+                        marginLeft: -22,
+                        zIndex: (!mobile && !hasCursor) ? 1 : 51,
+                        cursor: (botState === 'idle' || botState === 'arrival' || botState === 'cursor-follow' || botState === 'inactive') ? 'pointer' : 'default',
+                    }}
+                    onClick={(e) => {
+                        if (botState === 'idle' || botState === 'arrival' || botState === 'cursor-follow' || botState === 'inactive') handleFocus();
+                        e.stopPropagation();
+                    }}
+                >
+                    <motion.div style={{ x: springX, y: springY, position: 'relative' }}>
+                        <AnimatePresence>
+                            {showHi && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 10, scale: 0.8 }}
+                                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                                    exit={{ opacity: 0, y: 5, scale: 0.8 }}
+                                    style={{
+                                        position: 'absolute',
+                                        top: -36,
+                                        left: '50%',
+                                        transform: 'translateX(-50%)',
+                                        background: 'rgba(255,255,255,0.15)',
+                                        backdropFilter: 'blur(8px)',
+                                        padding: '4px 10px',
+                                        borderRadius: '10px 10px 10px 2px',
+                                        border: '1px solid rgba(255,255,255,0.2)',
+                                        color: '#fff',
+                                        fontSize: 16,
+                                        fontWeight: 600,
+                                        whiteSpace: 'nowrap',
+                                        pointerEvents: 'none'
+                                    }}
+                                >
+                                    Hi!
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                        <GlassRobot state={botState} />
+                        {/* Glow ring */}
+                        <motion.div
+                            animate={{ opacity: glowOpacity }}
+                            transition={{ duration: 0.6 }}
+                            style={{
+                                position: 'absolute', bottom: -8, left: '50%', marginLeft: -20,
+                                width: 40, height: 12, background: 'var(--tint-primary)',
+                                borderRadius: '50%', filter: 'blur(10px)', pointerEvents: 'none',
+                                transition: 'background 600ms cubic-bezier(0.25,0.46,0.45,0.94)',
+                            }}
+                        />
+                    </motion.div>
                 </motion.div>
-            </motion.div>
-
+            )}
             {/* ── Chat UI — full-width anchor, flex-center children ── */}
             {barVisible && (
                 <motion.div
                     ref={chatRef}
                     style={{
                         position: 'fixed',
-                        bottom: 100,
+                        bottom: mobile ? 92 : 100, // Increased gap from dock
                         left: 0, right: 0,
                         display: 'flex',
                         flexDirection: 'column',
@@ -504,8 +541,8 @@ export function PortfolioAssistant() {
                                 exit={{ opacity: 0, y: 10, scale: 0.97 }}
                                 transition={{ duration: 0.25 }}
                                 style={{
-                                    width: 'min(340px, 72vw)',
-                                    maxHeight: 280,
+                                    width: mobile ? 280 : 'min(340px, 62vw)',
+                                    maxHeight: mobile ? 240 : 280,
                                     overflowY: 'auto',
                                     padding: '14px 14px 10px',
                                     display: 'flex',
@@ -578,7 +615,7 @@ export function PortfolioAssistant() {
                                 style={{
                                     display: 'flex',
                                     justifyContent: 'flex-end',
-                                    width: 'min(340px, 72vw)',
+                                    width: mobile ? 280 : 'min(340px, 72vw)',
                                     pointerEvents: 'auto',
                                 }}
                             >
@@ -603,7 +640,7 @@ export function PortfolioAssistant() {
                     {/* Input pill */}
                     <motion.div
                         style={{
-                            width: 'min(340px, 72vw)',
+                            width: mobile ? 280 : 'min(340px, 72vw)',
                             borderRadius: 100,
                             display: 'flex', alignItems: 'center',
                             padding: '11px 16px', gap: 8,
@@ -636,7 +673,7 @@ export function PortfolioAssistant() {
                             aria-label="Portfolio chat input"
                             style={{
                                 flex: 1, background: 'none', border: 'none', outline: 'none',
-                                color: 'rgba(255,255,255,0.85)', fontSize: 13,
+                                color: 'rgba(255,255,255,0.85)', fontSize: mobile ? 16 : 13,
                                 fontFamily: 'inherit', minWidth: 0,
                             }}
                         />

@@ -2,6 +2,7 @@
 
 import { useTint, Tint } from '@/lib/TintContext';
 import { motion } from 'framer-motion';
+import { useIsMobile } from '@/lib/useIsMobile';
 
 const TINTS: { id: Tint; color: string; label: string }[] = [
     { id: 'deep-blue', color: '#2563EB', label: 'Deep Blue' },
@@ -15,18 +16,21 @@ const TINTS: { id: Tint; color: string; label: string }[] = [
 
 export default function TintSwitcher() {
     const { activeTint, setTint } = useTint();
+    const isMobile = useIsMobile();
+    const mobile = isMobile === true;
 
     return (
         <motion.div
             style={{
                 position: 'fixed',
-                top: 20,
-                right: 24,
+                top: mobile ? 12 : 20,
+                right: mobile ? 12 : 24,
                 zIndex: 100,
                 display: 'flex',
+                flexDirection: 'row',
                 alignItems: 'center',
-                gap: 8,
-                padding: '10px 16px',
+                gap: mobile ? 6 : 8,
+                padding: mobile ? '6px 10px' : '10px 16px',
                 borderRadius: 100,
                 background: 'rgba(255, 255, 255, 0.15)',
                 backdropFilter: 'blur(16px) saturate(180%)',
@@ -41,7 +45,7 @@ export default function TintSwitcher() {
             {TINTS.map((t) => {
                 const isActive = activeTint === t.id;
                 return (
-                    <button
+                    <motion.button
                         key={t.id}
                         aria-label={`Set tint: ${t.label}`}
                         className="tint-pill"
@@ -50,9 +54,12 @@ export default function TintSwitcher() {
                             position: 'relative',
                             display: 'flex',
                             alignItems: 'center',
-                            justifyContent: 'center'
+                            justifyContent: 'center',
+                            width: mobile ? 14 : 22,
+                            height: mobile ? 14 : 22,
                         }}
                         onClick={() => setTint(t.id)}
+                        whileTap={{ scale: 0.85 }}
                     >
                         {isActive && (
                             <motion.div
@@ -72,9 +79,10 @@ export default function TintSwitcher() {
                                 }}
                             />
                         )}
-                    </button>
+                    </motion.button>
                 );
             })}
         </motion.div>
     );
 }
+

@@ -38,6 +38,7 @@ const customSlugMap: Record<string, string> = {
     'Perplexity Pro': 'perplexity-color',
     'VS Code': 'Visual Studio Code (VS Code)',
     'Vercel': 'Vercel',
+    'Google Colab': 'colab-color',
 
     'Python': 'Python',
     'C': 'C',
@@ -49,14 +50,14 @@ const customSlugMap: Record<string, string> = {
     'PostgreSQL': 'PostgresSQL',
     'Supabase': 'supabase-logo-icon',
     'BigQuery': 'Google Cloud',
-    'AWS RDS': 'aws-color',
+    'AWS': 'aws-color',
+    'Codex by OpenAI': 'codex by OpenAI',
 
     'React': 'React',
     'FastAPI': 'FastAPI',
     'Tailwind CSS': 'Tailwind CSS',
     'Next.js': 'nextjs',
 
-    'AWS': 'aws-color',
     'Google Cloud Platform (GCS, BigQuery, Dataflow)': 'Google Cloud',
     'Docker': 'Docker',
     'GitHub Actions': 'github',
@@ -84,7 +85,7 @@ const validIcons = new Set([
     'githubcopilot', 'googlecloud-color', 'huggingface-color', 'langchain',
     'llamaindex-color', 'microsoft copilot-color', 'microsoft-excel', 'ollama', 'openai',
     'openclaw-color', 'perplexity-color (1)', 'perplexity-color', 'pytest', 'scikit-learn',
-    'supabase-logo-icon', 'tableau', 'vllm-color', 'nextjs', 'convex'
+    'supabase-logo-icon', 'tableau', 'vllm-color', 'nextjs', 'convex', 'codex by OpenAI'
 ]);
 
 const categoryDescriptions: Record<string, string> = {

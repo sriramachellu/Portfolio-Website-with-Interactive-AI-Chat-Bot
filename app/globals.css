@@ -224,9 +224,11 @@ body,
   transition: transform 400ms var(--spring), box-shadow 400ms ease;
 }
 
-.card-hover:hover {
-  transform: scale(1.03) translateY(-8px);
-  box-shadow: var(--glass-shadow), 0 32px 80px var(--tint-shadow);
+@media (hover: hover) {
+  .card-hover:hover {
+    transform: scale(1.03) translateY(-8px);
+    box-shadow: var(--glass-shadow), 0 32px 80px var(--tint-shadow);
+  }
 }
 
 /* ─── Tint Pill (TintSwitcher) ─────────────────────────────── */
@@ -239,8 +241,10 @@ body,
   transition: transform 200ms ease, border-color 200ms ease;
 }
 
-.tint-pill:hover {
-  transform: scale(1.2);
+@media (hover: hover) {
+  .tint-pill:hover {
+    transform: scale(1.2);
+  }
 }
 
 /* Selection handled by layout animation in React */

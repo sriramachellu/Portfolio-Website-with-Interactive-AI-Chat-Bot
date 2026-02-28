@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useIsMobile } from '@/lib/useIsMobile';
 
 const MY_TZ = 'America/Los_Angeles';
 const MY_LABEL = ' PST';
@@ -20,7 +21,7 @@ function getTimeParts(date: Date, tz: string) {
 
 /* ---------- TIME WIDGET ---------- */
 
-function TimeWidget() {
+function TimeWidget({ compact }: { compact?: boolean }) {
     const [now, setNow] = useState<Date | null>(null);
 
     useEffect(() => {
@@ -40,24 +41,24 @@ function TimeWidget() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="glass-2"
             style={{
-                padding: '6px 10px',
-                borderRadius: 12,
-                minWidth: 100,
+                padding: compact ? '4px 8px' : '6px 10px',
+                borderRadius: compact ? 10 : 12,
+                minWidth: compact ? 70 : 100,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                gap: 14,
+                gap: compact ? 8 : 14,
             }}
         >
             <div>
                 <p
                     style={{
-                        fontSize: 9,
+                        fontSize: compact ? 7 : 9,
                         fontWeight: 600,
                         letterSpacing: '0.1em',
                         textTransform: 'uppercase',
                         color: 'var(--tint-primary)',
-                        marginBottom: 3,
+                        marginBottom: compact ? 2 : 3,
                     }}
                 >
                     <span style={{ color: '#fff', opacity: 0.85 }}>
@@ -68,7 +69,7 @@ function TimeWidget() {
 
                 <p
                     style={{
-                        fontSize: 16,
+                        fontSize: compact ? 12 : 16,
                         fontWeight: 500,
                         color: '#fff',
                         fontVariantNumeric: 'tabular-nums',
@@ -81,8 +82,8 @@ function TimeWidget() {
 
             <span
                 style={{
-                    width: 7,
-                    height: 7,
+                    width: compact ? 5 : 7,
+                    height: compact ? 5 : 7,
                     borderRadius: '50%',
                     background: '#22c55e',
                     boxShadow: '0 0 8px #22c55e88',
@@ -94,7 +95,7 @@ function TimeWidget() {
 
 /* ---------- AQI WIDGET ---------- */
 
-function AQIWidget() {
+function AQIWidget({ compact }: { compact?: boolean }) {
     const [aqi, setAqi] = useState<number | null>(null);
 
     useEffect(() => {
@@ -121,9 +122,9 @@ function AQIWidget() {
             transition={{ duration: 0.6, delay: 0.5 }}
             className="glass-2"
             style={{
-                padding: '6px 10px',
-                borderRadius: 12,
-                minWidth: 100,
+                padding: compact ? '4px 8px' : '6px 10px',
+                borderRadius: compact ? 10 : 12,
+                minWidth: compact ? 70 : 100,
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
@@ -131,15 +132,15 @@ function AQIWidget() {
         >
             <p
                 style={{
-                    fontSize: 8,
+                    fontSize: compact ? 6 : 8,
                     fontWeight: 600,
                     letterSpacing: '0.1em',
                     textTransform: 'uppercase',
-                    marginBottom: 3,
+                    marginBottom: compact ? 2 : 3,
                 }}
             >
                 <span style={{ color: '#fff', opacity: 0.85 }}>
-                    Current Location:
+                    {compact ? 'Location: ' : 'Current Location:'}
                 </span>
                 <span
                     style={{
@@ -148,13 +149,13 @@ function AQIWidget() {
                         transition: 'color 600ms cubic-bezier(0.25,0.46,0.45,0.94)',
                     }}
                 >
-                    Los Angeles, California
+                    {compact ? 'LA, CA' : 'Los Angeles, California'}
                 </span>
             </p>
 
             <p
                 style={{
-                    fontSize: 16,
+                    fontSize: compact ? 12 : 16,
                     fontWeight: 500,
                     color:
                         aqi !== null
@@ -178,19 +179,22 @@ function AQIWidget() {
 /* ---------- WRAPPER (Side by Side) ---------- */
 
 export function TopInfoBar() {
+    const isMobile = useIsMobile();
+    const mobile = isMobile === true;
+
     return (
         <div
             style={{
                 position: 'absolute',
-                top: 28,
-                left: 28,
+                top: mobile ? 14 : 28,
+                left: mobile ? 14 : 28,
                 display: 'flex',
-                gap: 16,
+                gap: mobile ? 6 : 16,
                 zIndex: 4,
             }}
         >
-            <TimeWidget />
-            <AQIWidget />
+            <TimeWidget compact={mobile} />
+            <AQIWidget compact={mobile} />
         </div>
     );
 }

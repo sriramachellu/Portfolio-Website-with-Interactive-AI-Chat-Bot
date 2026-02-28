@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useIsMobile } from '@/lib/useIsMobile';
 
 interface GlassPanelProps {
     level?: 1 | 2 | 3;
@@ -22,6 +23,8 @@ export default function GlassPanel({
     onClick,
 }: GlassPanelProps) {
     const levelClass = tinted ? 'glass-1-tinted' : `glass-${level}`;
+    const isMobile = useIsMobile();
+    const mobile = isMobile === true;
 
     return (
         <motion.div
@@ -29,7 +32,12 @@ export default function GlassPanel({
             style={style}
             onClick={onClick}
             whileHover={
-                onClick
+                onClick && !mobile
+                    ? { scale: 1.02, y: -4, transition: { duration: 0.25 } }
+                    : undefined
+            }
+            whileTap={
+                onClick && mobile
                     ? { scale: 1.02, y: -4, transition: { duration: 0.25 } }
                     : undefined
             }

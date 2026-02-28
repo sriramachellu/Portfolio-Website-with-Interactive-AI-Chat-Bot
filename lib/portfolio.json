@@ -98,7 +98,9 @@
         "ChatGPT",
         "Perplexity Pro",
         "VS Code",
-        "Antigravity"
+        "Antigravity",
+        "Codex by OpenAI",
+        "Google Colab"
       ]
     },
     {
@@ -162,8 +164,8 @@
     {
       "id": "1",
       "title": "OpenNoteLM (Inspired by Google NotebookLM)",
-      "tagline": "AI-Driven Document Intelligence Workspace",
-      "description": "AI document intelligence workspace inspired by Google NotebookLM. Engineered a full Retrieval-Augmented Generation (RAG) system using Gemini 2.5 Flash and Vertex AI embeddings to enable low-latency streaming chat over user-uploaded PDFs. Built real-time reactive architecture with Convex, integrated native vector search over 768-D embeddings, and implemented strict grounding mechanisms to eliminate hallucinations. Designed modular knowledge transformation tools (Quiz, Flashcards, Mind Maps) and optimized end-to-end inference latency (~120–250ms TTFT) with retrieval under ~50ms. Serverless architecture ensures cost-efficient scaling with zero idle infrastructure overhead.",
+      "tagline": "AI Driven Document Intelligence Workspace",
+      "description": "OpenNoteLM was built to explore how a lightweight, cost efficient alternative to large document intelligence platforms could be implemented using modern LLM infrastructure. The project focuses on designing a low latency Retrieval Augmented Generation (RAG) system that delivers grounded responses over uploaded PDF collections. It integrates Gemini 2.5 Flash with Vertex AI embeddings, leveraging 768 dimensional vector search for semantic retrieval. The architecture emphasizes retrieval optimization (sub 50ms search latency), structured context chunking to reduce hallucination risk, and fast Time to First Token performance (~120–250ms). Deployed using Vercel for frontend delivery, Convex for backend and database orchestration, and protected via Cloudflare at the edge, the system operates on serverless infrastructure with zero idle compute overhead. From a business perspective, the project demonstrates the ability to design and deploy scalable, cost aware AI systems that balance performance, grounding, and infrastructure efficiency.",
       "architecture": [
         "Full RAG Pipeline",
         "Reactive Data Layer",
@@ -195,7 +197,7 @@
       "id": "2",
       "title": "Portfolio Website with Interactive AI Chat Bot",
       "tagline": "Apple Liquid Glass Inspired UI/UX",
-      "description": "Production ready AI native personal portfolio website integrating Google Gemini APIs with a lightweight Retrieval-Augmented Generation (RAG) system. Features dynamic JSON based context chunking, custom keyword scoring retrieval, model fallback handling, exponential backoff for rate limits, and strict prompt guardrails. Deployed on Vercel with serverless API routes and environment secured LLM integration.",
+      "description": "The portfolio website was designed as an AI native workspace rather than a static personal showcase, with the intention of demonstrating real world LLM integration in a production style web application. It incorporates a custom RAG layer to dynamically surface structured project context using JSON based chunking and controlled prompt pipelines. The system implements model fallback strategies and exponential backoff handling to maintain resilience under API rate limits. Deployed entirely on Vercel, the application reflects a serverless first approach emphasizing secure API management, prompt guardrails, and optimized inference flow. From a business standpoint, it showcases the practical ability to embed LLM powered features into modern web products while maintaining availability, cost control, and performance awareness.",
       "architecture": [
         "JSON-Based Context Chunking",
         "Keyword Scoring Retrieval",
@@ -229,7 +231,7 @@
       "id": "3",
       "title": "Interpretation of Metagenomic Data using GenAI",
       "tagline": "Bridging Metagenomics and Clinical Action through LLMs",
-      "description": "End-to-end AI-driven clinical decision support system for interpreting metagenomic next-generation sequencing (mNGS) reports. The pipeline integrates microbial signal processing, weighted pathogen ranking, contaminant filtering, host immune response analysis, PubMed-backed Retrieval-Augmented Generation (RAG), and safety-constrained LLM reasoning to generate structured, literature-grounded infectious disease reports with hallucination controls.",
+      "description": "This project was motivated by the complexity of interpreting metagenomic next generation sequencing (mNGS) outputs, where microbial signal noise and fragmented literature references can make structured reasoning difficult. The system integrates contaminant filtering and pathogen ranking with a PubMed grounded RAG pipeline to support literature backed analysis. Using DeepSeek R1 for structured reasoning, the workflow transforms raw sequencing outputs into organized, evidence referenced draft reports. The focus of the project is on building interpretable AI pipelines that emphasize source grounding and safety constrained reasoning rather than autonomous diagnosis. From a business and research perspective, it demonstrates how GenAI can assist in organizing complex biomedical data into structured insights while preserving traceability and evidentiary support.",
       "architecture": [
         "Signal Processing Pipeline",
         "PubMed-Backed RAG",
@@ -265,7 +267,7 @@
       "id": "4",
       "title": "Superstore Sales Analysis and Visualization",
       "tagline": "Retail Analytics Dashboard & ETL Pipeline",
-      "description": "End-to-end sales analytics and ETL project processing 50,000+ retail transactions to uncover revenue trends, category performance drivers, customer retention patterns, and regional profitability insights. Built scalable data pipelines and interactive KPI dashboards to enable standardized performance tracking and data-driven campaign evaluation.",
+      "description": "The Superstore Sales project was developed to explore scalable data engineering and analytics workflows for large transactional datasets. Processing 50,000+ retail records using PySpark and MySQL, the system implements a structured ETL pipeline that automates cleaning, transformation, and KPI aggregation. The processed data is centralized in interactive Power BI dashboards highlighting regional performance, profitability trends, and customer retention metrics. The project emphasizes reproducible pipelines and automated reporting over manual spreadsheet analysis. From a business perspective, it demonstrates the ability to translate raw operational data into structured dashboards that enable performance monitoring and data driven decision making.",
       "architecture": [
         "ETL Data Pipeline",
         "Interactive KPI Dashboards",
@@ -295,7 +297,7 @@
       "id": "5",
       "title": "Pneumonia Detection Using Chest X-Rays",
       "tagline": "CNN Based Pneumonia Detection",
-      "description": "Developed a deep learning based medical imaging classifier using Convolutional Neural Networks (CNNs) to detect pneumonia from over 5,800 pediatric chest X-ray images. Implemented data augmentation, dropout regularization, and fine-tuning strategies to improve generalization. Achieved 79.17% test accuracy with precision-recall evaluation and 97%+ training accuracy.",
+      "description": "This project was undertaken to study the practical challenges of deep learning in medical imaging, particularly model generalization across real world data. A convolutional neural network was trained on 5,800+ pediatric chest X-ray images with data augmentation and dropout regularization techniques applied to mitigate overfitting. The model achieved 97%+ training accuracy and 79.17% test accuracy, highlighting the gap between training performance and generalization in clinical datasets. The primary objective was to understand model behavior in healthcare contexts and evaluate how AI assisted preliminary screening systems could support radiological workflows. From a broader impact perspective, the project demonstrates applied deep learning methodology with careful attention to evaluation rigor.",
       "architecture": [
         "CNN Architecture",
         "Data Preprocessing Pipeline",
@@ -324,7 +326,7 @@
       "id": "6",
       "title": "Autonomous Data Labeler",
       "tagline": "Active Learning Data Labeling System",
-      "description": "Active learning system that uses a weak LLM to propose labels, a human-in-the-loop UI for review, and a strong model to arbitrate — cut labeling cost by 80%.",
+      "description": "The Autonomous Data Labeler was designed to explore cost efficient annotation strategies for scaling machine learning systems. The architecture follows a weak to strong orchestration model in which a lightweight model proposes labels, human reviewers validate uncertain cases, and a supervisory model arbitrates edge scenarios. This layered workflow reduces dependency on fully manual annotation while preserving quality control mechanisms. Simulated cost comparisons suggest meaningful efficiency improvements compared to traditional labeling pipelines. From a business standpoint, the project demonstrates scalable annotation design, human in the loop integration, and structured supervision strategies aimed at balancing cost, speed, and precision in ML development.",
       "architecture": [
         "Proposal Engine (Weak LLM)",
         "Human-in-the-Loop UI",

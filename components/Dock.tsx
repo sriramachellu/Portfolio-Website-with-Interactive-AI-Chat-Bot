@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { Home, Cpu, FolderOpen, Briefcase, Camera, ChefHat, Gamepad2 } from 'lucide-react';
 import { motion, useScroll, useVelocity, useTransform, useSpring } from 'framer-motion';
 import { useLightbox } from '@/lib/LightboxContext';
+import { useIsMobile } from '@/lib/useIsMobile';
 
 const NAV_ITEMS = [
     { href: '/', icon: Home, label: 'Home' },
@@ -17,20 +18,28 @@ const NAV_ITEMS = [
     { href: '/game', icon: Gamepad2, label: 'Game' },
 ];
 
-const BASE = 40;
-const MAX = 64;
+/* Desktop sizes */
+const BASE_DESKTOP = 40;
+const MAX_DESKTOP = 64;
+/* Mobile sizes */
+const BASE_MOBILE = 32;
+const MAX_MOBILE = 44;
 const SPREAD = 120;
 
-function getMagnification(mouseX: number, itemX: number): number {
+function getMagnification(mouseX: number, itemX: number, base: number, max: number): number {
     const dist = Math.abs(mouseX - itemX);
-    if (dist > SPREAD) return BASE;
+    if (dist > SPREAD) return base;
     const factor = 1 - dist / SPREAD;
-    return BASE + (MAX - BASE) * factor * factor;
+    return base + (max - base) * factor * factor;
 }
 
 export default function Dock() {
     const pathname = usePathname();
     const { isLightboxOpen } = useLightbox();
+    const isMobile = useIsMobile();
+    const mobile = isMobile === true;
+    const BASE = mobile ? BASE_MOBILE : BASE_DESKTOP;
+    const MAX = mobile ? MAX_MOBILE : MAX_DESKTOP;
     const [mouseX, setMouseX] = useState<number | null>(null);
     const dockRef = useRef<HTMLDivElement>(null);
     const itemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
@@ -45,10 +54,10 @@ export default function Dock() {
             if (!el) return BASE;
             const rect = el.getBoundingClientRect();
             const cx = rect.left + rect.width / 2;
-            return getMagnification(mouseX, cx);
+            return getMagnification(mouseX, cx, BASE, MAX);
         });
         setSizes(newSizes);
-    }, [mouseX]);
+    }, [mouseX, BASE, MAX]);
 
     return (
         <motion.div
@@ -69,9 +78,9 @@ export default function Dock() {
                 style={{
                     display: 'flex',
                     alignItems: 'flex-end',
-                    gap: 10,
-                    padding: '10px 16px',
-                    borderRadius: 28,
+                    gap: mobile ? 6 : 10,
+                    padding: mobile ? '8px 10px' : '10px 16px',
+                    borderRadius: mobile ? 22 : 28,
                     background: 'rgba(255, 255, 255, 0.15)',
                     backdropFilter: 'blur(16px) saturate(180%)',
                     WebkitBackdropFilter: 'blur(16px) saturate(180%)',
@@ -79,6 +88,10 @@ export default function Dock() {
                 }}
                 onMouseMove={(e) => setMouseX(e.clientX)}
                 onMouseLeave={() => setMouseX(null)}
+                onTouchMove={(e) => setMouseX(e.touches[0].clientX)}
+                onTouchStart={(e) => setMouseX(e.touches[0].clientX)}
+                onTouchEnd={() => setMouseX(null)}
+                onTouchCancel={() => setMouseX(null)}
                 initial={{ y: 80, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}

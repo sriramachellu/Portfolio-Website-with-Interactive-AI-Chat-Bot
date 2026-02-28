@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
+import { useIsMobile } from '@/lib/useIsMobile';
 
 export interface TimelineItemData {
     role: string;
@@ -25,6 +26,8 @@ export interface TimelineProps {
 
 export function Timeline({ items, showBullets = true, showRedirection = false }: TimelineProps) {
     const [cacheBuster, setCacheBuster] = useState('');
+    const isMobile = useIsMobile();
+    const mobile = isMobile === true;
 
     useEffect(() => {
         setCacheBuster(Date.now().toString());
@@ -145,7 +148,8 @@ export function Timeline({ items, showBullets = true, showRedirection = false }:
                             ) : (
                                 // Image on Left
                                 <motion.div
-                                    whileHover={{ scale: 1.05, rotate: 0, borderColor: 'var(--tint-primary)' }}
+                                    whileHover={!mobile ? { scale: 1.05, rotate: 0, borderColor: 'var(--tint-primary)' } : undefined}
+                                    whileTap={mobile ? { scale: 1.05, rotate: 0, borderColor: 'var(--tint-primary)' } : undefined}
                                     style={{
                                         width: 220,
                                         height: 184,
@@ -255,7 +259,8 @@ export function Timeline({ items, showBullets = true, showRedirection = false }:
                             ) : (
                                 // Image on Right
                                 <motion.div
-                                    whileHover={{ scale: 1.05, rotate: 0, borderColor: 'var(--tint-primary)' }}
+                                    whileHover={!mobile ? { scale: 1.05, rotate: 0, borderColor: 'var(--tint-primary)' } : undefined}
+                                    whileTap={mobile ? { scale: 1.05, rotate: 0, borderColor: 'var(--tint-primary)' } : undefined}
                                     style={{
                                         width: 220,
                                         height: 184,

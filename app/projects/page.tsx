@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import portfolioData from '@/lib/portfolio.json';
 import { ProjectShowcaseCard } from '@/components/ProjectShowcaseCard';
+import { useIsMobile } from '@/lib/useIsMobile';
 
 const { projects } = portfolioData;
 const ALL_CATEGORIES = ['All', ...Array.from(new Set(projects.map((p) => p.category)))];
@@ -11,6 +12,8 @@ const ALL_CATEGORIES = ['All', ...Array.from(new Set(projects.map((p) => p.categ
 export default function ProjectsPage() {
     const [active, setActive] = useState('All');
     const filtered = active === 'All' ? projects : projects.filter((p) => p.category === active);
+    const isMobile = useIsMobile();
+    const mobile = isMobile === true;
 
     return (
         <div style={{ minHeight: '100vh', padding: '120px 24px 160px', maxWidth: 1280, margin: '0 auto' }}>
@@ -71,8 +74,9 @@ export default function ProjectsPage() {
                 layout
                 style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))',
-                    gap: 32,
+                    gridTemplateColumns: mobile ? '1fr' : 'repeat(auto-fill, minmax(380px, 1fr))',
+                    gap: mobile ? 24 : 32,
+                    width: '100%',
                 }}
             >
                 <AnimatePresence mode="popLayout">
@@ -91,6 +95,7 @@ export default function ProjectsPage() {
                             demo={project.demo}
                             image={project.image}
                             displayType="architectural"
+                            mobileHeight={580}
                         />
                     ))}
                 </AnimatePresence>

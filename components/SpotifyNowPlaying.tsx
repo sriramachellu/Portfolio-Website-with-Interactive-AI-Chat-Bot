@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { useIsMobile } from '@/lib/useIsMobile';
 
 interface NowPlayingTrack {
     album?: string;
@@ -15,6 +16,8 @@ interface NowPlayingTrack {
 export default function SpotifyNowPlaying() {
     const [track, setTrack] = useState<NowPlayingTrack | null>(null);
     const [isLoading, setIsLoading] = useState(true);
+    const isMobile = useIsMobile();
+    const mobile = isMobile === true;
 
     const fetchTrack = async () => {
         try {
@@ -45,15 +48,15 @@ export default function SpotifyNowPlaying() {
             className="glass-2"
             style={{
                 position: 'absolute',
-                top: 72,
-                right: 24,
+                top: mobile ? 56 : 72,
+                ...(mobile ? { left: 14 } : { right: 24 }),
                 zIndex: 10,
                 display: 'flex',
                 alignItems: 'center',
-                gap: 12,
-                padding: '8px 14px',
+                gap: mobile ? 8 : 12,
+                padding: mobile ? '5px 10px' : '8px 14px',
                 borderRadius: 100,
-                maxWidth: 280,
+                maxWidth: mobile ? 180 : 280,
                 border: '1px solid rgba(255,255,255,0.08)',
                 cursor: 'pointer'
             }}

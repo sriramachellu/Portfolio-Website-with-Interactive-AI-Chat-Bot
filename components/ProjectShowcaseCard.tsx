@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Github, ExternalLink, ArrowRight, Layers, Cpu, BarChart3, RotateCw, BookOpen } from 'lucide-react';
+import { useIsMobile } from '@/lib/useIsMobile';
 
 export interface ProjectShowcaseCardProps {
     title: string;
@@ -16,6 +17,7 @@ export interface ProjectShowcaseCardProps {
     index: number;
     variant?: 'compact' | 'full';
     displayType?: 'architectural' | 'visual';
+    mobileHeight?: number;
 }
 
 export function ProjectShowcaseCard({
@@ -31,7 +33,8 @@ export function ProjectShowcaseCard({
     image,
     index,
     variant = 'compact',
-    displayType = 'architectural'
+    displayType = 'architectural',
+    mobileHeight
 }: ProjectShowcaseCardProps) {
     const [isFlipped, setIsFlipped] = useState(false);
     const isFull = variant === 'full';
@@ -42,6 +45,9 @@ export function ProjectShowcaseCard({
     // Dynamic count for tech stack display
     const stackDisplayCount = isVisual ? 4 : 6;
     const displayStack = stack.slice(0, stackDisplayCount);
+
+    const isMobile = useIsMobile();
+    const mobile = isMobile === true;
 
     const handleFlip = (e: React.MouseEvent) => {
         // Prevent flip if clicking a link or button
@@ -58,7 +64,7 @@ export function ProjectShowcaseCard({
             style={{
                 perspective: 1200,
                 width: '100%',
-                height: isVisual ? 540 : 540,
+                height: mobile ? (mobileHeight || 480) : 540,
             }}
         >
             <motion.div
@@ -81,7 +87,8 @@ export function ProjectShowcaseCard({
                 {/* FRONT SIDE */}
                 <motion.div
                     className={!isVisual ? (index === 0 ? "glass-3" : "glass-1") : ""}
-                    whileHover={!isVisual ? { borderColor: 'var(--tint-primary)' } : {}}
+                    whileHover={!mobile && !isVisual ? { borderColor: 'var(--tint-primary)' } : undefined}
+                    whileTap={mobile && !isVisual ? { borderColor: 'var(--tint-primary)' } : undefined}
                     style={{
                         position: 'absolute',
                         width: '100%',
@@ -136,7 +143,8 @@ export function ProjectShowcaseCard({
 
                     <motion.div
                         className={isVisual ? (index === 0 ? "glass-3" : "glass-1") : ""}
-                        whileHover={isVisual ? { borderColor: 'var(--tint-primary)', boxShadow: '0 0 40px var(--tint-shadow)' } : {}}
+                        whileHover={!mobile && isVisual ? { borderColor: 'var(--tint-primary)', boxShadow: '0 0 40px var(--tint-shadow)' } : undefined}
+                        whileTap={mobile && isVisual ? { borderColor: 'var(--tint-primary)', boxShadow: '0 0 40px var(--tint-shadow)' } : undefined}
                         style={{
                             flex: 1,
                             display: 'flex',
@@ -166,7 +174,8 @@ export function ProjectShowcaseCard({
                                         href={github}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        whileHover={{ scale: 1.1, color: '#fff' }}
+                                        whileHover={!mobile ? { scale: 1.1, color: '#fff' } : undefined}
+                                        whileTap={mobile ? { scale: 1.1, color: '#fff' } : undefined}
                                         style={{ color: 'rgba(255,255,255,0.4)', transition: 'color 0.2s', flexShrink: 0 }}
                                         onClick={(e) => e.stopPropagation()}
                                     >
@@ -287,7 +296,8 @@ export function ProjectShowcaseCard({
                                         fontWeight: 600,
                                         textDecoration: 'none',
                                     }}
-                                    whileHover={{ x: 4 }}
+                                    whileHover={!mobile ? { x: 4 } : undefined}
+                                    whileTap={mobile ? { x: 4 } : undefined}
                                     onClick={(e) => e.stopPropagation()}
                                 >
                                     View System <ArrowRight size={16} />
@@ -316,7 +326,8 @@ export function ProjectShowcaseCard({
 
                 {/* BACK SIDE */}
                 <motion.div
-                    whileHover={{ borderColor: 'var(--tint-primary)' }}
+                    whileHover={!mobile ? { borderColor: 'var(--tint-primary)' } : undefined}
+                    whileTap={mobile ? { borderColor: 'var(--tint-primary)' } : undefined}
                     style={{
                         position: 'absolute',
                         width: '100%',
