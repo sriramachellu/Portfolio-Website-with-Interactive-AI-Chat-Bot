@@ -24,6 +24,16 @@
 .DS_Store
 *.pem
 
+# debug output files
+*-out.txt
+*-errors.txt
+*_errors.txt
+tsc_current_errors.txt
+
+# OS junk
+Thumbs.db
+ehthumbs.db
+
 # debug
 npm-debug.log*
 yarn-debug.log*
