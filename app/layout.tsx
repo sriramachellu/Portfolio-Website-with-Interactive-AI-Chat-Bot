@@ -8,6 +8,7 @@ import TintSwitcher from "@/components/TintSwitcher";
 import AmbientGlow from "@/components/AmbientGlow";
 import { PageTransition } from "@/components/PageTransition";
 import { PortfolioAssistant } from "@/components/PortfolioAssistant";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -42,6 +43,7 @@ export default function RootLayout({
             <TintSwitcher />
             <Dock />
             <PortfolioAssistant />
+            <Analytics />
           </TintProvider>
         </LightboxProvider>
       </body>
