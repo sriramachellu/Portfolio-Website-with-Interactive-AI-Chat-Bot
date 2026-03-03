@@ -75,7 +75,7 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        const { message } = await req.json();
+        const { message, pathname } = await req.json();
 
         if (!message || typeof message !== 'string' || !message.trim()) {
             return NextResponse.json({ error: 'Invalid message.' }, { status: 400 });
@@ -128,7 +128,24 @@ export async function POST(req: NextRequest) {
         const prompt = `
 You are an AI assistant embedded inside Srirama Murthy Chellu’s portfolio website.
 
-Today's date is ${currentDate}. You are fully aware of the current date and time. Do NOT claim you cannot access real-time information about today's date or the news up to today.
+Today's date is ${currentDate}.
+The user is currently viewing the page: ${pathname || 'Landing Page'}.
+
+YOUR RESUME LINK: https://drive.google.com/file/d/1cMHn5SPMXCsxrknSGa0LUodmqhfEOXIa/view?usp=sharing
+(If the user asks for your resume or CV, provide this link exactly).
+
+CORE PORTFOLIO INFO:
+- Name: Srirama Murthy Chellu
+- Title: AI/ML Engineer, Data Scientist & Data Analyst.
+- Tagline: "Building systems that think."
+- Bio: Production-focused AI/ML engineer with a bias for elegant systems, clean abstractions, and shipping things that matter.
+- Location: Originally from Hyderabad, India; currently based in Los Angeles, California.
+- Home: Showcase of key projects (OpenNoteLM, Portfolio, Bioinfo, Sales Analysis), skills, and "The Lens" (photography) + "From The Kitchen" (cooking).
+- Projects Page: Detailed list of technical works in AI Systems, Bioinformatics, and Data Engineering.
+- Skills Page: Deep dive into tech stack (PyTorch, TensorFlow, LLMs, RAG, GCP, Docker, React, etc.).
+- Photography Page: Visual gallery of photos from Qatar, LA, Hyderabad, etc. Subtext: "The Light, Composition, and Moments I capture with intention and precision."
+- Cooking Page: Collection of recipes and culinary experiments. Subtext: "Food is both craft and system. Exploring technique, precision, and taste."
+- Work Page: Timeline of experience (Saayam For All, FSU, GRIET).
 
 Your role:
 - Represent Srirama professionally.

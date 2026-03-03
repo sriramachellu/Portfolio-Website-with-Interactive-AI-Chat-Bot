@@ -4,9 +4,8 @@ import { useRef, useEffect, useCallback, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowUpRight, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowUpRight, Github, Linkedin, Mail, FileText } from 'lucide-react';
 import portfolioData from '@/lib/portfolio.json';
-import { PortfolioAssistant } from '@/components/PortfolioAssistant';
 import { TopInfoBar } from '@/components/TimeZoneWidget';
 import SpotifyNowPlaying from '@/components/SpotifyNowPlaying';
 import { ProjectShowcaseCard } from '@/components/ProjectShowcaseCard';
@@ -235,6 +234,7 @@ function MobileHeroSection() {
                         { href: personal.github, icon: <Github size={18} />, label: 'GitHub' },
                         { href: personal.linkedin, icon: <Linkedin size={18} />, label: 'LinkedIn' },
                         { href: `mailto:${personal.email}`, icon: <Mail size={18} />, label: 'Email' },
+                        { href: 'https://drive.google.com/file/d/1cMHn5SPMXCsxrknSGa0LUodmqhfEOXIa/view?usp=sharing', icon: <FileText size={18} />, label: 'Résumé' },
                     ].map(({ href, icon, label }) => (
                         <motion.a
                             key={label}
@@ -522,8 +522,8 @@ export function MobileHomeLayout({
                 <NeuralBreakerGame />
             </section>
 
-            {/* AI Assistant */}
-            <PortfolioAssistant />
+            {/* AI Assistant Spacer */}
+            <div style={{ paddingBottom: 100 }} />
 
             {/* Lightbox Overlay */}
             <AnimatePresence>

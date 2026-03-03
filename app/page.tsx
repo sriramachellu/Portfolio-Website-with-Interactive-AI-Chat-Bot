@@ -3,7 +3,7 @@
 import { useRef, useEffect, useCallback, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { Github, Linkedin, Mail } from 'lucide-react';
+import { Github, Linkedin, Mail, FileText } from 'lucide-react';
 import portfolioData from '@/lib/portfolio.json';
 import { TopInfoBar } from '@/components/TimeZoneWidget';
 import SpotifyNowPlaying from '@/components/SpotifyNowPlaying';
@@ -326,6 +326,7 @@ function HeroSection() {
             { href: personal.github, icon: <Github size={20} />, label: 'GitHub' },
             { href: personal.linkedin, icon: <Linkedin size={20} />, label: 'LinkedIn' },
             { href: `mailto:${personal.email}`, icon: <Mail size={20} />, label: 'Email' },
+            { href: 'https://drive.google.com/file/d/1cMHn5SPMXCsxrknSGa0LUodmqhfEOXIa/view?usp=sharing', icon: <FileText size={20} />, label: 'Résumé' },
           ].map(({ href, icon, label }) => (
             <div key={label} style={{ position: 'relative' }}>
               <motion.a

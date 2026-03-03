@@ -158,6 +158,37 @@ export function PortfolioAssistant() {
     const [hasCursor, setHasCursor] = useState(false);
     const [showHi, setShowHi] = useState(true);
     const [isLanding, setIsLanding] = useState(true);
+    const [showSuggestions, setShowSuggestions] = useState(false);
+
+    const PAGE_SUGGESTIONS: Record<string, string[]> = {
+        '/': [
+            "What are your core skills?",
+            "Tell me about your AI projects.",
+            "Where are you based?",
+        ],
+        '/projects': [
+            "Tell me about OpenNoteLM.",
+            "What did you build for Florida State University?",
+            "Do you have any open-source projects?",
+        ],
+        '/skills': [
+            "What is your experience with PyTorch?",
+            "Are you familiar with RAG systems?",
+            "What dev tools do you use?",
+        ],
+        '/photography': [
+            "What camera do you use?",
+            "Where was your favorite photo taken?",
+            "Do you do professional photography?",
+        ],
+        '/cooking': [
+            "What's your favorite thing to cook?",
+            "Do you have any secret recipes?",
+            "Can you suggest a quick dinner?",
+        ],
+    };
+
+    const SUGGESTIONS = PAGE_SUGGESTIONS[pathname] || PAGE_SUGGESTIONS['/'];
 
     const robotControls = useAnimation();
     const inactivityRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -186,6 +217,18 @@ export function PortfolioAssistant() {
     const isMobile = useIsMobile();
     const mobile = isMobile === true;
     const hideBotOnMobile = mobile && pathname === '/';
+
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                handleClose();
+            }
+        };
+        if (chatVisible) {
+            window.addEventListener('keydown', handleKeyDown);
+        }
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [chatVisible]);
 
     useEffect(() => {
         // Safe check for window for initial value
@@ -369,6 +412,7 @@ export function PortfolioAssistant() {
     const handleFocus = () => {
         dispatch('FOCUS');
         setChatVisible(true);
+        setShowSuggestions(true);
         resetInactivity();
     };
 
@@ -428,7 +472,7 @@ export function PortfolioAssistant() {
             const res = await fetch('/api/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: userMsg }),
+                body: JSON.stringify({ message: userMsg, pathname }),
             });
             const data = await res.json();
             if (!res.ok) throw new Error(data.error ?? 'Unknown error');
@@ -441,7 +485,23 @@ export function PortfolioAssistant() {
     };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') handleSend();
+        if (e.key === 'Enter') {
+            if (input.trim()) {
+                setChatVisible(true);
+                handleSend();
+            }
+        }
+    };
+
+    const handleSuggestionClick = (suggestion: string) => {
+        setInput(suggestion);
+        setChatVisible(true);
+        setShowSuggestions(false);
+        // We need to wait for state update or just pass suggestion to handleSend
+        setTimeout(() => {
+            const btn = document.getElementById('chat-send-btn');
+            if (btn) btn.click();
+        }, 10);
     };
 
     const glowOpacity =
@@ -533,7 +593,7 @@ export function PortfolioAssistant() {
                 >
                     {/* Messages panel */}
                     <AnimatePresence>
-                        {chatVisible && messages.length > 0 && (
+                        {chatVisible && (messages.length > 0 || showSuggestions) && (
                             <motion.div
                                 key="messages"
                                 initial={{ opacity: 0, y: 10, scale: 0.97 }}
@@ -557,6 +617,31 @@ export function PortfolioAssistant() {
                                     border: '1px solid rgba(255, 255, 255, 0.2)',
                                 }}
                             >
+                                {showSuggestions && messages.length === 0 && (
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                                        <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', margin: '0 0 4px 4px', fontWeight: 600, letterSpacing: '0.05em' }}>SUGGESTIONS</p>
+                                        {SUGGESTIONS.map((s, idx) => (
+                                            <motion.button
+                                                key={idx}
+                                                whileHover={{ x: 4, background: 'rgba(255,255,255,0.12)' }}
+                                                onClick={() => handleSuggestionClick(s)}
+                                                style={{
+                                                    textAlign: 'left',
+                                                    padding: '8px 12px',
+                                                    borderRadius: 12,
+                                                    background: 'rgba(255,255,255,0.06)',
+                                                    border: '1px solid rgba(255,255,255,0.08)',
+                                                    color: 'rgba(255,255,255,0.7)',
+                                                    fontSize: 12,
+                                                    cursor: 'pointer',
+                                                    transition: 'all 0.2s ease',
+                                                }}
+                                            >
+                                                {s}
+                                            </motion.button>
+                                        ))}
+                                    </div>
+                                )}
                                 {/* No close button here — moved below */}
 
                                 {messages.map((msg, i) => (
@@ -576,11 +661,13 @@ export function PortfolioAssistant() {
 
                                 {loading && (
                                     <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-                                        <div style={{
-                                            padding: '8px 13px', borderRadius: '14px 14px 14px 3px',
-                                            background: 'rgba(255,255,255,0.09)',
-                                            display: 'flex', gap: 5, alignItems: 'center',
-                                        }}>
+                                        <div
+                                            aria-live="polite"
+                                            style={{
+                                                padding: '8px 13px', borderRadius: '14px 14px 14px 3px',
+                                                background: 'rgba(255,255,255,0.09)',
+                                                display: 'flex', gap: 5, alignItems: 'center',
+                                            }}>
                                             {[0, 1, 2].map((i) => (
                                                 <motion.div key={i}
                                                     animate={{ opacity: [0.25, 1, 0.25] }}
@@ -605,7 +692,7 @@ export function PortfolioAssistant() {
 
                     {/* Close row — always visible above input pill */}
                     <AnimatePresence>
-                        {chatVisible && messages.length > 0 && (
+                        {chatVisible && (messages.length > 0 || showSuggestions) && (
                             <motion.div
                                 key="close-row"
                                 initial={{ opacity: 0, y: 4 }}
@@ -669,7 +756,7 @@ export function PortfolioAssistant() {
                             onFocus={handleFocus}
                             onBlur={handleBlur}
                             onKeyDown={handleKeyDown}
-                            placeholder="Ask about my portfolio…"
+                            placeholder="Hi, I'm Sri. Ask about my portfolio…"
                             aria-label="Portfolio chat input"
                             style={{
                                 flex: 1, background: 'none', border: 'none', outline: 'none',
@@ -686,6 +773,7 @@ export function PortfolioAssistant() {
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0, scale: 0.6 }}
                                     transition={{ duration: 0.18 }}
+                                    id="chat-send-btn"
                                     onClick={handleSend}
                                     disabled={loading}
                                     aria-label="Send"

@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import portfolioData from '@/lib/portfolio.json';
-import { PortfolioAssistant } from '@/components/PortfolioAssistant';
 import { ProjectShowcaseCard } from '@/components/ProjectShowcaseCard';
 import { CORE_SKILLS } from '@/lib/skillsData';
 import { SkillGroupCard } from '@/components/SkillGroupCard';
@@ -383,15 +382,12 @@ export function DesktopHomeLayout({
                 </div>
             </section>
 
-            {/* SECTION 8 — Interactive AI Game */}
+            {/* interactive AI Game */}
             <section style={{ padding: '0 clamp(24px, 6vw, 80px)', marginBottom: 'clamp(80px, 10vw, 120px)' }}>
                 <div style={{ maxWidth: 1280, margin: '0 auto', background: 'rgba(255,255,255,0.01)', borderRadius: 40, border: '1px solid rgba(255,255,255,0.05)', overflow: 'hidden' }}>
                     <NeuralBreakerGame />
                 </div>
             </section>
-
-            {/* AI Assistant — fixed position, no layout impact */}
-            <PortfolioAssistant />
 
             {/* Lightbox Overlay */}
             <AnimatePresence>

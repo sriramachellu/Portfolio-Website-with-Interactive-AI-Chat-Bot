@@ -454,15 +454,18 @@ export function NeuralBreakerGame() {
         const onKey = (e: KeyboardEvent) => {
             keysRef.current.add(e.key);
             if (e.key === ' ') {
-                e.preventDefault();
-                const g = gameRef.current;
-                if (!g.started) {
-                    g.running = true;
-                    g.started = true;
-                    setDisplay((d) => ({ ...d, started: true }));
-                }
-                if (g.ballAttached) {
-                    g.ballAttached = false;
+                const target = e.target as HTMLElement;
+                if (target.tagName !== 'INPUT' && target.tagName !== 'TEXTAREA') {
+                    e.preventDefault();
+                    const g = gameRef.current;
+                    if (!g.started) {
+                        g.running = true;
+                        g.started = true;
+                        setDisplay((d) => ({ ...d, started: true }));
+                    }
+                    if (g.ballAttached) {
+                        g.ballAttached = false;
+                    }
                 }
             }
         };

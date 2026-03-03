@@ -7,6 +7,7 @@ import Dock from "@/components/Dock";
 import TintSwitcher from "@/components/TintSwitcher";
 import AmbientGlow from "@/components/AmbientGlow";
 import { PageTransition } from "@/components/PageTransition";
+import { PortfolioAssistant } from "@/components/PortfolioAssistant";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -40,6 +41,7 @@ export default function RootLayout({
             </main>
             <TintSwitcher />
             <Dock />
+            <PortfolioAssistant />
           </TintProvider>
         </LightboxProvider>
       </body>
