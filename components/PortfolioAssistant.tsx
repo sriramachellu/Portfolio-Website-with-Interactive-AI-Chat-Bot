@@ -162,29 +162,29 @@ export function PortfolioAssistant() {
 
     const PAGE_SUGGESTIONS: Record<string, string[]> = {
         '/': [
-            "What are your core skills?",
-            "Tell me about your AI projects.",
-            "Where are you based?",
+            "What are your core AI skills?",
+            "Tell me about your favorite projects.",
+            "Where are you based currently?",
         ],
         '/projects': [
-            "Tell me about OpenNoteLM.",
-            "What did you build for Florida State University?",
-            "Do you have any open-source projects?",
+            "How did you build OpenNoteLM?",
+            "What was your most challenging project?",
+            "Can I see your GitHub repositories?",
         ],
         '/skills': [
-            "What is your experience with PyTorch?",
-            "Are you familiar with RAG systems?",
-            "What dev tools do you use?",
+            "What's your experience with RAG?",
+            "Do you prefer PyTorch or TensorFlow?",
+            "What tools are in your daily stack?",
         ],
         '/photography': [
-            "What camera do you use?",
-            "Where was your favorite photo taken?",
-            "Do you do professional photography?",
+            "What camera gear do you use?",
+            "Do you take photos professionally?",
+            "Where was your favorite shoot?",
         ],
         '/cooking': [
-            "What's your favorite thing to cook?",
-            "Do you have any secret recipes?",
-            "Can you suggest a quick dinner?",
+            "What's your signature dish?",
+            "How do you approach cooking?",
+            "Any recommendations for a quick meal?",
         ],
     };
 
