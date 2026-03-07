@@ -59,6 +59,20 @@ export default function Dock() {
         setSizes(newSizes);
     }, [mouseX, BASE, MAX]);
 
+    // requestAnimationFrame throttling for smooth but non-blocking updates
+    const rafRef = useRef<number | null>(null);
+    const handleMove = (clientX: number) => {
+        if (rafRef.current) cancelAnimationFrame(rafRef.current);
+        rafRef.current = requestAnimationFrame(() => {
+            setMouseX(clientX);
+        });
+    };
+
+    const handleLeave = () => {
+        if (rafRef.current) cancelAnimationFrame(rafRef.current);
+        setMouseX(null);
+    };
+
     return (
         <motion.div
             style={{
@@ -86,12 +100,12 @@ export default function Dock() {
                     WebkitBackdropFilter: 'blur(16px) saturate(180%)',
                     border: '1px solid rgba(255, 255, 255, 0.2)',
                 }}
-                onMouseMove={(e) => setMouseX(e.clientX)}
-                onMouseLeave={() => setMouseX(null)}
-                onTouchMove={(e) => setMouseX(e.touches[0].clientX)}
-                onTouchStart={(e) => setMouseX(e.touches[0].clientX)}
-                onTouchEnd={() => setMouseX(null)}
-                onTouchCancel={() => setMouseX(null)}
+                onMouseMove={(e) => handleMove(e.clientX)}
+                onMouseLeave={handleLeave}
+                onTouchMove={(e) => handleMove(e.touches[0].clientX)}
+                onTouchStart={(e) => handleMove(e.touches[0].clientX)}
+                onTouchEnd={handleLeave}
+                onTouchCancel={handleLeave}
                 initial={{ y: 80, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}

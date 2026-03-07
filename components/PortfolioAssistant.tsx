@@ -254,15 +254,21 @@ export function PortfolioAssistant() {
             }
 
             mouseRef.current = { x: clientX, y: clientY };
-            dispatch('MOVE');
 
-            // Reset stop timers
-            if (mouseTimerRef.current) clearTimeout(mouseTimerRef.current);
-            if (stayTimerRef.current) clearTimeout(stayTimerRef.current);
+            if (botState !== 'cursor-follow' && botState !== 'dock' && botState !== 'typing') {
+                dispatch('MOVE');
+            }
 
-            mouseTimerRef.current = setTimeout(() => {
-                dispatch('STOP');
-            }, 800);
+            // Throttle timeout resets to avoid garbage collection spikes
+            if (!mouseTimerRef.current || Math.random() < 0.1) {
+                if (mouseTimerRef.current) clearTimeout(mouseTimerRef.current);
+                if (stayTimerRef.current) clearTimeout(stayTimerRef.current);
+
+                mouseTimerRef.current = setTimeout(() => {
+                    dispatch('STOP');
+                    mouseTimerRef.current = null;
+                }, 800);
+            }
 
             if (botState === 'cursor-follow' || botState === 'inactive' || botState === 'arrival' || botState === 'idle') {
                 const anchorX = window.innerWidth / 2;
@@ -272,11 +278,17 @@ export function PortfolioAssistant() {
                 cursorY.set(clientY - anchorY);
             }
         };
-        window.addEventListener('mousemove', handleMouseMove);
-        // window.addEventListener('touchstart', handleMouseMove);
+
+        let rafId: number;
+        const throttledMouseMove = (e: MouseEvent | TouchEvent) => {
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(() => handleMouseMove(e));
+        };
+
+        window.addEventListener('mousemove', throttledMouseMove, { passive: true });
         return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-            // window.removeEventListener('touchstart', handleMouseMove);
+            if (rafId) cancelAnimationFrame(rafId);
+            window.removeEventListener('mousemove', throttledMouseMove);
         }
     }, [botState, hasCursor, cursorX, cursorY]);
 
