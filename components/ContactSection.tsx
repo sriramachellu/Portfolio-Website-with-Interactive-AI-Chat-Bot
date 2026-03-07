@@ -199,7 +199,7 @@ export default function ContactSection() {
                                 </button>
 
                                 <h3 style={{ color: '#fff', fontSize: 20, fontWeight: 500, marginBottom: 8, letterSpacing: '-0.01em' }}>
-                                    Let's Connect
+                                    Let's <span className="text-glass-tint">Connect</span>
                                 </h3>
                                 <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 13, marginBottom: 24 }}>
                                     Reach out via your preferred platform.

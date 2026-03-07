@@ -51,7 +51,7 @@ const customSlugMap: Record<string, string> = {
     'Supabase': 'supabase-logo-icon',
     'BigQuery': 'Google Cloud',
     'AWS': 'aws-color',
-    'Codex by OpenAI': 'codex by OpenAI',
+    'Codex by OpenAI': 'codex-by-openai',
 
     'React': 'React',
     'FastAPI': 'FastAPI',
@@ -85,7 +85,7 @@ const validIcons = new Set([
     'githubcopilot', 'googlecloud-color', 'huggingface-color', 'langchain',
     'llamaindex-color', 'microsoft copilot-color', 'microsoft-excel', 'ollama', 'openai',
     'openclaw-color', 'perplexity-color (1)', 'perplexity-color', 'pytest', 'scikit-learn',
-    'supabase-logo-icon', 'tableau', 'vllm-color', 'nextjs', 'convex', 'codex by OpenAI'
+    'supabase-logo-icon', 'tableau', 'vllm-color', 'nextjs', 'convex', 'codex-by-openai'
 ]);
 
 const categoryDescriptions: Record<string, string> = {
