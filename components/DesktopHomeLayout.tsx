@@ -11,6 +11,7 @@ import { Timeline } from '@/components/Timeline';
 import { CookingShowcaseCard } from '@/components/CookingShowcaseCard';
 import { PhotographyShowcaseCard } from '@/components/PhotographyShowcaseCard';
 import { NeuralBreakerGame } from '@/components/NeuralBreakerGame';
+import ContactSection from '@/components/ContactSection';
 
 const { projects } = portfolioData;
 
@@ -159,7 +160,7 @@ export function DesktopHomeLayout({
             </section>
 
             {/* SECTION 4 — Core Skills */}
-            <section style={{ padding: '0 clamp(24px, 6vw, 80px)', marginBottom: 'clamp(80px, 10vw, 120px)' }}>
+            <section style={{ padding: '0 clamp(24px, 6vw, 80px)', marginBottom: 'clamp(40px, 5vw, 60px)' }}>
                 <div style={{ maxWidth: 1280, margin: '0 auto' }}>
 
                     {/* Centered heading without gradient */}
@@ -245,6 +246,9 @@ export function DesktopHomeLayout({
                     </motion.div>
                 </div>
             </section>
+
+            {/* Contact CTA */}
+            <ContactSection />
 
             {/* SECTION 5 — Engineering Journey */}
             <section style={{ padding: '0 clamp(24px, 6vw, 80px)', marginTop: 'clamp(80px, 10vw, 120px)' }}>
@@ -383,7 +387,7 @@ export function DesktopHomeLayout({
             </section>
 
             {/* interactive AI Game */}
-            <section style={{ padding: '0 clamp(24px, 6vw, 80px)', marginBottom: 'clamp(80px, 10vw, 120px)' }}>
+            <section style={{ padding: '0 clamp(24px, 6vw, 80px)', marginBottom: 'clamp(40px, 5vw, 60px)' }}>
                 <div style={{ maxWidth: 1280, margin: '0 auto', background: 'rgba(255,255,255,0.01)', borderRadius: 40, border: '1px solid rgba(255,255,255,0.05)', overflow: 'hidden' }}>
                     <NeuralBreakerGame />
                 </div>

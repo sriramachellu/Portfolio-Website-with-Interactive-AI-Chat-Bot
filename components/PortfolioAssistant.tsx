@@ -216,7 +216,7 @@ export function PortfolioAssistant() {
     const isActive = botState === 'dock' || botState === 'typing';
     const isMobile = useIsMobile();
     const mobile = isMobile === true;
-    const hideBotOnMobile = mobile && pathname === '/';
+    const hideBotOnMobile = mobile;
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
@@ -510,6 +510,8 @@ export function PortfolioAssistant() {
                 : 0.2;
 
     /* ─────────────────────────────────────────────────────────── */
+    if (pathname === '/game') return null;
+
     return (
         <>
             {/* ── Robot — mobile fixed or tracking ── */}

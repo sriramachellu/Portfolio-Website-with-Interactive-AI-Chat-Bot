@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 import { useTint } from '@/lib/TintContext';
 import { useIsMobile } from '@/lib/useIsMobile';
 
@@ -112,6 +113,8 @@ const TINT_COLORS: Record<string, string> = {
 };
 
 export function NeuralBreakerGame() {
+    const pathname = usePathname();
+    const isGamePage = pathname === '/game';
     const isMobile = useIsMobile();
     const mobile = isMobile === true;
     const { activeTint, setTint } = useTint();
@@ -506,11 +509,11 @@ export function NeuralBreakerGame() {
             onMouseEnter={() => typeof window !== 'undefined' && window.dispatchEvent(new CustomEvent('game-hover', { detail: true }))}
             onMouseLeave={() => typeof window !== 'undefined' && window.dispatchEvent(new CustomEvent('game-hover', { detail: false }))}
             style={{
-                minHeight: mobile ? '100dvh' : '100vh',
+                minHeight: (mobile && isGamePage) ? '100dvh' : mobile ? 'auto' : '100vh',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                justifyContent: 'center',
+                justifyContent: mobile ? 'flex-start' : 'center',
                 padding: mobile ? '0 12px 20px' : '0 24px 40px',
                 overflow: 'hidden'
             }}>
@@ -523,7 +526,7 @@ export function NeuralBreakerGame() {
                     textAlign: 'center',
                     marginBottom: 20,
                     width: '100%',
-                    paddingTop: mobile ? '10dvh' : 0 // Ensure it sits below the notch/tint switcher properly
+                    paddingTop: mobile ? '100px' : 0
                 }}
             >
                 <p className="text-micro" style={{ color: 'var(--tint-primary)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 8 }}>

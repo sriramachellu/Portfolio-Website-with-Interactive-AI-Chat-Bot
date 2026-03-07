@@ -28,7 +28,7 @@ export default function WorkPage() {
             </motion.div>
 
             {/* Advanced Timeline Component */}
-            <Timeline items={workExperience} showBullets={true} />
+            <Timeline items={workExperience} showBullets={true} straightOnMobile={true} />
         </div>
     );
 }

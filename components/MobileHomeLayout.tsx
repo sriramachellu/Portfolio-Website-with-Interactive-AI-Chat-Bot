@@ -15,6 +15,7 @@ import { Timeline } from '@/components/Timeline';
 import { CookingShowcaseCard } from '@/components/CookingShowcaseCard';
 import { PhotographyShowcaseCard } from '@/components/PhotographyShowcaseCard';
 import { NeuralBreakerGame } from '@/components/NeuralBreakerGame';
+import ContactSection from '@/components/ContactSection';
 
 const { personal, projects } = portfolioData;
 
@@ -447,6 +448,9 @@ export function MobileHomeLayout({
                 <MobileExploreButton href="/skills" label="View all skills" />
             </section>
 
+            {/* Contact CTA */}
+            <ContactSection />
+
             {/* SECTION 5 — Engineering Journey (single column) */}
             <section style={{ padding: mobilePadding, marginTop: 56 }}>
                 <motion.h2
@@ -518,12 +522,9 @@ export function MobileHomeLayout({
             </section>
 
             {/* SECTION 8 — Interactive AI Game */}
-            <section style={{ marginBottom: 80 }}>
+            <section style={{ marginBottom: 0 }}>
                 <NeuralBreakerGame />
             </section>
-
-            {/* AI Assistant Spacer */}
-            <div style={{ paddingBottom: 100 }} />
 
             {/* Lightbox Overlay */}
             <AnimatePresence>
