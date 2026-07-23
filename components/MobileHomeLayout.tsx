@@ -328,6 +328,23 @@ export function MobileHomeLayout({
     setSelectedPhoto,
 }: MobileHomeLayoutProps) {
     const mobilePadding = '0 16px';
+    const gameSectionRef = useRef<HTMLElement>(null);
+
+    useEffect(() => {
+        const el = gameSectionRef.current;
+        if (!el) return;
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                window.dispatchEvent(new CustomEvent('game-section-visible', { detail: entry.isIntersecting }));
+            },
+            { threshold: 0.15 }
+        );
+        observer.observe(el);
+        return () => {
+            observer.disconnect();
+            window.dispatchEvent(new CustomEvent('game-section-visible', { detail: false }));
+        };
+    }, []);
 
     return (
         <div style={{ minHeight: '100vh', overflowX: 'hidden', paddingBottom: 120 }}>
@@ -522,7 +539,7 @@ export function MobileHomeLayout({
             </section>
 
             {/* SECTION 8 — Interactive AI Game */}
-            <section style={{ marginBottom: 0 }}>
+            <section ref={gameSectionRef} style={{ marginBottom: 80 }}>
                 <NeuralBreakerGame />
             </section>
 

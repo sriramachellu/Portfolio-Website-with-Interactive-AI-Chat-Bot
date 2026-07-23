@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
@@ -37,6 +38,24 @@ export function DesktopHomeLayout({
     selectedPhoto,
     setSelectedPhoto,
 }: DesktopHomeLayoutProps) {
+    const gameSectionRef = useRef<HTMLElement>(null);
+
+    useEffect(() => {
+        const el = gameSectionRef.current;
+        if (!el) return;
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                window.dispatchEvent(new CustomEvent('game-section-visible', { detail: entry.isIntersecting }));
+            },
+            { threshold: 0.15 }
+        );
+        observer.observe(el);
+        return () => {
+            observer.disconnect();
+            window.dispatchEvent(new CustomEvent('game-section-visible', { detail: false }));
+        };
+    }, []);
+
     return (
         <div style={{ minHeight: '100vh', overflowX: 'hidden', paddingBottom: 160 }}>
 
@@ -387,7 +406,7 @@ export function DesktopHomeLayout({
             </section>
 
             {/* interactive AI Game */}
-            <section style={{ padding: '0 clamp(24px, 6vw, 80px)', marginBottom: 'clamp(40px, 5vw, 60px)' }}>
+            <section ref={gameSectionRef} style={{ padding: '0 clamp(24px, 6vw, 80px)', marginBottom: 'clamp(80px, 10vw, 120px)' }}>
                 <div style={{ maxWidth: 1280, margin: '0 auto', background: 'rgba(255,255,255,0.01)', borderRadius: 40, border: '1px solid rgba(255,255,255,0.05)', overflow: 'hidden' }}>
                     <NeuralBreakerGame />
                 </div>

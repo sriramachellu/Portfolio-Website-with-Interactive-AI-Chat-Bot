@@ -354,9 +354,19 @@
   ],
   "workExperience": [
     {
+      "company": "Popular Tech",
+      "role": "Software Engineer",
+      "duration": "June 2026 \u2013 Present",
+      "location": "Irvine, CA",
+      "bullets": [],
+      "image": "/popular-tech.jpg",
+      "imageCaption": "Berkeley, CA",
+      "imageYears": "2026"
+    },
+    {
       "company": "Saayam For All",
       "role": "Full Stack Developer",
-      "duration": "July 2025 \u2013 Present",
+      "duration": "July 2025 \u2013 June 2026",
       "location": "San Jose, CA",
       "bullets": [
         "Built and maintained backend services and REST APIs in Python using Flask to power real time geospatial volunteer matching, enabling efficient and low latency request routing across active users.",
