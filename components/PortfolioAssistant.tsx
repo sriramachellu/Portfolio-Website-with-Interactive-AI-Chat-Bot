@@ -159,6 +159,8 @@ export function PortfolioAssistant() {
     const [showHi, setShowHi] = useState(true);
     const [isLanding, setIsLanding] = useState(true);
     const [showSuggestions, setShowSuggestions] = useState(false);
+    const [gameSectionVisible, setGameSectionVisible] = useState(false);
+    const hideForGame = gameSectionVisible || pathname === '/game';
 
     const PAGE_SUGGESTIONS: Record<string, string[]> = {
         '/': [
@@ -206,6 +208,14 @@ export function PortfolioAssistant() {
         };
         window.addEventListener('game-hover', handleGameHover);
         return () => window.removeEventListener('game-hover', handleGameHover);
+    }, []);
+
+    useEffect(() => {
+        const handler = (e: Event) => {
+            setGameSectionVisible((e as CustomEvent).detail);
+        };
+        window.addEventListener('game-section-visible', handler);
+        return () => window.removeEventListener('game-section-visible', handler);
     }, []);
 
     const cursorX = useMotionValue(0);
@@ -511,7 +521,13 @@ export function PortfolioAssistant() {
 
     /* ─────────────────────────────────────────────────────────── */
     return (
-        <>
+        <div
+            style={{
+                opacity: hideForGame ? 0 : 1,
+                pointerEvents: hideForGame ? 'none' : 'auto',
+                transition: 'opacity 0.3s ease',
+            }}
+        >
             {/* ── Robot — mobile fixed or tracking ── */}
             {!hideBotOnMobile && (
                 <motion.div
@@ -794,6 +810,6 @@ export function PortfolioAssistant() {
                     </motion.div>
                 </motion.div>
             )}
-        </>
+        </div>
     );
 }
